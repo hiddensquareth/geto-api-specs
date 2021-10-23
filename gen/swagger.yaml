@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  title: Users
+  description: API to manage users
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/littlepawcraft/user/1.0.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /users/updateUser:
+    post:
+      tags:
+      - user
+      summary: update some information of a user
+      description: update some information of a userx
+      operationId: updateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users_updateUser_body'
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+components:
+  schemas:
+    DefaultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    users_updateUser_body:
+      required:
+      - profileImageUrl
+      type: object
+      properties:
+        profileImageUrl:
+          type: string
