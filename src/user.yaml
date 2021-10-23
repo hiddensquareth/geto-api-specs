@@ -29,7 +29,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'https://api.swaggerhub.com/domains/littlepawcraft/geto/1.0.0#/components/schemas/DefaultResponse'
+                $ref: 'https://raw.githubusercontent.com/hiddensquareth/geto-api-specs/main/src/common.yaml?token=ABQXJ4X5NVAYBUDXQD2MTJLBOQKXE#/components/schemas/DefaultResponse'
 servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
