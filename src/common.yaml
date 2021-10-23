@@ -1,0 +1,62 @@
+# OpenAPI version identifier - required for OpenAPI 3.0 domains
+openapi: 3.0.0
+
+#######################
+# Optional info section
+#######################
+info:
+  title: GETO API Common
+  description: Common components for GETO REST APIss
+  version: '1.0.0'
+
+components:
+
+  ####################
+  # Common data models
+  ####################
+  schemas:
+    DefaultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    ApiError:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2020-07-10T15:00:00.000+07:00
+        errorCode:
+          type: string
+          example: API_CORE/INTERNAL_ERROR
+        httpStatusCode:
+          type: integer
+          example: 500
+        developerMessage:
+          type: string
+          example: Internal Server Error
+        requestId:
+          type: string
+          example: 5f01a072-9248-4d19-a2ce-e7e59e6150b5
+        userId:
+          type: string
+          example: 5f01a072-9248-4d19-a2ce-e7e59e6150b5
+        extra:
+          type: string
+          example: '{"customField": "value"}'
+          
+  #########################
+  # Common headers
+  # (except request headers - they are defined as parameters)
+  #########################
+  headers:
+    x-user-id:
+      description: the authenticated user id
+      schema:
+        type: string
+      example: anonymous
+    x-channel:
+      description: geto-mobile | geto-cms
+      schema:
+        type: string
+      example: geto-mobile
