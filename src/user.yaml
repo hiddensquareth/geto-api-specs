@@ -3,6 +3,20 @@ info:
   title: Users
   description: API to manage users
   version: 1.0.0
+components:
+  schemas:
+    DefaultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    UpdateUserRequestData:
+      type: object
+      required:
+        - profileImageUrl
+      properties:
+        profileImageUrl:
+          type: string
 
 paths:
   /users/updateUser:
@@ -17,20 +31,12 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - profileImageUrl
-              properties:
-                profileImageUrl:
-                  type: string
+              $ref: '#/components/schemas/UpdateUserRequestData'
+       
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/hiddensquareth/geto-api-specs/main/src/common.yaml?token=ABQXJ4X5NVAYBUDXQD2MTJLBOQKXE#/components/schemas/DefaultResponse'
-servers:
-  # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/littlepawcraft/user/1.0.0
+                $ref: '#/components/schemas/DefaultResponse'
