@@ -328,6 +328,8 @@ components:
           type: string
         custMobileNo:
           type: string
+        custAddressId:
+          type: string
         custAddressName:
           type: string
         custAddressLine:
@@ -363,6 +365,8 @@ components:
         custMapLocationLng:
           type: string
         custDeliveryTime:
+          type: string
+        shippingCompanyCode:
           type: string
         shippingCompanyUuid:
           type: string
