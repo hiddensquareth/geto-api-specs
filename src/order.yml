@@ -410,106 +410,6 @@ components:
       properties:
         orderId:
           type: string
-    CreateOrderByImportRequestData:
-      type: object
-      required:
-        - companyUuid
-        - price
-        - paymentOption
-        - importId
-        - referenceOrderId
-      properties:
-        companyUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-          example: "abc"
-        importId:
-          type: number
-          minimum: 0
-          example: 123456
-        referenceOrderId:
-          type: string
-          minLength: 1
-          maxLength: 50
-          example: "abc"
-        referenceCustomerId:
-          type: string
-          minLength: 1
-          maxLength: 50
-          example: "abc"
-        referenceMerchantId:
-          type: string
-          minLength: 1
-          maxLength: 50
-          example: "abc"
-        price:
-          type: number
-          minimum: 0
-          maximum: 1000000
-          example: 100.50
-        paymentOption:
-          type: string
-          enum:
-            - PAYMENT_ONLY
-            - PAYMENT_BEFORE_SHIPPING
-            - PAYMENT_ON_DELIVERY
-        shippingCompany:
-          type: string
-          minLength: 1
-          maxLength: 50
-          example: "Kerry"
-        useCompanyRegisteredAddress:
-          type: boolean
-          example: true
-        companyAddressLine:
-          type: string
-          maxLength: 300
-          minLength: 1
-          example: "GG Apartment Soi 18, Kaosan Rd."
-        companyPostalCode:
-          type: string
-          maxLength: 50
-          minLength: 1
-          example: 10600
-        customerEmail:
-          type: string
-          format: email
-          pattern: '[^\.]+\.[^\.]+$'
-          example: "maw-dev@littlepawcraft.com"
-        customerFirstName:
-          type: string
-          maxLength: 100
-          minLength: 1
-          example: John
-        customerLastName:
-          type: string
-          maxLength: 100
-          minLength: 1
-          example: Lennon
-        customerMobileNo:
-          type: string
-          pattern: '^\+[1-9][0-9]{3,14}$'
-          example: "+66999999999"
-        customerAddressPhone:
-          type: string
-          pattern: "^[0-9]{9,10}$"
-          example: "021234567"
-        customerAddressLine:
-          type: string
-          maxLength: 300
-          minLength: 1
-          example: "GG Apartment Soi 18, Kaosan Rd."
-        customerPostalCode:
-          type: string
-          maxLength: 50
-          minLength: 1
-          example: 10600
-        deliveryTime:
-          type: string
-          description: "1|0 string, each digit represents true or false value of checkbox, starting from Monday_Morning, Monday_Evening, Tuesday_Morning, and so on"
-          pattern: "^[01]{14}$"
-          example: "10101010101010"
 
     CreateOrderRequestData:
       type: object
@@ -518,6 +418,21 @@ components:
         - price
         - paymentOption
       properties:
+        referenceOrderId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: "EX1234"
+        referenceCustomerId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: "EX1234"
+        referenceMerchantId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: "EX1234"
         companyUuid:
           type: string
           minLength: 1
@@ -525,25 +440,26 @@ components:
           example: "abc"
         importId:
           type: string
-          minLength: 1
           maxLength: 50
-          example: "abc"
-        customerUuid:
-          type: string
           minLength: 1
-          maxLength: 50
-          example: "abc"
+          pattern: '\d+$'
+          example: "123"
         price:
           type: number
           minimum: 0
           maximum: 1000000
           example: 100.50
+          format: double
         paymentOption:
           type: string
           enum:
             - PAYMENT_ONLY
             - PAYMENT_BEFORE_SHIPPING
             - PAYMENT_ON_DELIVERY
+        useCompanyRegisteredAddress:
+          type: boolean
+          example: true
+          description: "infer address data from company, if this field is true, other company address fields can be omitted"
         companyAddressLine:
           type: string
           maxLength: 300
@@ -553,22 +469,22 @@ components:
           type: string
           maxLength: 50
           minLength: 1
-          example: 10
+          example: "10"
         companyDistrictId:
           type: string
           maxLength: 50
           minLength: 1
-          example: 1015
+          example: "1015"
         companySubDistrictId:
           type: string
           maxLength: 50
           minLength: 1
-          example: 101501
+          example: "101501"
         companyPostalCode:
           type: string
           maxLength: 50
           minLength: 1
-          example: 10600
+          example: "10600"
         companyMapLocationPlaceId:
           type: string
           description: "For reference with Google Map"
@@ -613,10 +529,12 @@ components:
           format: email
           pattern: '[^\.]+\.[^\.]+$'
           example: "maw-dev@littlepawcraft.com"
+          maxLength: 100
         customerMobileNo:
           type: string
           pattern: '^\+[1-9][0-9]{3,14}$'
           example: "+66999999999"
+          maxLength: 100
         customerAddressId:
           type: string
           minLength: 1
@@ -626,6 +544,7 @@ components:
           type: string
           pattern: "^[0-9]{9,10}$"
           example: "021234567"
+          maxLength: 100
         customerAddressLine:
           type: string
           maxLength: 300
@@ -680,7 +599,7 @@ components:
           maxLength: 50
           minLength: 1
           example: "3.3456"
-        shippingVendorId:
+        shippingCompanyCode:
           type: string
           minLength: 1
           maxLength: 50
@@ -690,6 +609,7 @@ components:
           description: "1|0 string, each digit represents true or false value of checkbox, starting from Monday_Morning, Monday_Evening, Tuesday_Morning, and so on"
           pattern: "^[01]{14}$"
           example: "10101010101010"
+          maxLength: 100
     AssignDriverRequestData:
       type: object
       required:
@@ -1588,26 +1508,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CreateOrderRequestData"
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateOrderResponseData"
-  /orders/createOrderByImport:
-    post:
-      tags:
-        - order
-      summary: Create order by import
-      description: Create order by import
-      operationId: createOrderByImport
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateOrderByImportRequestData"
       responses:
         200:
           description: Success
