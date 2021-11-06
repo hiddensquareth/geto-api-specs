@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: Seed
+  description: API to seed data
+  version: 1.0.0
+components:
+  schemas:
+    DefaultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'ok'
+    CreateSuperAdminUserForCmsRequestData:
+      type: object
+      required: 
+        - email
+        - password
+        - firstName
+        - lastName
+        - mobileNo
+      properties:
+        email:
+          type: string
+          format: email
+          pattern: '[^\.]+\.[^\.]+$'
+          example: 'superadmin@geto.app'
+        password:
+          type: string
+          pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,20}$'
+          example: Passw0rd
+        firstName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: SuperAdmin
+        lastName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: Stg
+        mobileNo:
+          type: string
+          pattern: '^[0-9]{10}$'
+          example: '0999999999'
+
+paths:
+  /seeds/createSuperAdminUserForCms:
+    post:
+      tags:
+        - seed
+      summary: 'Create super admin user for fist-time access after new lauch'
+      description: 'Create super admin user for fist-time access after new lauch'
+      operationId: createSuperAdminUserForCms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSuperAdminUserForCmsRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'

@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: File
+  description: API to manage files
+  version: 1.0.0
+components:
+  schemas:
+    GetPresignedUrlResponseData:
+      type: object
+      properties:
+        uploadUrl:
+          type: string
+        downloadUrl:
+          type: string
+
+paths:
+  /files/getPresignedUrl:
+    get:
+      tags:
+        - file
+      summary: Generate presigned URL
+      description: Generate presigned URL
+      operationId: getPresignedUrl
+      parameters:
+        - in: query
+          name: originalFileName
+          required: true
+          description: The original filename
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 50
+        - in: query
+          name: resourceType
+          required: true
+          description: Resource Type
+          schema:
+            type: string
+            enum:
+              - PROFILE_IMAGE
+              - COMPANY_DOCUMENT
+              - ERROR_REPORT
+              - ORDER_IMPORT
+      responses:
+        200:
+          description: The presigned URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPresignedUrlResponseData'

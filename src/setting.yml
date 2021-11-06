@@ -1,0 +1,39 @@
+openapi: 3.0.0
+info:
+  title: Setting
+  description: API to manage settings
+  version: 1.0.0
+components:
+  schemas:
+    DefaultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'ok'
+    ListGeneralSettingsResponseData:
+      type: object
+      required: 
+        - mobileMinimumSupportedVersion
+        - mobileMinimumSupportedVersionAndroid
+      properties:
+        mobileMinimumSupportedVersion:
+          type: string
+        mobileMinimumSupportedVersionAndroid:
+          type: string
+
+paths:
+  /settings/listGeneralSettings:
+    get:
+      tags:
+        - setting
+      summary: Get list of banks
+      description: Get list of banks
+      operationId: listGeneralSettings
+      responses:
+        200:
+          description: The list of banks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListGeneralSettingsResponseData'

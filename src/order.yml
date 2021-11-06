@@ -1,0 +1,1505 @@
+openapi: 3.0.0
+info:
+  title: Order
+  description: API to manage orders
+  version: 1.0.0
+
+components:
+  parameters:
+    statusFilter:
+      in: query
+      name: statusFilter
+      description: statusFilter
+      required: false
+      schema:
+        type: string
+        maxLength: 50
+    searchKeyword:
+      in: query
+      name: searchKeyword
+      description: searchKeyword
+      required: false
+      schema:
+        type: string
+        maxLength: 100
+    startDate:
+      in: query
+      name: startDate
+      description: startDate
+      required: false
+      schema:
+        type: string
+        maxLength: 20
+    endDate:
+      in: query
+      name: endDate
+      description: endDate
+      required: false
+      schema:
+        type: string
+        maxLength: 20
+    page:
+      in: query
+      name: page
+      description: page
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+    rowsPerPage:
+      in: query
+      name: rowsPerPage
+      description: rowsPerPage
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+    sortField:
+      in: query
+      name: sortField
+      description: sortField
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 20
+    sortDirection:
+      in: query
+      name: sortDirection
+      description: sortDirection
+      required: true
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+          
+  schemas:
+    DefaultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: ok
+    RefundList:
+      type: object
+      required:
+        - itemCount
+        - list
+      properties:
+        itemCount:
+          type: integer
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetRefundResponseData'
+    GetRefundResponseData:
+      type: object
+      required: 
+        - refundId
+        - orderId
+        - orderDate
+        - refundStatus
+        - orderStatusBeforeCancelled
+        - refundDate
+        - merchantNameTh
+        - merchantNameEn
+        - merchantAddressTh
+        - merchantAddressEn
+        - merchantEmail
+        - merchantTel
+        - customerName
+        - customerAddressTh
+        - customerAddressEn
+        - customerEmail
+        - customerMobileNo
+        - onlinePaymentAmount
+        - debitOrCreditCardAmount
+        - cashAmount
+        - proofOfTransferUrl
+        - proofOfRefundRequestUrl
+      properties:
+        refundId:
+          type: string
+        orderId:
+          type: string
+        orderDate:
+          type: string
+        refundStatus:
+          type: string
+        orderStatusBeforeCancelled:
+          type: string
+        refundDate:
+          type: string
+        merchantNameTh:
+          type: string
+        merchantNameEn:
+          type: string
+        merchantAddressTh:
+          type: string
+        merchantAddressEn:
+          type: string
+        merchantEmail:
+          type: string
+        merchantTel:
+          type: string
+        customerName:
+          type: string
+        customerAddressTh:
+          type: string
+        customerAddressEn:
+          type: string
+        customerEmail:
+          type: string
+        customerMobileNo:
+          type: string
+        onlinePaymentAmount:
+          type: number
+        debitOrCreditCardAmount:
+          type: number
+        cashAmount:
+          type: number
+        proofOfTransferUrl:
+          type: string
+        proofOfRefundRequestUrl:
+          type: string
+
+    CustomerCancelRequestData:
+      type: object
+      required:
+        - orderId
+      properties:
+        orderId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+    SimulatePaymentRequestData:
+      type: object
+      properties:
+        orderId:
+          type: string
+        onlinePaymentAmount:
+          type: number
+        cashAmount:
+          type: number
+    DriverBulkAcceptTasksRequestData:
+      type: object
+      required: 
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/DriverAcceptTaskRequestData'
+    DriverBulkRejectTasksRequestData:
+      type: object
+      required: 
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/DriverRejectTaskRequestData'
+    OrderList:
+      type: object
+      required: 
+        - itemCount
+        - list
+      properties:
+        itemCount:
+          type: integer
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetOrderResponseData'
+    GetOrderResponseData:
+      type: object
+      required: 
+        - orderId
+        - createdAt
+        - createdBy
+        - lastUpdatedAt
+        - lastUpdatedBy
+        - status
+        - orderDate
+        - shopLogoUrl
+        - shopNameTh
+        - shopNameEn
+        - shopEmail
+        - shopMobileNo
+        - shopAddressLine
+        - shopProvinceId
+        - shopProvinceNameTh
+        - shopProvinceNameEn
+        - shopDistrictId
+        - shopDistrictNameTh
+        - shopDistrictNameEn
+        - shopSubDistrictId
+        - shopSubDistrictNameTh
+        - shopSubDistrictNameEn
+        - shopPostalCode
+        - shopMapLocationTitle
+        - shopMapLocationDetail
+        - shopMapLocationLat
+        - shopMapLocationLng
+        - custFirstName
+        - custLastName
+        - custEmail
+        - custMobileNo
+        - custAddressName
+        - custAddressLine
+        - custAddressPhone
+        - custProvinceId
+        - custProvinceNameTh
+        - custProvinceNameEn
+        - custDistrictId
+        - custDistrictNameTh
+        - custDistrictNameEn
+        - custSubDistrictId
+        - custSubDistrictNameTh
+        - custSubDistrictNameEn
+        - custPostalCode
+        - custDeliveryTime
+        - price
+        - paid
+        - paymentOption
+        - enabledCod
+      properties:
+        orderId:
+          type: string
+        createdAt:
+          type: string
+        createdBy:
+          type: string
+        lastUpdatedAt:
+          type: string
+        lastUpdatedBy:
+          type: string
+        status:
+          type: string
+        orderDate:
+          type: string
+        shopLogoUrl:
+          type: string
+        shopNameTh:
+          type: string
+        shopNameEn:
+          type: string
+        shopEmail:
+          type: string
+        shopMobileNo:
+          type: string
+        shopAddressLine:
+          type: string
+        shopProvinceId:
+          type: string
+        shopProvinceNameTh:
+          type: string
+        shopProvinceNameEn:
+          type: string
+        shopDistrictId:
+          type: string
+        shopDistrictNameTh:
+          type: string
+        shopDistrictNameEn:
+          type: string
+        shopSubDistrictId:
+          type: string
+        shopSubDistrictNameTh:
+          type: string
+        shopSubDistrictNameEn:
+          type: string
+        shopPostalCode:
+          type: string
+        shopMapLocationTitle:
+          type: string
+        shopMapLocationDetail:
+          type: string
+        shopMapLocationLat:
+          type: string
+        shopMapLocationLng:
+          type: string
+        custFirstName:
+          type: string
+        custLastName:
+          type: string
+        custEmail:
+          type: string
+        custMobileNo:
+          type: string
+        custAddressName:
+          type: string
+        custAddressLine:
+          type: string
+        custAddressPhone:
+          type: string
+        custProvinceId:
+          type: string
+        custProvinceNameTh:
+          type: string
+        custProvinceNameEn:
+          type: string
+        custDistrictId:
+          type: string
+        custDistrictNameTh:
+          type: string
+        custDistrictNameEn:
+          type: string
+        custSubDistrictId:
+          type: string
+        custSubDistrictNameTh:
+          type: string
+        custSubDistrictNameEn:
+          type: string
+        custPostalCode:
+          type: string
+        custMapLocationTitle:
+          type: string
+        custMapLocationDetail:
+          type: string
+        custMapLocationLat:
+          type: string
+        custMapLocationLng:
+          type: string
+        custDeliveryTime:
+          type: string
+        shippingCompanyUuid:
+          type: string
+        shippingCompanyNameTh:
+          type: string
+        shippingCompanyNameEn:
+          type: string
+        dueDate:
+          type: string
+        dueTime:
+          type: string
+        postponedDueDate:
+         type: string
+        postponedDueTime:
+         type: string
+        price:
+          type: number
+        paid:
+          type: number
+        driverUuid:
+          type: string
+        driverFirstName:
+          type: string
+        driverLastName:
+          type: string
+        driverEmail:
+          type: string
+        driverMobileNo:
+          type: string
+        photoImageUrl:
+          type: string
+        signatureImageUrl:
+          type: string
+        paymentOption:
+          type: string
+        recipientStatus:
+          type: string
+        enabledCod:
+          type: boolean
+
+    CreateOrderResponseData:
+      type: object
+      required: 
+        - orderId
+      properties:
+        orderId:
+          type: string
+    CreateOrderRequestData:
+      type: object
+      required: 
+        - companyUuid
+        - price
+        - paymentOption
+      properties:
+        companyUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        customerUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        price:
+          type: number
+          minimum: 0
+          maximum: 1000000
+          example: 100.50
+        paymentOption:
+          type: string
+          enum:
+            - PAYMENT_ONLY
+            - PAYMENT_BEFORE_SHIPPING
+            - PAYMENT_ON_DELIVERY
+        companyAddressLine:
+          type: string
+          maxLength: 300
+          minLength: 1
+          example: 'GG Apartment Soi 18, Kaosan Rd.'
+        companyProvinceId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 10
+        companyDistrictId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 1015
+        companySubDistrictId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 101501
+        companyPostalCode:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 10600
+        companyMapLocationPlaceId:
+          type: string
+          description: 'For reference with Google Map'
+          maxLength: 1000
+          minLength: 1
+        companyMapLocationPlaceTitle:
+          type: string
+          description: 'Any text. From Map provider such as Google Map'
+          maxLength: 1000
+          minLength: 1
+          example: 'Piyavate Hospital'
+        companyMapLocationPlaceDetails:
+          type: string
+          description: 'Any text. From Map provider such as Google Map'
+          maxLength: 1000
+          minLength: 1
+          example: 'GG Apartment Soi 18, Kaosan Rd. Bangkok'
+        companyMapLocationLat:
+          type: string
+          description: latitude
+          maxLength: 50
+          minLength: 1
+          example: '1.1234'
+        companyMapLocationLng:
+          type: string
+          description: longitude
+          maxLength: 50
+          minLength: 1
+          example: '3.3456'
+        customerFirstName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: John
+        customerLastName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: Lennon
+        customerEmail:
+          type: string
+          format: email
+          pattern: '[^\.]+\.[^\.]+$'
+          example: 'maw-dev@littlepawcraft.com'
+        customerMobileNo:
+          type: string
+          pattern: '^\+[1-9][0-9]{3,14}$'
+          example: '+66999999999'
+        customerAddressId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        customerAddressPhone:
+          type: string
+          pattern: '^[0-9]{9,10}$'
+          example: '021234567'
+        customerAddressLine:
+          type: string
+          maxLength: 300
+          minLength: 1
+          example: 'GG Apartment Soi 18, Kaosan Rd.'
+        customerProvinceId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 10
+        customerDistrctId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 1015
+        customerSubDistrctId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 101501
+        customerPostalCode:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 10600
+        customerMapLocationPlaceId:
+          type: string
+          description: 'For reference with Google Map'
+          maxLength: 1000
+          minLength: 1
+        customerMapLocationPlaceTitle:
+          type: string
+          description: 'Any text. From Map provider such as Google Map'
+          maxLength: 1000
+          minLength: 1
+          example: 'Piyavate Hospital'
+        customerMapLocationPlaceDetails:
+          type: string
+          description: 'Any text. From Map provider such as Google Map'
+          maxLength: 1000
+          minLength: 1
+          example: 'GG Apartment Soi 18, Kaosan Rd. Bangkok'
+        customerMapLocationLat:
+          type: string
+          description: latitude
+          maxLength: 50
+          minLength: 1
+          example: '1.1234'
+        customerMapLocationLng:
+          type: string
+          description: longitude
+          maxLength: 50
+          minLength: 1
+          example: '3.3456'
+        shippingVendorId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        deliveryTime:
+          type: string
+          description: '1|0 string, each digit represents true or false value of checkbox, starting from Monday_Morning, Monday_Evening, Tuesday_Morning, and so on'
+          pattern: '^[01]{14}$'
+          example: '10101010101010'
+    AssignDriverRequestData:
+      type: object
+      required: 
+        - orderId
+        - driverUuid
+      properties:
+        orderId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        driverUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+    DriverRejectTaskRequestData:
+      type: object
+      required: 
+        - orderId
+      properties:
+        orderId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+    DriverPostponeTaskRequestData:
+      type: object
+      required: 
+        - orderId
+      properties:
+        orderId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+    DriverAcceptTaskRequestData:
+      type: object
+      required: 
+        - orderId
+      properties:
+        orderId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+    DriverReceiveCashRequestData:
+      type: object
+      required: 
+        - orderId
+      properties:
+        orderId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+    DriverUndoReceiveCashRequestData:
+      type: object
+      required: 
+        - orderId
+      properties:
+        orderId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+    DriverEnableCodRequestData:
+      type: object
+      required: 
+        - orderId
+      properties:
+        orderId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+    DriverDeliveryRequestData:
+      type: object
+      required: 
+        - orderId
+        - recipientStatus
+        - signatureImageUrl
+      properties:
+        orderId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        recipientStatus:
+          type: string
+          enum:
+            - MATCHED
+            - NOT_MATCHED
+        photoImageUrl:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        signatureImageUrl:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+    CustomerReceiveRequestData:
+      type: object
+      required: 
+        - orderId
+      properties:
+        orderId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+    UpdateRefundRequestRequestData:
+      type: object
+      required: 
+        - refundId
+        - proofOfTransferUrl
+        - proofOfRefundRequestUrl
+      properties:
+        refundId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        proofOfTransferUrl:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        proofOfRefundRequestUrl:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+    UpdateRefundRequestResendToEditRequestData:
+      type: object
+      required: 
+        - refundId
+        - resendNote
+      properties:
+        refundId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        resendNote:
+          type: string
+          minLength: 1
+          maxLength: 1000
+          example: 'Incorrect image'
+    UpdateRefundRequestRejectRequestData:
+      type: object
+      required: 
+        - refundId
+        - rejectReason
+      properties:
+        refundId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        rejectReason:
+          type: string
+          minLength: 1
+          maxLength: 1000
+          example: 'Incorrect image'
+    UpdateRefundRequestApproveRequestData:
+      type: object
+      required: 
+        - refundId
+      properties:
+        refundId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+    UpdateRefundRequestStatusRequestData:
+      type: object
+      required: 
+        - refundId
+        - status
+      properties:
+        refundId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        status:
+          type: string
+          enum:
+            - NEW
+            - PENDING_APPROVAL
+            - APPROVED
+            - REJECTED
+            - ERROR
+            - SUCCESS
+    GetEventsResponseData:
+      type: object
+      required: 
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required: 
+              - uuid
+              - orderId
+              - eventDate
+              - status
+              - eventStatus
+            properties:
+              uuid:
+                type: string
+              orderId:
+                type: string
+              eventDate:
+                type: string
+              status:
+                type: string
+              previousStatus:
+                type: string
+              eventStatus:
+                type: string
+    ListShippingCompaniesResponseData:
+      type: object
+      required: 
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required: 
+              - companyUuid
+              - nameTh
+              - nameEn
+            properties:
+              companyUuid:
+                type: string
+              nameTh:
+                type: string
+              nameEn:
+                type: string
+    CreateImportRequestData:
+      type: object
+      required: 
+        - companyUuid
+        - fileUrl
+      properties:
+        companyUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        fileUrl:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+
+paths:
+  /orders/createImport:
+    post:
+      tags:
+        - order
+      summary: Create Import
+      description: Create Import
+      operationId: createImport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateImportRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/getEvents:
+    get:
+      tags:
+        - order
+      summary: Get order events
+      description: Get order events
+      operationId: getEvents
+      parameters:
+        - in: query
+          name: orderId
+          description: id of the order
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEventsResponseData'
+  /orders/updateRefundRequestStatus:
+    post:
+      tags:
+        - refund
+      summary: Update refund
+      description: Update refund
+      operationId: updateRefundRequestStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRefundRequestStatusRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/updateRefundRequestApprove:
+    post:
+      tags:
+        - refund
+      summary: Update refund
+      description: Update refund
+      operationId: updateRefundRequestApprove
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRefundRequestApproveRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/updateRefundRequestReject:
+    post:
+      tags:
+        - refund
+      summary: Update refund
+      description: Update refund
+      operationId: updateRefundRequestReject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRefundRequestRejectRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/updateRefundRequestResendToEdit:
+    post:
+      tags:
+        - refund
+      summary: Update refund
+      description: Update refund
+      operationId: updateRefundRequestResendToEdit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRefundRequestResendToEditRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/updateRefundRequest:
+    post:
+      tags:
+        - refund
+      summary: Update refund
+      description: Update refund
+      operationId: updateRefundRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRefundRequestRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/getRefund:
+    get:
+      tags:
+        - refund
+      summary: Get refund
+      description: Get refund
+      operationId: getRefund
+      parameters:
+        - in: query
+          name: refundId
+          description: id of the refund
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRefundResponseData'
+
+  /orders/listRefundsByCompany:
+    get:
+      tags:
+        - refund
+      summary: List refund by company
+      description: List refund by company
+      operationId: listRefundsByCompany
+      parameters:
+        - in: query
+          name: companyUuid
+          description: uuid of the company
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundList'
+  /orders/customerCancel:
+    post:
+      tags:
+        - customer-order
+      summary: Customer cancel order
+      description: Customer cancel order
+      operationId: customerCancel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCancelRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/customerReceive:
+    post:
+      tags:
+        - customer-order
+      summary: Customer receive
+      description: Customer receive
+      operationId: customerReceive
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerReceiveRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+
+  /orders/driverEnableCod:
+    post:
+      tags:
+        - driver-order
+      summary: Driver enable cod
+      description: Driver enable cod
+      operationId: driverEnableCod
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverEnableCodRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/driverDeliver:
+    post:
+      tags:
+        - driver-order
+      summary: Driver deliver product
+      description: Driver deliver product
+      operationId: driverDeliver
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverDeliveryRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/driverUndoReceiveCash:
+    post:
+      tags:
+        - driver-order
+      summary: Driver undo receive cash
+      description: Driver undo receive cash
+      operationId: driverUndoReceiveCash
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverUndoReceiveCashRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/driverReceiveCash:
+    post:
+      tags:
+        - driver-order
+      summary: Driver receive cash
+      description: Driver receive cash
+      operationId: driverReceiveCash
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverReceiveCashRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/driverPostponeTask:
+    post:
+      tags:
+        - driver-order
+      summary: Driver postpone task
+      description: Driver postpone task
+      operationId: driverPostponeTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverPostponeTaskRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/driverBulkRejectTasks:
+    post:
+      tags:
+        - driver-order
+      summary: Driver reject task
+      description: Driver reject task
+      operationId: driverBulkRejectTasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverBulkRejectTasksRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/driverBulkAcceptTasks:
+    post:
+      tags:
+        - driver-order
+      summary: Driver accpet task
+      description: Driver accpet task
+      operationId: driverBulkAcceptTasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverBulkAcceptTasksRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/driverRejectTask:
+    post:
+      tags:
+        - driver-order
+      summary: Driver reject task
+      description: Driver reject task
+      operationId: driverRejectTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverRejectTaskRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/driverAcceptTask:
+    post:
+      tags:
+        - driver-order
+      summary: Driver accept task
+      description: Driver accept task
+      operationId: driverAcceptTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverAcceptTaskRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/listOrderByDriver:
+    get:
+      tags:
+        - driver-order
+      summary: List order by driver
+      description: List order by driver
+      operationId: listOrderByDriver
+      parameters:
+        - in: query
+          name: driverUuid
+          description: uuid of the driver
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: tab
+          description: assignment | mytask | history
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+  /orders/assignDriver:
+    post:
+      tags:
+        - order
+      summary: Assign Driver
+      description: Assign Driver
+      operationId: assignDriver
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignDriverRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/simulatePayments:
+    post:
+      tags:
+        - order
+      summary: Simulate Payment
+      description: Simulate Payment
+      operationId: simulatePayments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimulatePaymentRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /orders/searchRefunds:
+    get:
+      tags:
+        - refund
+      summary: search refunds
+      description: search refunds
+      operationId: searchRefunds
+      parameters:
+        - in: query
+          name: companyUuid
+          description: uuid of the company
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/statusFilter'
+        - $ref: '#/components/parameters/searchKeyword'
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/rowsPerPage'
+        - $ref: '#/components/parameters/sortField'
+        - $ref: '#/components/parameters/sortDirection'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundList'
+  /orders/searchOrders:
+    get:
+      tags:
+        - order
+      summary: search orders
+      description: search orders
+      operationId: searchOrders
+      parameters:
+        - in: query
+          name: companyUuid
+          description: uuid of the company
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: shipping
+          description: search by shipping company
+          required: false
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/statusFilter'
+        - $ref: '#/components/parameters/searchKeyword'
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/rowsPerPage'
+        - $ref: '#/components/parameters/sortField'
+        - $ref: '#/components/parameters/sortDirection'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+  /orders/listOrdersByCompany:
+    get:
+      tags:
+        - order
+      summary: List order by company
+      description: List order by company
+      operationId: listOrdersByCompany
+      parameters:
+        - in: query
+          name: companyUuid
+          description: uuid of the company
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+  /orders/listOrdersByShippingCompany:
+    get:
+      tags:
+        - order
+      summary: List order by shipping company
+      description: List order by shipping company
+      operationId: listOrdersByShippingCompany
+      parameters:
+        - in: query
+          name: shippingCompanyUuid
+          description: uuid of the shipping company
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+  /orders/listOrdersByCustomer:
+    get:
+      tags:
+        - customer-order
+      summary: List order by customer
+      description: List order by customer
+      operationId: listOrdersByCustomer
+      parameters:
+        - in: query
+          name: userUuid
+          description: uuid of the user
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: tab
+          description: topay | toshop | history
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+  /orders/getOrder:
+    get:
+      tags:
+        - order
+      summary: Get order
+      description: Get order
+      operationId: getOrder
+      parameters:
+        - in: query
+          name: orderId
+          description: id of the order
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrderResponseData'
+
+  /orders/createOrder:
+    post:
+      tags:
+        - order
+      summary: Create order
+      description: Create order
+      operationId: createOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOrderResponseData'
+  /orders/listShippingCompanies:
+    get:
+      tags:
+        - order
+      summary: List shipping companies
+      description: List shipping companies
+      operationId: listShippingCompanies
+      responses:
+        200:
+          description: The list of banks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListShippingCompaniesResponseData'

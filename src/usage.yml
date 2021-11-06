@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: Users
-  description: API to manage users
+  title: Usage
+  description: API to manage usage
   version: 1.0.0
 components:
   schemas:
@@ -10,29 +10,35 @@ components:
       properties:
         message:
           type: string
-    UpdateUserRequestData:
+          example: 'ok'
+    ReportErrorRequestData:
       type: object
-      required:
-        - profileImageUrl
       properties:
-        profileImageUrl:
+        images:
+          type: array
+          items:
+            type: string
+        timestamp:
+          type: string
+        appState:
+          type: string
+        principalError:
           type: string
 
 paths:
-  /users/updateUser:
+  /usages/reportError:
     post:
       tags:
-        - user
-      summary: update some information of a user
-      description: update some information of a userx
-      operationId: updateUser
+        - usage
+      summary: Report error
+      description: Report error
+      operationId: reportError
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateUserRequestData'
-       
+              $ref: '#/components/schemas/ReportErrorRequestData'
       responses:
         200:
           description: Success

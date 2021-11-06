@@ -1,0 +1,1909 @@
+openapi: 3.0.0
+info:
+  title: Account
+  description: Account Management APIs
+  version: 1.0.0
+components:
+  parameters:
+    statusFilter:
+      in: query
+      name: statusFilter
+      description: statusFilter
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 20
+    searchKeyword:
+      in: query
+      name: searchKeyword
+      description: searchKeyword
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 20
+    startDate:
+      in: query
+      name: startDate
+      description: startDate
+      required: false
+      schema:
+        type: string
+        format: date-time
+        minLength: 1
+        maxLength: 20
+    endDate:
+      in: query
+      name: endDate
+      description: endDate
+      required: false
+      schema:
+        type: string
+        format: date-time
+        minLength: 1
+        maxLength: 20
+    page:
+      in: query
+      name: page
+      description: page
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+    rowsPerPage:
+      in: query
+      name: rowsPerPage
+      description: rowsPerPage
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+    sortField:
+      in: query
+      name: sortField
+      description: sortField
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 20
+    sortDirection:
+      in: query
+      name: sortDirection
+      description: sortDirection
+      required: false
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+  schemas:
+    DefaultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: ok
+    UpdateUserRequestData:
+      type: object
+      required:
+        - profileImageUrl
+      properties:
+        profileImageUrl:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+    ResendCustomerRegistrationEmailRequestData:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+          pattern: '[^\.]+\.[^\.]+$'
+          example: 'maw-dev@littlepawcraft.com'
+
+    UpdateCustomerRequestData:
+      type: object
+      required:
+        - profileImageUrl
+        - nationality
+        - firstName
+        - lastName
+        - mobileNo
+        - occupationId
+      properties:
+        profileImageUrl:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        nationality:
+          type: string
+          enum:
+            - THAI
+            - NON_THAI
+          example: THAI
+        firstName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: John
+        lastName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: Lennon
+        mobileNo:
+          type: string
+          pattern: '^\+[1-9][0-9]{3,14}$'
+          example: '+66999999999'
+        occupationId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 10000
+    RegisterCustomerRequestData:
+      type: object
+      required: 
+        - profileImageUrl
+        - email
+        - nationality
+        - firstName
+        - lastName
+        - mobileNo
+        - occupationId
+        - addressName
+        - addressLine
+        - addressPhoneNo
+        - provinceId
+        - districtId
+        - subDistrictId
+        - postalCode
+        - preferredDeliveryTime
+        - password
+      properties:
+        profileImageUrl:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        email:
+          type: string
+          format: email
+          pattern: '[^\.]+\.[^\.]+$'
+          example: 'maw-dev@littlepawcraft.com'
+        nationality:
+          type: string
+          enum:
+            - THAI
+            - NON_THAI
+          example: THAI
+        firstName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: John
+        lastName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: Lennon
+        mobileNo:
+          type: string
+          pattern: '^\+[1-9][0-9]{3,14}$'
+          example: '+66999999999'
+        occupationId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 10000
+        addressName:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: My Office
+        addressLine:
+          type: string
+          maxLength: 300
+          minLength: 1
+          example: 'GG Apartment Soi 18, Kaosan Rd.'
+        addressPhoneNo:
+          type: string
+          pattern: '^[0-9]{9,10}$'
+          example: '021234567'
+        provinceId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 10
+        districtId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 1015
+        subDistrictId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 101501
+        postalCode:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 10600
+        mapLocationLat:
+          type: string
+          description: latitude
+          maxLength: 50
+          minLength: 1
+          example: '1.1234'
+        mapLocationLng:
+          type: string
+          description: longitude
+          maxLength: 50
+          minLength: 1
+          example: '3.3456'
+        mapLocationLngPlaceDetails:
+          type: string
+          description: 'Any text. From Map provider such as Google Map'
+          maxLength: 1000
+          minLength: 1
+          example: 'GG Apartment Soi 18, Kaosan Rd. Bangkok'
+        mapLocationLngPlaceTitle:
+          type: string
+          description: 'Any text. From Map provider such as Google Map'
+          maxLength: 1000
+          minLength: 1
+          example: 'Piyavate Hospital'
+        mapLocationLngPlaceId:
+          type: string
+          description: 'For reference with Google Map'
+          maxLength: 1000
+          minLength: 1
+        preferredDeliveryTime:
+          type: string
+          description: '1|0 string, each digit represents true or false value of checkbox, starting from Monday_Morning, Monday_Evening, Tuesday_Morning, and so on'
+          pattern: '^[01]{14}$'
+          example: '10101010101010'
+        password:
+          type: string
+          description: 'Minimum eight characters, at least one letter, one number and one special character'
+          pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,20}$'
+          example: P@ssw0rd
+    GetAuthenticatedUserForCmsResponseData:
+      type: object
+      required:
+        - id
+        - email
+        - profileImage
+        - companyAccesses
+      properties:
+        id:
+          type: string
+          example: '5f01a072-9248-4d19-a2ce-e7e59e6150b5'
+        email:
+          type: string
+          example: 'john@example.com'
+        profileImage:
+          type: string
+          example: '/images/abc.png'
+        companyAccesses:
+          type: array
+          items:
+            type: object
+            required:
+              - companyType
+              - companyUuid
+              - companyLogoUrl
+              - companyNameTh
+              - companyNameEn
+              - firstName
+              - lastName
+              - mobileNo
+              - roleId
+              - roleNameTh
+              - roleNameEn
+              - permissions
+            properties:
+              companyType:
+                type: string
+              companyUuid:
+                type: string
+              companyLogoUrl:
+                type: string
+              companyNameTh:
+                type: string
+              companyNameEn:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              mobileNo:
+                type: string
+              roleId:
+                type: string
+              roleNameTh:
+                type: string
+              roleNameEn:
+                type: string
+              permissions:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - action
+                    - resource
+                  properties:
+                    action:
+                      type: string
+                    resource:
+                      type: string
+    GetAuthenticatedUserForCustomerResponseData:
+      type: object
+      required: 
+        - status
+        - userUuid
+        - email
+        - profileImageUrl
+        - firstName
+        - lastName
+        - mobileNo
+        - nationality
+        - occupationId
+        - driverAccesses
+      properties:
+        status:
+          type: string
+        userUuid:
+          type: string
+        email:
+          type: string
+        profileImageUrl:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        mobileNo:
+          type: string
+        nationality:
+          type: string
+        occupationId:
+          type: string
+        driverAccesses:
+          type: array
+          items:
+            type: object
+            required:
+              - companyType
+              - companyUuid
+              - companyLogoUrl
+              - companyNameTh
+              - companyNameEn
+              - firstName
+              - lastName
+              - mobileNo
+              - driverUuid
+            properties:
+              companyType:
+                type: string
+              companyUuid:
+                type: string
+              companyLogoUrl:
+                type: string
+              companyNameTh:
+                type: string
+              companyNameEn:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              mobileNo:
+                type: string
+              driverUuid:
+                type: string
+    RegisterCompanyStaffByInvitationCodeRequestData:
+      type: object
+      required: 
+        - password
+        - invitationToken
+      properties:
+        password:
+          type: string
+          pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,20}$'
+          example: Passw0rd
+        invitationToken:
+          type: string
+          description: JWT
+          maxLength: 5000
+          minLength: 1
+    AcceptCompanyStaffInvitationResponseData:
+      type: object
+      properties:
+        registrationToken:
+          type: string
+          description: 'JWT token if need registration, or null if completed'
+          maxLength: 5000
+          minLength: 1
+    SearchCustomerResponseData:
+      type: object
+      required:
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - customerUuid
+              - firstName
+              - lastName
+              - mobileNo
+              - email
+              - shippingAddresses
+            properties:
+              customerUuid:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              mobileNo:
+                type: string
+              email:
+                type: string
+              shippingAddresses:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - isPrimary
+                    - addressId
+                    - addressName
+                    - addressPhone
+                    - addressLine
+                    - provinceId
+                    - provinceNameEn
+                    - provinceNameTh
+                    - districtId
+                    - districtNameEn
+                    - districtNameTh
+                    - subDistrictId
+                    - subDistrictNameEn
+                    - subDistrictNameTh
+                    - postalCode
+                  properties:
+                    isPrimary:
+                      type: boolean
+                    addressId:
+                      type: string
+                    addressName:
+                      type: string
+                    addressPhone:
+                      type: string
+                    addressLine:
+                      type: string
+                    provinceId:
+                      type: string
+                    provinceNameEn:
+                      type: string
+                    provinceNameTh:
+                      type: string
+                    districtId:
+                      type: string
+                    districtNameEn:
+                      type: string
+                    districtNameTh:
+                      type: string
+                    subDistrictId:
+                      type: string
+                    subDistrictNameEn:
+                      type: string
+                    subDistrictNameTh:
+                      type: string
+                    postalCode:
+                      type: string
+                    mapLocationLngPlaceTitle:
+                      type: string
+                    mapLocationLngPlaceDetails:
+                      type: string
+                    mapLocationLng:
+                      type: string
+                    mapLocationLat:
+                      type: string
+                    preferredDeliveryTime:
+                      type: string
+    GetCompanyResponseData:
+      type: object
+      required:
+        - companyUuid
+        - createdAt
+        - createdBy
+        - lastUpdatedAt
+        - lastUpdatedBy
+        - rejectReason
+        - resentNote
+        - version
+        - status
+        - registerLocation
+        - juristicNameTh
+        - juristicNameEn
+        - corporateRegistrationNumber
+        - commercialRegistrationNumber
+        - taxPayerIdentificationNumber
+        - addressLine
+        - provinceId
+        - provinceNameTh
+        - provinceNameEn
+        - districtId
+        - districtNameTh
+        - districtNameEn
+        - subDistrictId
+        - subDistrictNameTh
+        - subDistrictNameEn
+        - postalCode
+        - phoneNumber
+        - fax
+        - pContactFullName
+        - pContactPosition
+        - pContactEmail
+        - pContactMobileNo
+        - sSameAsLegalAddress
+        - deliveryChannelType
+        - isMerchant
+        - isCourier
+        - hasPaymentGatewayService
+        - hasShippingService
+        - companyCode
+        - bAccountName
+        - bAccountNumber
+        - bBankCode
+        - bBankNameTh
+        - bBankNameEn
+        - fRegistrationCertification
+        - fIdCardOrPassportOfAuthorizationOwner
+        - fIdCardOrPasswordOfAuthorizedPerson
+        - fIdCardOrPassportOfAuthorizedDirector
+        - fPowerOfAttorney
+        - fBankPassbookFirstPage
+        - fCompanyLogo
+        - fRegistrationForm
+        - fInformationChangeForm
+      properties:
+        companyUuid:
+          type: string
+        createdAt:
+          type: string
+        createdBy:
+          type: string
+        lastUpdatedAt:
+          type: string
+        lastUpdatedBy:
+          type: string
+        rejectReason:
+          type: string
+        resentNote:
+          type: string
+        version:
+          type: integer
+        status:
+          type: string
+        registerLocation:
+          type: string
+        juristicNameTh:
+          type: string
+        juristicNameEn:
+          type: string
+        corporateRegistrationNumber:
+          type: string
+        commercialRegistrationNumber:
+          type: string
+        taxPayerIdentificationNumber:
+          type: string
+        addressLine:
+          type: string
+        provinceId:
+          type: string
+        provinceNameTh:
+          type: string
+        provinceNameEn:
+          type: string
+        districtId:
+          type: string
+        districtNameTh:
+          type: string
+        districtNameEn:
+          type: string
+        subDistrictId:
+          type: string
+        subDistrictNameTh:
+          type: string
+        subDistrictNameEn:
+          type: string
+        postalCode:
+          type: string
+        phoneNumber:
+          type: string
+        fax:
+          type: string
+        pContactFullName:
+          type: string
+        pContactPosition:
+          type: string
+        pContactEmail:
+          type: string
+        pContactMobileNo:
+          type: string
+        sSameAsLegalAddress:
+          type: string
+        sAddressLine:
+          type: string
+        sProvinceId:
+          type: string
+        sProvinceNameTh:
+          type: string
+        sProvinceNameEn:
+          type: string
+        sDistrictId:
+          type: string
+        sDistrictNameTh:
+          type: string
+        sDistrictNameEn:
+          type: string
+        sSubDistrictId:
+          type: string
+        sSubDistrictNameTh:
+          type: string
+        sSubDistrictNameEn:
+          type: string
+        sPostalCode:
+          type: string
+        deliveryChannelType:
+          type: string
+        deliveryChannelDesc:
+          type: string
+        isMerchant:
+          type: boolean
+        isCourier:
+          type: boolean
+        hasPaymentGatewayService:
+          type: boolean
+        hasShippingService:
+          type: boolean
+        paymentGatewayPercent:
+          type: integer
+        shippingRatePercent:
+          type: integer
+        companyCode:
+          type: string
+        bAccountName:
+          type: string
+        bAccountNumber:
+          type: string
+        bBankCode:
+          type: string
+        bBankNameTh:
+          type: string
+        bBankNameEn:
+          type: string
+        fRegistrationCertification:
+          type: string
+        fIdCardOrPassportOfAuthorizationOwner:
+          type: string
+        fIdCardOrPasswordOfAuthorizedPerson:
+          type: string
+        fIdCardOrPassportOfAuthorizedDirector:
+          type: string
+        fPowerOfAttorney:
+          type: string
+        fBankPassbookFirstPage:
+          type: string
+        fVatLicense:
+          type: string
+        fCompanyLogo:
+          type: string
+        fRegistrationForm:
+          type: string
+        fInformationChangeForm:
+          type: string
+        mapLocationPlaceId:
+          type: string
+        mapLocationPlaceTitle:
+          type: string
+        mapLocationPlaceDesc:
+          type: string
+        mapLocationLat:
+          type: string
+        mapLocationLng:
+          type: string
+    CreateOrUpdateCompanyRequestData:
+      type: object
+      required:
+        - companyUuid
+        - version
+        - registerLocation
+        - juristicNameTh
+        - juristicNameEn
+        - corporateRegistrationNumber
+        - commercialRegistrationNumber
+        - taxPayerIdentificationNumber
+        - addressLine
+        - provinceId
+        - districtId
+        - subDistrictId
+        - postalCode
+        - phoneNumber
+        - pContactFullName
+        - pContactPosition
+        - pContactEmail
+        - pContactMobileNo
+        - sSameAsLegalAddress
+        - deliveryChannelType
+        - isMerchant
+        - isCourier
+        - hasPaymentGatewayService
+        - hasShippingService
+        - companyCode
+        - bAccountName
+        - bAccountNumber
+        - bBankCode
+        - bBankNameTh
+        - bBankNameEn
+        - fRegistrationCertification
+        - fIdCardOrPassportOfAuthorizationOwner
+        - fIdCardOrPasswordOfAuthorizedPerson
+        - fIdCardOrPassportOfAuthorizedDirector
+        - fPowerOfAttorney
+        - fBankPassbookFirstPage
+        - fCompanyLogo
+        - fRegistrationForm
+        - fInformationChangeForm
+      properties:
+        companyUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        version:
+          type: integer
+          minimum: 0
+          example: 0
+        registerLocation:
+          type: string
+          enum:
+            - THAI
+            - NON_THAI
+        juristicNameTh:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: 'บริษัทจำกัด'
+        juristicNameEn:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: 'Example Company'
+        corporateRegistrationNumber:
+          type: string
+          pattern: '^\d{13}$'
+          example: '0000000000000'
+        commercialRegistrationNumber:
+          type: string
+          pattern: '^\d{13}$'
+          example: '0000000000000'
+        taxPayerIdentificationNumber:
+          type: string
+          pattern: '^\d{13}$'
+          example: '0000000000000'
+        addressLine:
+          type: string
+          minLength: 1
+          maxLength: 300
+          example: '1/1 Kaosan Road'
+        provinceId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: '10'
+        districtId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: '1015'
+        subDistrictId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: '101501'
+        postalCode:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: '10600'
+        phoneNumber:
+          type: string
+          pattern: '^[0-9]{9,10}$'
+          example: '029999999'
+        fax:
+          type: string
+          pattern: '^[0-9]{9,10}$'
+          example: '029999999'
+        pContactFullName:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: 'John Lennon'
+        pContactPosition:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: 'CEO'
+        pContactEmail:
+          type: string
+          format: email
+          pattern: '[^\.]+\.[^\.]+$'
+          example: 'maw-dev@littlepawcraft.com'
+        pContactMobileNo:
+          type: string
+          pattern: '^[0-9]{10}$'
+          example: '0999999999'
+        sSameAsLegalAddress:
+          type: string
+          enum: 
+            - 'true'
+            - 'false'
+        sAddressLine:
+          type: string
+          minLength: 1
+          maxLength: 300
+          example: '1/1 Kaosan Road'
+        sProvinceId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: '10'
+        sDistrictId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: '1015'
+        sSubDistrictId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: '101501'
+        sPostalCode:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: '10600'
+        deliveryChannelType:
+          type: string
+          enum:
+            - POST_OFFICE
+            - PRIMARY_CONTACT_EMAIL
+            - OTHER
+        deliveryChannelDesc:
+          type: string
+          format: email
+          pattern: '[^\.]+\.[^\.]+$'
+          example: 'maw-dev@littlepawcraft.com'
+        isMerchant:
+          type: boolean
+          example: true
+        isCourier:
+          type: boolean
+          example: true
+        hasPaymentGatewayService:
+          type: boolean
+          example: true
+        hasShippingService:
+          type: boolean
+          example: true
+        paymentGatewayPercent:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 0
+        shippingRatePercent:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 0
+        companyCode:
+          type: string
+          minLength: 8
+          maxLength: 8
+          example: 'GOO-ZXCV'
+        bAccountName:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: 'John Lennon'
+        bAccountNumber:
+          type: string
+          pattern: '^\d{10,13}$'
+          example: '0000000000000'
+        bBankCode:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: '001'
+        fRegistrationCertification:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        fIdCardOrPassportOfAuthorizationOwner:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        fIdCardOrPasswordOfAuthorizedPerson:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        fIdCardOrPassportOfAuthorizedDirector:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        fPowerOfAttorney:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        fBankPassbookFirstPage:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        fVatLicense:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        fCompanyLogo:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        fRegistrationForm:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        fInformationChangeForm:
+          type: string
+          pattern: '^https?://.+$'
+          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+        mapLocationPlaceId:
+          type: string
+          description: 'For reference with Google Map'
+          maxLength: 1000
+          minLength: 1
+        mapLocationPlaceTitle:
+          type: string
+          description: 'Any text. From Map provider such as Google Map'
+          maxLength: 1000
+          minLength: 1
+          example: 'Piyavate Hospital'
+        mapLocationPlaceDesc:
+          type: string
+          description: 'Any text. From Map provider such as Google Map'
+          maxLength: 1000
+          minLength: 1
+          example: 'GG Apartment Soi 18, Kaosan Rd. Bangkok'
+        mapLocationLat:
+          type: string
+          description: latitude
+          maxLength: 50
+          minLength: 1
+          example: '1.1234'
+        mapLocationLng:
+          type: string
+          description: longitude
+          maxLength: 50
+          minLength: 1
+          example: '3.3456'
+
+    ListAllCompaniesResponseData:
+      type: object
+      required:
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - logoUrl
+              - companyUuid
+              - nameTh
+              - nameEn
+              - lastEdit
+              - status
+              - version
+            properties:
+              logoUrl:
+                type: string
+              version:
+                type: integer
+              companyUuid:
+                type: string
+              nameTh:
+                type: string
+              nameEn:
+                type: string
+              lastEdit:
+                type: string
+              status:
+                type: string
+    BulkUpdateCompanyStatusRequestData:
+      type: object
+      required: 
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required: 
+              - rejectReason
+              - resentNote
+              - version
+              - companyUuid
+              - status
+            properties:
+              rejectReason:
+                type: string
+                minLength: 1
+                maxLength: 1000
+                example: 'Invalid info'
+              resentNote:
+                type: string
+                minLength: 1
+                maxLength: 1000
+                example: 'Incorrect image'
+              version:
+                type: integer
+                minimum: 0
+                example: 0
+              companyUuid:
+                type: string
+                minLength: 1
+                maxLength: 50
+              status:
+                type: string
+                enum:
+                  - APPROVED
+                  - DELETED
+                  - WAITING_VERIFY
+                  - WAITING_EDIT
+                  - REJECTED
+    UpdateCompanyStatusRequestData:
+      type: object
+      required: 
+        - rejectReason
+        - resentNote
+        - version
+        - companyUuid
+        - status
+      properties:
+        rejectReason:
+          type: string
+          minLength: 1
+          maxLength: 1000
+          example: 'Invalid info'
+        resentNote:
+          type: string
+          minLength: 1
+          maxLength: 1000
+          example: 'Incorrect image'
+        version:
+          type: integer
+          minimum: 0
+          example: 0
+        companyUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+        status:
+          type: string
+          enum:
+            - APPROVED
+            - DELETED
+            - WAITING_VERIFY
+            - WAITING_EDIT
+            - REJECTED
+    BulkUpdateStaffStatusRequestData:
+      type: object
+      required:
+        - list
+        - companyUuid
+      properties:
+        companyUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - version
+              - staffUuid
+              - status
+            properties:
+              version:
+                type: integer
+                minimum: 0
+                example: 0
+              staffUuid:
+                type: string
+                minLength: 1
+                maxLength: 50
+                example: 'abc'
+              status:
+                type: string
+                enum:
+                  - ACTIVE
+                  - INACTIVE
+                  - WAITING_INVITATION
+                  - EXPIRED
+                  - DELETED
+    UpdateStaffRequestData:
+      type: object
+      required:
+        - companyUuid
+        - version
+        - staffUuid
+        - firstName
+        - lastName
+        - mobileNo
+        - roleId
+      properties:
+        companyUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        version:
+          type: integer
+          minimum: 0
+          example: 0
+        staffUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        firstName:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: 'John'
+        lastName:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: 'Lennong'
+        mobileNo:
+          type: string
+          pattern: '^[0-9]{10}$'
+          example: '0999999999'
+        roleId:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: '100'
+    ListCompanyRolesResponseData:
+      type: object
+      required:
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - roleId
+              - nameTh
+              - nameEn
+            properties:
+              roleId:
+                type: string
+                minLength: 1
+                maxLength: 100
+                example: '100'
+              nameTh:
+                type: string
+                minLength: 1
+                maxLength: 100
+                example: 'John'
+              nameEn:
+                type: string
+                minLength: 1
+                maxLength: 100
+                example: 'Lennon'
+
+    InviteStaffRequestData:
+      type: object
+      required:
+        - companyUuid
+        - roleId
+        - email
+        - firstName
+        - lastName
+        - mobileNo
+      properties:
+        companyUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: 'abc'
+        roleId:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: '100'
+        email:
+          type: string
+          format: email
+          pattern: '[^\.]+\.[^\.]+$'
+          example: 'maw-dev@littlepawcraft.com'
+        firstName:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: 'John'
+        lastName:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: 'Lennon'
+        mobileNo:
+          type: string
+          pattern: '^[0-9]{10}$'
+          example: '0999999999'
+
+    ListStaffsResponseData:
+      type: object
+      required:
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - version
+              - staffUuid
+              - email
+              - firstName
+              - lastName
+              - mobileNo
+              - roleId
+              - roleNameTh
+              - roleNameEn
+              - lastEdit
+              - status
+            properties:
+              version:
+                type: integer
+              staffUuid:
+                type: string
+              email:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              mobileNo:
+                type: string
+              roleId:
+                type: string
+              roleNameTh:
+                type: string
+              roleNameEn:
+                type: string
+              lastEdit:
+                type: string
+              status:
+                type: string
+                      
+
+paths:
+  /accounts/updateUser:
+    post:
+      tags:
+        - user
+      summary: update some information of a user
+      description: update some information of a user
+      operationId: updateUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequestData'
+       
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/resendCustomerRegistrationEmail:
+    post:
+      tags:
+        - registration
+      summary: Resend email for customer registration
+      description: Resend email for customer registration
+      operationId: resendCustomerRegistrationEmail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResendCustomerRegistrationEmailRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/updateCustomer:
+    post:
+      tags:
+        - customer
+      summary: 'Update Customer Profile'
+      description: 'Update Customer Profile'
+      operationId: updateCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomerRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/verifyEmailForCustomerRegistration:
+    get:
+      tags:
+        - registration
+      summary: 'Verify Email for customer registration'
+      description: 'Verify Email for customer registration'
+      operationId: verifyEmailForCustomerRegistration
+      parameters:
+        - in: query
+          name: token
+          description: JWT invitation token
+          required: true
+          schema:
+            type: string
+            maxLength: 500
+            minLength: 1
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/checkEmailValidForRegistration:
+    post:
+      tags:
+        - registration
+      summary: 'Check if email is valid for registration'
+      description: 'Check if email is valid for registration'
+      operationId: checkEmailValidForRegistration
+      parameters:
+        - in: query
+          name: email
+          description: email to check
+          required: true
+          schema:
+            type: string
+            format: email
+            pattern: '[^\.]+\.[^\.]+$'
+            example: 'maw-dev@littlepawcraft.com'
+      responses:
+        200:
+          description: Email is valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/registerCustomer:
+    post:
+      tags:
+        - registration
+      summary: 'Register customer from mobile app'
+      description: 'Register customer from mobile app'
+      operationId: registerCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterCustomerRequestData'
+      responses:
+        200:
+          description: Registration succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/getAuthenticatedUserForCms:
+    get:
+      tags:
+        - user
+      summary: 'Return authenticated user data'
+      description: 'Return authenticated user data'
+      operationId: getAuthenticatedUserForCms
+      responses:
+        200:
+          description: User data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAuthenticatedUserForCmsResponseData'
+  /accounts/getAuthenticatedUserForCustomer:
+    get:
+      tags:
+        - user
+      summary: 'Return authenticated user data'
+      description: 'Return authenticated user data'
+      operationId: getAuthenticatedUserForCustomer
+      responses:
+        200:
+          description: User data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAuthenticatedUserForCustomerResponseData'
+                
+  /accounts/registerCompanyStaffByInvitationCode:
+    post:
+      tags:
+        - registration
+      summary: 'Register a company staff by invitation code'
+      description: 'Register a company staff by invitation code'
+      operationId: registerCompanyStaffByInvitationCode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterCompanyStaffByInvitationCodeRequestData'
+      responses:
+        200:
+          description: Registration succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+
+  /accounts/acceptCompanyStaffInvitation:
+    get:
+      tags:
+        - registration
+      summary: 'Accept invitation code for company staff'
+      description: 'Accept invitation code for company staff'
+      operationId: acceptCompanyStaffInvitation
+      parameters:
+        - in: query
+          name: token
+          description: JWT invitation token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Registration succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptCompanyStaffInvitationResponseData'
+                
+  /accounts/emailAvailableForCustomerCreation:
+    get:
+      tags:
+        - customer
+      summary: 'Check Customers Email Available'
+      description: 'Check Customers Email Available'
+      operationId: emailAvailableForCustomerCreation
+      parameters:
+        - in: query
+          name: email
+          required: false
+          schema:
+            type: string
+            format: email
+            pattern: '[^\.]+\.[^\.]+$'
+            example: 'maw-dev@littlepawcraft.com'
+      responses:
+        200:
+          description: Available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/searchActiveCustomersByKeyword:
+    get:
+      tags:
+        - customer
+      summary: 'Search customers'
+      description: 'Search customers'
+      operationId: searchActiveCustomersByKeyword
+      parameters:
+        - in: query
+          name: keyword
+          required: true
+          description: 'search keyword (email | first name | last name | mobile no)'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+            example: 'john@example.com'
+        - in: query
+          name: limit
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchCustomerResponseData'
+  /accounts/bulkUpdateCompanyStatus:
+    post:
+      tags:
+        - company
+      summary: 'Bulk update company status'
+      description: 'Bulk update company status'
+      operationId: bulkUpdateCompanyStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkUpdateCompanyStatusRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/updateCompanyStatus:
+    post:
+      tags:
+        - company
+      summary: Update company status
+      description: Update company status
+      operationId: updateCompanyStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCompanyStatusRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/getCompany:
+    get:
+      tags:
+        - company
+      summary: Get company
+      description: Get company
+      operationId: getCompany
+      parameters:
+        - in: query
+          name: companyUuid
+          description: uuid of the company
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCompanyResponseData'
+  /accounts/updateCompany:
+    post:
+      tags:
+        - company
+      summary: Update company
+      description: Update company
+      operationId: updateCompany
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateCompanyRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/createCompany:
+    post:
+      tags:
+        - company
+      summary: Create company
+      description: Create company
+      operationId: createCompany
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateCompanyRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/listAllCompanies:
+    get:
+      tags:
+        - company
+      summary: List all companies
+      description: List all companies
+      operationId: listAllCompanies
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAllCompaniesResponseData'
+  /accounts/bulkUpdateStaffStatus:
+    post:
+      tags:
+        - company
+      summary: Bulk update status staff
+      description: Bulk update status staff
+      operationId: bulkUpdateStaffStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkUpdateStaffStatusRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/activateStaff:
+    post:
+      tags:
+        - company
+      summary: Activate staff
+      description: Activate staff
+      operationId: activateStaff
+      parameters:
+        - in: query
+          name: staffUuid
+          description: uuid of the staff to update
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: version
+          description: optimistic lock version
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: companyUuid
+          description: the target company
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/inactivateStaff:
+    post:
+      tags:
+        - company
+      summary: Inactivate staff
+      description: Inactivate staff
+      operationId: inactivateStaff
+      parameters:
+        - in: query
+          name: staffUuid
+          description: uuid of the staff to update
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: version
+          description: optimistic lock version
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: companyUuid
+          description: the target company
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/deleteStaff:
+    post:
+      tags:
+        - company
+      summary: Delete staff
+      description: Delete staff
+      operationId: deleteStaff
+      parameters:
+        - in: query
+          name: staffUuid
+          description: uuid of the staff to update
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: version
+          description: optimistic lock version
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: companyUuid
+          description: the target company
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/updateStaff:
+    post:
+      tags:
+        - company
+      summary: Update Staff
+      description: Update Staff
+      operationId: updateStaff
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStaffRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+  /accounts/checkEmailAvailableForStaffInvitation:
+    post:
+      tags:
+        - registration
+      summary: Check if an email can be used to invite an admin user
+      description: Check if an email can be used to invite an admin user
+      operationId: checkEmailAvailableForStaffInvitation
+      parameters:
+        - in: query
+          name: email
+          description: email to check
+          required: true
+          example: john@example.com
+          schema:
+            type: string
+        - in: query
+          name: companyUuid
+          description: the target company
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'
+
+  /accounts/listCompanyRoles:
+    get:
+      tags:
+        - company
+      summary: List of all admin roles for update admin user data
+      description: List of all admin roles for update admin user data
+      operationId: listCompanyRoles
+      parameters:
+        - in: query
+          name: companyUuid
+          description: the target company
+          required: true
+          schema:
+           type: string
+      responses:
+        200:
+          description: Admin role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCompanyRolesResponseData'
+  /accounts/listStaffs:
+    get:
+      tags:
+        - company
+      summary: List of all staffs
+      description: List of all staffs
+      operationId: listStaffs
+      parameters:
+        - in: query
+          name: companyUuid
+          description: the target company
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Admin users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStaffsResponseData'
+  /accounts/inviteStaff:
+    post:
+      tags:
+        - registration
+      summary: Invite (create) a new staff
+      description: Invite (create) a new staff
+      operationId: inviteStaff
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteStaffRequestData'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultResponse'

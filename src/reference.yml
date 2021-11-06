@@ -1,0 +1,280 @@
+openapi: 3.0.0
+info:
+  title: Reference
+  description: API to manage reference data
+  version: 1.0.0
+components:
+  schemas:
+    DefaultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'ok'
+    ListBanksResponseData:
+      type: object
+      required: 
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required: 
+              - code
+              - nameTh
+              - nameEn
+            properties:
+              code:
+                type: string
+              nameTh:
+                type: string
+              nameEn:
+                type: string
+    ListOccupationsResponseData:
+      type: object
+      required: 
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required: 
+              - occupationId
+              - nameTh
+              - nameEn
+            properties:
+              occupationId:
+                type: string
+              nameTh:
+                type: string
+              nameEn:
+                type: string
+    ListProvincesResponseData:
+      type: object
+      required: 
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required: 
+              - provinceId
+              - nameTh
+              - nameEn
+            properties:
+              provinceId:
+                type: string
+              nameTh:
+                type: string
+              nameEn:
+                type: string
+    ListDistrictsResponseData:
+      type: object
+      required: 
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required: 
+              - districtId
+              - nameTh
+              - nameEn
+            properties:
+              districtId:
+                type: string
+              nameTh:
+                type: string
+              nameEn:
+                type: string
+    ListSubDistrictsResponseData:
+      type: object
+      required: 
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required: 
+              - subDistrictId
+              - nameTh
+              - nameEn
+            properties:
+              subDistrictId:
+                type: string
+              nameTh:
+                type: string
+              nameEn:
+                type: string
+    ListPostalCodesResponseData:
+      type: object
+      required: 
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required: 
+              - postalCode
+            properties:
+              postalCode:
+                type: string
+
+paths:
+  /references/listBanks:
+    get:
+      tags:
+        - reference
+      summary: Get list of banks
+      description: Get list of banks
+      operationId: listBanks
+      responses:
+        200:
+          description: The list of banks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBanksResponseData'
+  /references/getConsentDocument:
+    get:
+      tags:
+        - reference
+      summary: Get consent document such as Terms and Conditions, Privacy Policy ...
+      description: Get consent document such as Terms and Conditions, Privacy Policy ...
+      operationId: getConsentDocument
+      parameters:
+        - in: query
+          name: documentType
+          required: true
+          description: TC_USER | TC_CARRIAGE | PRIVACY
+          example: TC_USER
+          schema:
+            type: string
+            enum:
+              - TC_USER
+              - TC_CARRIAGE
+              - PRIVACY
+        - in: query
+          name: language
+          required: true
+          description: th | en
+          example: en
+          schema:
+            type: string
+            enum: 
+              - th
+              - en
+      responses:
+        200:
+          description: The consent document HTML
+          content:
+            text/html:
+              schema:
+                type: string
+  /references/listOccupations:
+    get:
+      tags:
+        - reference
+      summary: Get list of occupations
+      description: Get list of occupations
+      operationId: listOccupations
+      responses:
+        200:
+          description: The list of occupations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOccupationsResponseData'
+
+  /references/listProvinces:
+    get:
+      tags:
+        - reference
+      summary: Get list of provinces
+      description: Get list of provinces
+      operationId: listProvinces
+      responses:
+        200:
+          description: The list of provinces
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProvincesResponseData'
+
+  /references/listDistricts:
+    get:
+      tags:
+        - reference
+      summary: Get list of districts
+      description: Get list of districts
+      operationId: listDistricts
+      parameters:
+        - in: query
+          name: provinceId
+          required: true
+          description: The provinceId to filter
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+      responses:
+        200:
+          description: The list of districts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDistrictsResponseData'
+
+  /references/listSubDistricts:
+    get:
+      tags:
+        - reference
+      summary: Get list of subdistricts
+      description: Get list of subdistricts
+      operationId: listSubDistricts
+      parameters:
+        - in: query
+          name: districtId
+          required: true
+          description: The districtId to filter
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+      responses:
+        200:
+          description: The list of subdistricts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSubDistrictsResponseData'
+
+  /references/listPostalCodes:
+    get:
+      tags:
+        - reference
+      summary: Get list of postalcodes
+      description: Get list of postalcodes
+      operationId: listPostalCodes
+      parameters:
+        - in: query
+          name: subDistrictId
+          required: true
+          description: The subDistrictId to filter
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+      responses:
+        200:
+          description: The list of postalcodes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPostalCodesResponseData'
