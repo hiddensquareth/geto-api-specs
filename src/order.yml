@@ -449,7 +449,6 @@ components:
           minimum: 0
           maximum: 1000000
           example: 100.50
-          format: double
         paymentOption:
           type: string
           enum:
