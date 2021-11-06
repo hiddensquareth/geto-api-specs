@@ -73,7 +73,7 @@ components:
         enum:
           - asc
           - desc
-          
+
   schemas:
     DefaultResponse:
       type: object
@@ -92,10 +92,10 @@ components:
         list:
           type: array
           items:
-            $ref: '#/components/schemas/GetRefundResponseData'
+            $ref: "#/components/schemas/GetRefundResponseData"
     GetRefundResponseData:
       type: object
-      required: 
+      required:
         - refundId
         - orderId
         - orderDate
@@ -173,7 +173,7 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
     SimulatePaymentRequestData:
       type: object
       properties:
@@ -185,25 +185,25 @@ components:
           type: number
     DriverBulkAcceptTasksRequestData:
       type: object
-      required: 
+      required:
         - list
       properties:
         list:
           type: array
           items:
-            $ref: '#/components/schemas/DriverAcceptTaskRequestData'
+            $ref: "#/components/schemas/DriverAcceptTaskRequestData"
     DriverBulkRejectTasksRequestData:
       type: object
-      required: 
+      required:
         - list
       properties:
         list:
           type: array
           items:
-            $ref: '#/components/schemas/DriverRejectTaskRequestData'
+            $ref: "#/components/schemas/DriverRejectTaskRequestData"
     OrderList:
       type: object
-      required: 
+      required:
         - itemCount
         - list
       properties:
@@ -212,10 +212,10 @@ components:
         list:
           type: array
           items:
-            $ref: '#/components/schemas/GetOrderResponseData'
+            $ref: "#/components/schemas/GetOrderResponseData"
     GetOrderResponseData:
       type: object
-      required: 
+      required:
         - orderId
         - createdAt
         - createdBy
@@ -375,9 +375,9 @@ components:
         dueTime:
           type: string
         postponedDueDate:
-         type: string
+          type: string
         postponedDueTime:
-         type: string
+          type: string
         price:
           type: number
         paid:
@@ -405,14 +405,115 @@ components:
 
     CreateOrderResponseData:
       type: object
-      required: 
+      required:
         - orderId
       properties:
         orderId:
           type: string
+    CreateOrderByImportRequestData:
+      type: object
+      required:
+        - companyUuid
+        - price
+        - paymentOption
+        - importId
+        - referenceOrderId
+      properties:
+        companyUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: "abc"
+        importId:
+          type: number
+          minimum: 0
+          example: 123456
+        referenceOrderId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: "abc"
+        referenceCustomerId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: "abc"
+        referenceMerchantId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: "abc"
+        price:
+          type: number
+          minimum: 0
+          maximum: 1000000
+          example: 100.50
+        paymentOption:
+          type: string
+          enum:
+            - PAYMENT_ONLY
+            - PAYMENT_BEFORE_SHIPPING
+            - PAYMENT_ON_DELIVERY
+        shippingCompany:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: "Kerry"
+        useCompanyRegisteredAddress:
+          type: boolean
+          example: true
+        companyAddressLine:
+          type: string
+          maxLength: 300
+          minLength: 1
+          example: "GG Apartment Soi 18, Kaosan Rd."
+        companyPostalCode:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 10600
+        customerEmail:
+          type: string
+          format: email
+          pattern: '[^\.]+\.[^\.]+$'
+          example: "maw-dev@littlepawcraft.com"
+        customerFirstName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: John
+        customerLastName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: Lennon
+        customerMobileNo:
+          type: string
+          pattern: '^\+[1-9][0-9]{3,14}$'
+          example: "+66999999999"
+        customerAddressPhone:
+          type: string
+          pattern: "^[0-9]{9,10}$"
+          example: "021234567"
+        customerAddressLine:
+          type: string
+          maxLength: 300
+          minLength: 1
+          example: "GG Apartment Soi 18, Kaosan Rd."
+        customerPostalCode:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 10600
+        deliveryTime:
+          type: string
+          description: "1|0 string, each digit represents true or false value of checkbox, starting from Monday_Morning, Monday_Evening, Tuesday_Morning, and so on"
+          pattern: "^[01]{14}$"
+          example: "10101010101010"
+
     CreateOrderRequestData:
       type: object
-      required: 
+      required:
         - companyUuid
         - price
         - paymentOption
@@ -421,12 +522,17 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
+        importId:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: "abc"
         customerUuid:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         price:
           type: number
           minimum: 0
@@ -442,7 +548,7 @@ components:
           type: string
           maxLength: 300
           minLength: 1
-          example: 'GG Apartment Soi 18, Kaosan Rd.'
+          example: "GG Apartment Soi 18, Kaosan Rd."
         companyProvinceId:
           type: string
           maxLength: 50
@@ -465,33 +571,33 @@ components:
           example: 10600
         companyMapLocationPlaceId:
           type: string
-          description: 'For reference with Google Map'
+          description: "For reference with Google Map"
           maxLength: 1000
           minLength: 1
         companyMapLocationPlaceTitle:
           type: string
-          description: 'Any text. From Map provider such as Google Map'
+          description: "Any text. From Map provider such as Google Map"
           maxLength: 1000
           minLength: 1
-          example: 'Piyavate Hospital'
+          example: "Piyavate Hospital"
         companyMapLocationPlaceDetails:
           type: string
-          description: 'Any text. From Map provider such as Google Map'
+          description: "Any text. From Map provider such as Google Map"
           maxLength: 1000
           minLength: 1
-          example: 'GG Apartment Soi 18, Kaosan Rd. Bangkok'
+          example: "GG Apartment Soi 18, Kaosan Rd. Bangkok"
         companyMapLocationLat:
           type: string
           description: latitude
           maxLength: 50
           minLength: 1
-          example: '1.1234'
+          example: "1.1234"
         companyMapLocationLng:
           type: string
           description: longitude
           maxLength: 50
           minLength: 1
-          example: '3.3456'
+          example: "3.3456"
         customerFirstName:
           type: string
           maxLength: 100
@@ -506,25 +612,25 @@ components:
           type: string
           format: email
           pattern: '[^\.]+\.[^\.]+$'
-          example: 'maw-dev@littlepawcraft.com'
+          example: "maw-dev@littlepawcraft.com"
         customerMobileNo:
           type: string
           pattern: '^\+[1-9][0-9]{3,14}$'
-          example: '+66999999999'
+          example: "+66999999999"
         customerAddressId:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         customerAddressPhone:
           type: string
-          pattern: '^[0-9]{9,10}$'
-          example: '021234567'
+          pattern: "^[0-9]{9,10}$"
+          example: "021234567"
         customerAddressLine:
           type: string
           maxLength: 300
           minLength: 1
-          example: 'GG Apartment Soi 18, Kaosan Rd.'
+          example: "GG Apartment Soi 18, Kaosan Rd."
         customerProvinceId:
           type: string
           maxLength: 50
@@ -547,46 +653,46 @@ components:
           example: 10600
         customerMapLocationPlaceId:
           type: string
-          description: 'For reference with Google Map'
+          description: "For reference with Google Map"
           maxLength: 1000
           minLength: 1
         customerMapLocationPlaceTitle:
           type: string
-          description: 'Any text. From Map provider such as Google Map'
+          description: "Any text. From Map provider such as Google Map"
           maxLength: 1000
           minLength: 1
-          example: 'Piyavate Hospital'
+          example: "Piyavate Hospital"
         customerMapLocationPlaceDetails:
           type: string
-          description: 'Any text. From Map provider such as Google Map'
+          description: "Any text. From Map provider such as Google Map"
           maxLength: 1000
           minLength: 1
-          example: 'GG Apartment Soi 18, Kaosan Rd. Bangkok'
+          example: "GG Apartment Soi 18, Kaosan Rd. Bangkok"
         customerMapLocationLat:
           type: string
           description: latitude
           maxLength: 50
           minLength: 1
-          example: '1.1234'
+          example: "1.1234"
         customerMapLocationLng:
           type: string
           description: longitude
           maxLength: 50
           minLength: 1
-          example: '3.3456'
+          example: "3.3456"
         shippingVendorId:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         deliveryTime:
           type: string
-          description: '1|0 string, each digit represents true or false value of checkbox, starting from Monday_Morning, Monday_Evening, Tuesday_Morning, and so on'
-          pattern: '^[01]{14}$'
-          example: '10101010101010'
+          description: "1|0 string, each digit represents true or false value of checkbox, starting from Monday_Morning, Monday_Evening, Tuesday_Morning, and so on"
+          pattern: "^[01]{14}$"
+          example: "10101010101010"
     AssignDriverRequestData:
       type: object
-      required: 
+      required:
         - orderId
         - driverUuid
       properties:
@@ -594,75 +700,75 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         driverUuid:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
     DriverRejectTaskRequestData:
       type: object
-      required: 
+      required:
         - orderId
       properties:
         orderId:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
     DriverPostponeTaskRequestData:
       type: object
-      required: 
+      required:
         - orderId
       properties:
         orderId:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
     DriverAcceptTaskRequestData:
       type: object
-      required: 
+      required:
         - orderId
       properties:
         orderId:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
     DriverReceiveCashRequestData:
       type: object
-      required: 
+      required:
         - orderId
       properties:
         orderId:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
     DriverUndoReceiveCashRequestData:
       type: object
-      required: 
+      required:
         - orderId
       properties:
         orderId:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
     DriverEnableCodRequestData:
       type: object
-      required: 
+      required:
         - orderId
       properties:
         orderId:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
     DriverDeliveryRequestData:
       type: object
-      required: 
+      required:
         - orderId
         - recipientStatus
         - signatureImageUrl
@@ -671,7 +777,7 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         recipientStatus:
           type: string
           enum:
@@ -679,25 +785,25 @@ components:
             - NOT_MATCHED
         photoImageUrl:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         signatureImageUrl:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
     CustomerReceiveRequestData:
       type: object
-      required: 
+      required:
         - orderId
       properties:
         orderId:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
     UpdateRefundRequestRequestData:
       type: object
-      required: 
+      required:
         - refundId
         - proofOfTransferUrl
         - proofOfRefundRequestUrl
@@ -706,18 +812,18 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         proofOfTransferUrl:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         proofOfRefundRequestUrl:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
     UpdateRefundRequestResendToEditRequestData:
       type: object
-      required: 
+      required:
         - refundId
         - resendNote
       properties:
@@ -725,15 +831,15 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         resendNote:
           type: string
           minLength: 1
           maxLength: 1000
-          example: 'Incorrect image'
+          example: "Incorrect image"
     UpdateRefundRequestRejectRequestData:
       type: object
-      required: 
+      required:
         - refundId
         - rejectReason
       properties:
@@ -741,25 +847,25 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         rejectReason:
           type: string
           minLength: 1
           maxLength: 1000
-          example: 'Incorrect image'
+          example: "Incorrect image"
     UpdateRefundRequestApproveRequestData:
       type: object
-      required: 
+      required:
         - refundId
       properties:
         refundId:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
     UpdateRefundRequestStatusRequestData:
       type: object
-      required: 
+      required:
         - refundId
         - status
       properties:
@@ -767,7 +873,7 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         status:
           type: string
           enum:
@@ -779,14 +885,14 @@ components:
             - SUCCESS
     GetEventsResponseData:
       type: object
-      required: 
+      required:
         - list
       properties:
         list:
           type: array
           items:
             type: object
-            required: 
+            required:
               - uuid
               - orderId
               - eventDate
@@ -807,14 +913,14 @@ components:
                 type: string
     ListShippingCompaniesResponseData:
       type: object
-      required: 
+      required:
         - list
       properties:
         list:
           type: array
           items:
             type: object
-            required: 
+            required:
               - companyUuid
               - nameTh
               - nameEn
@@ -827,7 +933,7 @@ components:
                 type: string
     CreateImportRequestData:
       type: object
-      required: 
+      required:
         - companyUuid
         - fileUrl
       properties:
@@ -835,11 +941,11 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         fileUrl:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
 
 paths:
   /orders/createImport:
@@ -854,14 +960,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateImportRequestData'
+              $ref: "#/components/schemas/CreateImportRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/getEvents:
     get:
       tags:
@@ -882,7 +988,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetEventsResponseData'
+                $ref: "#/components/schemas/GetEventsResponseData"
   /orders/updateRefundRequestStatus:
     post:
       tags:
@@ -895,14 +1001,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateRefundRequestStatusRequestData'
+              $ref: "#/components/schemas/UpdateRefundRequestStatusRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/updateRefundRequestApprove:
     post:
       tags:
@@ -915,14 +1021,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateRefundRequestApproveRequestData'
+              $ref: "#/components/schemas/UpdateRefundRequestApproveRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/updateRefundRequestReject:
     post:
       tags:
@@ -935,14 +1041,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateRefundRequestRejectRequestData'
+              $ref: "#/components/schemas/UpdateRefundRequestRejectRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/updateRefundRequestResendToEdit:
     post:
       tags:
@@ -955,14 +1061,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateRefundRequestResendToEditRequestData'
+              $ref: "#/components/schemas/UpdateRefundRequestResendToEditRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/updateRefundRequest:
     post:
       tags:
@@ -975,14 +1081,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateRefundRequestRequestData'
+              $ref: "#/components/schemas/UpdateRefundRequestRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/getRefund:
     get:
       tags:
@@ -1003,7 +1109,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetRefundResponseData'
+                $ref: "#/components/schemas/GetRefundResponseData"
 
   /orders/listRefundsByCompany:
     get:
@@ -1025,7 +1131,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RefundList'
+                $ref: "#/components/schemas/RefundList"
   /orders/customerCancel:
     post:
       tags:
@@ -1038,14 +1144,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomerCancelRequestData'
+              $ref: "#/components/schemas/CustomerCancelRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/customerReceive:
     post:
       tags:
@@ -1058,14 +1164,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomerReceiveRequestData'
+              $ref: "#/components/schemas/CustomerReceiveRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
 
   /orders/driverEnableCod:
     post:
@@ -1079,14 +1185,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DriverEnableCodRequestData'
+              $ref: "#/components/schemas/DriverEnableCodRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/driverDeliver:
     post:
       tags:
@@ -1099,14 +1205,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DriverDeliveryRequestData'
+              $ref: "#/components/schemas/DriverDeliveryRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/driverUndoReceiveCash:
     post:
       tags:
@@ -1119,14 +1225,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DriverUndoReceiveCashRequestData'
+              $ref: "#/components/schemas/DriverUndoReceiveCashRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/driverReceiveCash:
     post:
       tags:
@@ -1139,14 +1245,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DriverReceiveCashRequestData'
+              $ref: "#/components/schemas/DriverReceiveCashRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/driverPostponeTask:
     post:
       tags:
@@ -1159,14 +1265,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DriverPostponeTaskRequestData'
+              $ref: "#/components/schemas/DriverPostponeTaskRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/driverBulkRejectTasks:
     post:
       tags:
@@ -1179,14 +1285,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DriverBulkRejectTasksRequestData'
+              $ref: "#/components/schemas/DriverBulkRejectTasksRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/driverBulkAcceptTasks:
     post:
       tags:
@@ -1199,14 +1305,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DriverBulkAcceptTasksRequestData'
+              $ref: "#/components/schemas/DriverBulkAcceptTasksRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/driverRejectTask:
     post:
       tags:
@@ -1219,14 +1325,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DriverRejectTaskRequestData'
+              $ref: "#/components/schemas/DriverRejectTaskRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/driverAcceptTask:
     post:
       tags:
@@ -1239,14 +1345,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DriverAcceptTaskRequestData'
+              $ref: "#/components/schemas/DriverAcceptTaskRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/listOrderByDriver:
     get:
       tags:
@@ -1273,7 +1379,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrderList'
+                $ref: "#/components/schemas/OrderList"
   /orders/assignDriver:
     post:
       tags:
@@ -1286,14 +1392,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AssignDriverRequestData'
+              $ref: "#/components/schemas/AssignDriverRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/simulatePayments:
     post:
       tags:
@@ -1306,14 +1412,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SimulatePaymentRequestData'
+              $ref: "#/components/schemas/SimulatePaymentRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /orders/searchRefunds:
     get:
       tags:
@@ -1328,21 +1434,21 @@ paths:
           required: true
           schema:
             type: string
-        - $ref: '#/components/parameters/statusFilter'
-        - $ref: '#/components/parameters/searchKeyword'
-        - $ref: '#/components/parameters/startDate'
-        - $ref: '#/components/parameters/endDate'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/rowsPerPage'
-        - $ref: '#/components/parameters/sortField'
-        - $ref: '#/components/parameters/sortDirection'
+        - $ref: "#/components/parameters/statusFilter"
+        - $ref: "#/components/parameters/searchKeyword"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RefundList'
+                $ref: "#/components/schemas/RefundList"
   /orders/searchOrders:
     get:
       tags:
@@ -1363,21 +1469,21 @@ paths:
           required: false
           schema:
             type: boolean
-        - $ref: '#/components/parameters/statusFilter'
-        - $ref: '#/components/parameters/searchKeyword'
-        - $ref: '#/components/parameters/startDate'
-        - $ref: '#/components/parameters/endDate'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/rowsPerPage'
-        - $ref: '#/components/parameters/sortField'
-        - $ref: '#/components/parameters/sortDirection'
+        - $ref: "#/components/parameters/statusFilter"
+        - $ref: "#/components/parameters/searchKeyword"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrderList'
+                $ref: "#/components/schemas/OrderList"
   /orders/listOrdersByCompany:
     get:
       tags:
@@ -1398,7 +1504,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrderList'
+                $ref: "#/components/schemas/OrderList"
   /orders/listOrdersByShippingCompany:
     get:
       tags:
@@ -1419,7 +1525,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrderList'
+                $ref: "#/components/schemas/OrderList"
   /orders/listOrdersByCustomer:
     get:
       tags:
@@ -1446,7 +1552,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrderList'
+                $ref: "#/components/schemas/OrderList"
   /orders/getOrder:
     get:
       tags:
@@ -1467,7 +1573,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetOrderResponseData'
+                $ref: "#/components/schemas/GetOrderResponseData"
 
   /orders/createOrder:
     post:
@@ -1481,14 +1587,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateOrderRequestData'
+              $ref: "#/components/schemas/CreateOrderRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateOrderResponseData'
+                $ref: "#/components/schemas/CreateOrderResponseData"
+  /orders/createOrderByImport:
+    post:
+      tags:
+        - order
+      summary: Create order by import
+      description: Create order by import
+      operationId: createOrderByImport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrderByImportRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateOrderResponseData"
   /orders/listShippingCompanies:
     get:
       tags:
@@ -1502,4 +1628,4 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListShippingCompaniesResponseData'
+                $ref: "#/components/schemas/ListShippingCompaniesResponseData"
