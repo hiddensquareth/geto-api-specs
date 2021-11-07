@@ -605,7 +605,7 @@ components:
           example: "3.3456"
         shippingCompanyCode:
           type: string
-          minLength: 1
+          minLength: 0
           maxLength: 50
           example: "abc"
         deliveryTime:
