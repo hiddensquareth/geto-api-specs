@@ -1513,7 +1513,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ImportDetail"
+                $ref: "#/components/schemas/ImportDetailList"
   /orders/searchOrders:
     get:
       tags:
