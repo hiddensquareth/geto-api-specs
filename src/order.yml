@@ -201,6 +201,82 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DriverRejectTaskRequestData"
+    ImportList:
+      type: object
+      required:
+        - itemCount
+        - list
+      properties:
+        itemCount:
+          type: integer
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetImportResponseData"
+    GetImportResponseData:
+      type: object
+      required:
+        - importId
+        - importDate
+        - totalCount
+        - successCount
+        - errorCount
+        - generalErrorReason
+        - status
+      properties:
+        importId:
+          type: string
+        importDate:
+          type: string
+        totalCount:
+          type: integer
+        successCount:
+          type: integer
+        errorCount:
+          type: integer
+        generalErrorReason:
+          type: integer
+        status:
+          type: string
+    ImportDetails:
+      type: object
+      required:
+        - uuid
+        - importId
+        - customerFirstName
+        - customerLastName
+        - customerEmail
+        - customerMobileNo
+        - price
+        - paymentOption
+        - status
+      properties:
+        uuid:
+          type: string
+        importId:
+          type: string
+        referenceOrderId:
+          type: string
+        customerFirstName:
+          type: string
+        customerLastName:
+          type: string
+        customerEmail:
+          type: string
+        customerMobileNo:
+          type: string
+        price:
+          type: number
+        paymentOption:
+          type: string
+        shippedBy:
+          type: string
+        orderId:
+          type: string
+        status:
+          type: string
+        errorReason:
+          type: string
     OrderList:
       type: object
       required:
@@ -1374,6 +1450,61 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RefundList"
+  /orders/searchImports:
+    get:
+      tags:
+        - order
+      summary: search imports
+      description: search imports
+      operationId: searchImports
+      parameters:
+        - in: query
+          name: companyUuid
+          description: uuid of the company
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/statusFilter"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportList"
+  /orders/listImportDetails:
+    get:
+      tags:
+        - order
+      summary: list import details
+      description: list import details
+      operationId: listImportDetails
+      parameters:
+        - in: query
+          name: companyUuid
+          description: uuid of the company
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: importId
+          description: importId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportDetails"
   /orders/searchOrders:
     get:
       tags:
