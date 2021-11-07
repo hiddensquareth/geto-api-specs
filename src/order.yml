@@ -238,7 +238,16 @@ components:
           type: string
         status:
           type: string
-    ImportDetails:
+    ImportDetailList:
+      type: object
+      required:
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/ImportDetail"
+    ImportDetail:
       type: object
       required:
         - uuid
@@ -1504,7 +1513,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ImportDetails"
+                $ref: "#/components/schemas/ImportDetail"
   /orders/searchOrders:
     get:
       tags:
