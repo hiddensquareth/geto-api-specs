@@ -605,7 +605,7 @@ components:
           example: "3.3456"
         shippingCompanyCode:
           type: string
-          minLength: 0
+          minLength: 1
           maxLength: 50
           example: "abc"
         deliveryTime:
@@ -614,6 +614,7 @@ components:
           pattern: "^[01]{14}$"
           example: "10101010101010"
           maxLength: 100
+          minLength: 1
     AssignDriverRequestData:
       type: object
       required:
