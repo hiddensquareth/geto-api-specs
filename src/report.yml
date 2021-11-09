@@ -1,0 +1,635 @@
+openapi: 3.0.0
+info:
+  title: Report
+  description: API to manage reports
+  version: 1.0.0
+
+components:
+  parameters:
+    view:
+      in: query
+      name: view
+      description: view
+      required: false
+      schema:
+        type: string
+        enum:
+          - MERCHANT
+          - COURIER
+          - USER
+    companyUuid:
+      in: query
+      name: companyUuid
+      description: uuid of the company
+      required: false
+      schema:
+        type: string
+        maxLength: 50
+    statusFilter:
+      in: query
+      name: statusFilter
+      description: statusFilter
+      required: false
+      schema:
+        type: string
+        maxLength: 50
+    searchKeyword:
+      in: query
+      name: searchKeyword
+      description: searchKeyword
+      required: false
+      schema:
+        type: string
+        maxLength: 100
+    startDate:
+      in: query
+      name: startDate
+      description: startDate
+      required: false
+      schema:
+        type: string
+        maxLength: 20
+    endDate:
+      in: query
+      name: endDate
+      description: endDate
+      required: false
+      schema:
+        type: string
+        maxLength: 20
+    page:
+      in: query
+      name: page
+      description: page
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+    rowsPerPage:
+      in: query
+      name: rowsPerPage
+      description: rowsPerPage
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+    sortField:
+      in: query
+      name: sortField
+      description: sortField
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 20
+    sortDirection:
+      in: query
+      name: sortDirection
+      description: sortDirection
+      required: true
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+  schemas:
+    SearchReportSummaryTransactionByCompanyResponseData:
+      type: object
+      properties:
+        fileUrl:
+          type: string
+        summary:
+          type: object
+          required:
+            - totalCount
+          properties:
+            totalCount:
+              type: number
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - companyName
+              - orderCount
+              - sumCashAmount
+              - enabledServices
+            properties:
+              companyName:
+                type: string
+              orderCount:
+                type: number
+              sumPaymentAmount:
+                type: number
+              sumCashAmount:
+                type: number
+              sumCreditCardAmount:
+                type: number
+              sumDirectDebitAmount:
+                type: number
+              enabledServices:
+                type: string
+
+    SearchReportEachCompanyTransactionsResponseData:
+      type: object
+      properties:
+        fileUrl:
+          type: string
+        summary:
+          type: object
+          required:
+            - totalCount
+          properties:
+            totalCount:
+              type: number
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - orderId
+              - companyName
+              - orderDate
+              - orderPrice
+              - creditCardAmount
+              - creditCardBankFeeRate
+              - creditCardGetoFeeRate
+              - creditCardBankFeeAmonnt
+              - creditCardGetoFeeAmount
+              - creditCardMerchantReceivedAmount
+              - creditCardTransferToMerchantStatus
+              - directDebitAmount
+              - directDebitReceivedFromCustomerAmount
+              - directDebitBankFeeRate
+              - directDebitGetoFeeRate
+              - directDebitBankFeeAmount
+              - directDebitGetoFeeAmount
+              - directDebitMerchantReceivedAmount
+              - directDebitTransferToMerchantStatus
+              - cashAmount
+            properties:
+              orderId:
+                type: string
+              companyName:
+                type: string
+              orderDate:
+                type: string
+              orderPrice:
+                type: number
+              creditCardAmount:
+                type: number
+              creditCardBankFeeRate:
+                type: number
+              creditCardGetoFeeRate:
+                type: number
+              creditCardBankFeeAmonnt:
+                type: number
+              creditCardGetoFeeAmount:
+                type: number
+              creditCardMerchantReceivedAmount:
+                type: number
+              creditCardTransferToMerchantStatus:
+                type: string
+              directDebitAmount:
+                type: number
+              directDebitReceivedFromCustomerAmount:
+                type: number
+              directDebitBankFeeRate:
+                type: number
+              directDebitGetoFeeRate:
+                type: number
+              directDebitBankFeeAmount:
+                type: number
+              directDebitGetoFeeAmount:
+                type: number
+              directDebitMerchantReceivedAmount:
+                type: number
+              directDebitTransferToMerchantStatus:
+                type: string
+              cashAmount:
+                type: number
+
+    SearchReportDailyBatchTransferResponseData:
+      type: object
+      properties:
+        fileUrl:
+          type: string
+        summary:
+          type: object
+          required:
+            - totalCount
+            - sumAmount
+          properties:
+            totalCount:
+              type: number
+            sumAmount:
+              type: number
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - orderId
+            properties:
+              referenceTransactionId:
+                type: string
+              srcAccountNumber:
+                type: number
+              destAccountNumber:
+                type: number
+              destBankCode:
+                type: string
+              amount:
+                type: number
+
+    SearchReportRiskAssessmentOfEndUsersResponseData:
+      type: object
+      properties:
+        fileUrl:
+          type: string
+        summary:
+          type: object
+          required:
+            - totalCount
+          properties:
+            totalCount:
+              type: number
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - customerName
+              - nationality
+              - riskLevel
+              - presentHomeland
+              - occupation
+            properties:
+              customerName:
+                type: string
+              nationality:
+                type: string
+              riskLevel:
+                type: number
+              presentHomeland:
+                type: string
+              occupation:
+                type: string
+
+    SearchReportCustomersResponseData:
+      type: object
+      properties:
+        fileUrl:
+          type: string
+        summary:
+          type: object
+          required:
+            - totalCount
+          properties:
+            totalCount:
+              type: number
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - email
+              - firstName
+              - lastName
+              - address
+              - mobileNo
+              - registrationDate
+            properties:
+              email:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              address:
+                type: string
+              mobileNo:
+                type: string
+              registrationDate:
+                type: string
+
+    SearchReportCompaniesResponseData:
+      type: object
+      properties:
+        fileUrl:
+          type: string
+        summary:
+          type: object
+          required:
+            - totalCount
+          properties:
+            totalCount:
+              type: number
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - companyCode
+              - juristrictName
+              - companyType
+              - primaryContactName
+              - primaryContactPhone
+              - registrationDate
+              - receiptReceivingChannel
+            properties:
+              companyCode:
+                type: string
+              juristrictName:
+                type: string
+              companyType:
+                type: string
+              primaryContactName:
+                type: string
+              primaryContactPhone:
+                type: string
+              registrationDate:
+                type: string
+              receiptReceivingChannel:
+                type: string
+
+    SearchReportDailyTransactionsResponseData:
+      type: object
+      properties:
+        fileUrl:
+          type: string
+        summary:
+          type: object
+          required:
+            - totalCount
+            - sumCashAmount
+            - sumShippingFee
+            - sumCreditCardFee
+            - sumMerchantReceivedFromGeto
+            - sumMerchantTotalRevenue
+          properties:
+            totalCount:
+              type: number
+            sumCashAmount:
+              type: number
+            sumShippingFee:
+              type: number
+            sumCreditCardFee:
+              type: number
+            sumMerchantReceivedFromGeto:
+              type: number
+            sumMerchantTotalRevenue:
+              type: number
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - orderId
+              - orderStatus
+              - orderDate
+              - orderPrice
+              - cashAmount
+              - creditCardAmount
+              - directDebitAmount
+              - customerEmail
+              - customerName
+              - courierName
+              - shippingFee
+              - creditCardFee
+              - merchantReceivedFromGeto
+              - merchantReceivedFromCourier
+              - merchantTotalRevenue
+            properties:
+              orderId:
+                type: string
+              orderStatus:
+                type: string
+              orderDate:
+                type: string
+              orderPrice:
+                type: number
+              cashAmount:
+                type: number
+              creditCardAmount:
+                type: number
+              directDebitAmount:
+                type: number
+              customerEmail:
+                type: string
+              customerName:
+                type: string
+              merchantName:
+                type: string
+              courierName:
+                type: string
+              shippingFee:
+                type: number
+              creditCardFee:
+                type: number
+              merchantReceivedFromGeto:
+                type: number
+              merchantReceivedFromCourier:
+                type: number
+              merchantTotalRevenue:
+                type: number
+
+paths:
+  /reports/searchReportDailyTransactions:
+    get:
+      tags:
+        - report
+      summary: searchReportDailyTransactions
+      description: searchReportDailyTransactions
+      operationId: searchReportDailyTransactions
+      parameters:
+        - in: query
+          name: view
+          description: view
+          required: false
+          schema:
+            type: string
+            enum:
+              - MERCHANT
+              - COURIER
+              - USER
+        - $ref: "#/components/parameters/companyUuid"
+        - $ref: "#/components/parameters/searchKeyword"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchReportDailyTransactionsResponseData"
+  /reports/searchReportSummaryTransactionByCompany:
+    get:
+      tags:
+        - report
+      summary: searchReportSummaryTransactionByCompany
+      description: searchReportSummaryTransactionByCompany
+      operationId: searchReportSummaryTransactionByCompany
+      parameters:
+        - in: query
+          name: view
+          description: view
+          required: false
+          schema:
+            type: string
+            enum:
+              - MERCHANT
+              - COURIER
+        - $ref: "#/components/parameters/companyUuid"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchReportSummaryTransactionByCompanyResponseData"
+  /reports/searchReportEachCompanyTransactions:
+    get:
+      tags:
+        - report
+      summary: searchReportEachCompanyTransactions
+      description: searchReportEachCompanyTransactions
+      operationId: searchReportEachCompanyTransactions
+      parameters:
+        - in: query
+          name: view
+          description: view
+          required: false
+          schema:
+            type: string
+            enum:
+              - MERCHANT
+              - COURIER
+        - $ref: "#/components/parameters/companyUuid"
+        - $ref: "#/components/parameters/searchKeyword"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchReportEachCompanyTransactionsResponseData"
+  /reports/searchReportDailyBatchTransfer:
+    get:
+      tags:
+        - report
+      summary: searchReportDailyBatchTransfer
+      description: searchReportDailyBatchTransfer
+      operationId: searchReportDailyBatchTransfer
+      parameters:
+        - in: query
+          name: view
+          description: view
+          required: false
+          schema:
+            type: string
+            enum:
+              - PENDING
+              - ERROR
+        - $ref: "#/components/parameters/companyUuid"
+        - $ref: "#/components/parameters/searchKeyword"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchReportDailyBatchTransferResponseData"
+  /reports/searchReportRiskAssessmentOfEndUsers:
+    get:
+      tags:
+        - report
+      summary: searchReportRiskAssessmentOfEndUsers
+      description: searchReportRiskAssessmentOfEndUsers
+      operationId: searchReportRiskAssessmentOfEndUsers
+      parameters:
+        - $ref: "#/components/parameters/searchKeyword"
+        - $ref: "#/components/parameters/statusFilter"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchReportRiskAssessmentOfEndUsersResponseData"
+  /reports/searchReportCustomers:
+    get:
+      tags:
+        - report
+      summary: searchReportCustomers
+      description: searchReportCustomers
+      operationId: searchReportCustomers
+      parameters:
+        - $ref: "#/components/parameters/searchKeyword"
+        - $ref: "#/components/parameters/statusFilter"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchReportCustomersResponseData"
+  /reports/searchReportCompanies:
+    get:
+      tags:
+        - report
+      summary: searchReportCompanies
+      description: searchReportCompanies
+      operationId: searchReportCompanies
+      parameters:
+        - $ref: "#/components/parameters/companyUuid"
+        - $ref: "#/components/parameters/searchKeyword"
+        - $ref: "#/components/parameters/statusFilter"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchReportCompaniesResponseData"
