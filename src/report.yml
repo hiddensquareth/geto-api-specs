@@ -395,8 +395,9 @@ components:
               - customerEmail
               - customerName
               - courierName
-              - shippingFee
-              - creditCardFee
+              - shippingFeeAmount
+              - creditCardFeeAmount
+              - creditCardFeeRate
               - merchantReceivedFromGeto
               - merchantReceivedFromCourier
               - merchantTotalRevenue
@@ -423,9 +424,11 @@ components:
                 type: string
               courierName:
                 type: string
-              shippingFee:
+              shippingFeeAmount:
                 type: number
-              creditCardFee:
+              creditCardFeeAmount:
+                type: number
+              creditCardFeeRate:
                 type: number
               merchantReceivedFromGeto:
                 type: number
