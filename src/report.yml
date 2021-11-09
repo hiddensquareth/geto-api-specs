@@ -91,6 +91,13 @@ components:
         enum:
           - asc
           - desc
+    export:
+      in: query
+      name: export
+      description: export
+      required: false
+      schema:
+        type: boolean
   schemas:
     SearchReportSummaryTransactionByCompanyResponseData:
       type: object
@@ -475,6 +482,7 @@ paths:
         - $ref: "#/components/parameters/rowsPerPage"
         - $ref: "#/components/parameters/sortField"
         - $ref: "#/components/parameters/sortDirection"
+        - $ref: "#/components/parameters/export"
       responses:
         200:
           description: Success
@@ -506,6 +514,7 @@ paths:
         - $ref: "#/components/parameters/rowsPerPage"
         - $ref: "#/components/parameters/sortField"
         - $ref: "#/components/parameters/sortDirection"
+        - $ref: "#/components/parameters/export"
       responses:
         200:
           description: Success
@@ -538,6 +547,7 @@ paths:
         - $ref: "#/components/parameters/rowsPerPage"
         - $ref: "#/components/parameters/sortField"
         - $ref: "#/components/parameters/sortDirection"
+        - $ref: "#/components/parameters/export"
       responses:
         200:
           description: Success
@@ -570,6 +580,7 @@ paths:
         - $ref: "#/components/parameters/rowsPerPage"
         - $ref: "#/components/parameters/sortField"
         - $ref: "#/components/parameters/sortDirection"
+        - $ref: "#/components/parameters/export"
       responses:
         200:
           description: Success
@@ -593,6 +604,7 @@ paths:
         - $ref: "#/components/parameters/rowsPerPage"
         - $ref: "#/components/parameters/sortField"
         - $ref: "#/components/parameters/sortDirection"
+        - $ref: "#/components/parameters/export"
       responses:
         200:
           description: Success
@@ -616,6 +628,7 @@ paths:
         - $ref: "#/components/parameters/rowsPerPage"
         - $ref: "#/components/parameters/sortField"
         - $ref: "#/components/parameters/sortDirection"
+        - $ref: "#/components/parameters/export"
       responses:
         200:
           description: Success
@@ -640,6 +653,7 @@ paths:
         - $ref: "#/components/parameters/rowsPerPage"
         - $ref: "#/components/parameters/sortField"
         - $ref: "#/components/parameters/sortDirection"
+        - $ref: "#/components/parameters/export"
       responses:
         200:
           description: Success
