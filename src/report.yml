@@ -362,6 +362,9 @@ components:
           required:
             - totalCount
             - sumCashAmount
+            - sumOnlineAmount
+            - sumCreditCardAmount
+            - sumDirectDebitAmount
             - sumShippingFeeAmount
             - sumCreditCardFeeAmount
             - sumMerchantReceivedFromGeto
@@ -370,6 +373,12 @@ components:
             totalCount:
               type: integer
             sumCashAmount:
+              type: number
+            sumOnlineAmount:
+              type: number
+            sumCreditCardAmount:
+              type: number
+            sumDirectDebitAmount:
               type: number
             sumShippingFeeAmount:
               type: number
