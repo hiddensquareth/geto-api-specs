@@ -363,18 +363,18 @@ components:
           required:
             - totalCount
             - sumCashAmount
-            - sumShippingFee
-            - sumCreditCardFee
+            - sumShippingFeeAmount
+            - sumCreditCardFeeAmount
             - sumMerchantReceivedFromGeto
             - sumMerchantTotalRevenue
           properties:
             totalCount:
-              type: number
+              type: integer
             sumCashAmount:
               type: number
-            sumShippingFee:
+            sumShippingFeeAmount:
               type: number
-            sumCreditCardFee:
+            sumCreditCardFeeAmount:
               type: number
             sumMerchantReceivedFromGeto:
               type: number
@@ -389,6 +389,7 @@ components:
               - orderStatus
               - orderDate
               - orderPrice
+              - onlinePaymentAmount
               - cashAmount
               - creditCardAmount
               - directDebitAmount
@@ -409,6 +410,8 @@ components:
               orderDate:
                 type: string
               orderPrice:
+                type: number
+              onlinePaymentAmount:
                 type: number
               cashAmount:
                 type: number
