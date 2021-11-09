@@ -458,7 +458,7 @@ paths:
             enum:
               - MERCHANT
               - COURIER
-              - USER
+              - CUSTOMER
         - $ref: "#/components/parameters/companyUuid"
         - $ref: "#/components/parameters/searchKeyword"
         - $ref: "#/components/parameters/startDate"
