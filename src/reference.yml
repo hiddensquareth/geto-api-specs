@@ -10,17 +10,17 @@ components:
       properties:
         message:
           type: string
-          example: 'ok'
+          example: "ok"
     ListBanksResponseData:
       type: object
-      required: 
+      required:
         - list
       properties:
         list:
           type: array
           items:
             type: object
-            required: 
+            required:
               - code
               - nameTh
               - nameEn
@@ -33,14 +33,14 @@ components:
                 type: string
     ListOccupationsResponseData:
       type: object
-      required: 
+      required:
         - list
       properties:
         list:
           type: array
           items:
             type: object
-            required: 
+            required:
               - occupationId
               - nameTh
               - nameEn
@@ -53,14 +53,14 @@ components:
                 type: string
     ListProvincesResponseData:
       type: object
-      required: 
+      required:
         - list
       properties:
         list:
           type: array
           items:
             type: object
-            required: 
+            required:
               - provinceId
               - nameTh
               - nameEn
@@ -73,14 +73,14 @@ components:
                 type: string
     ListDistrictsResponseData:
       type: object
-      required: 
+      required:
         - list
       properties:
         list:
           type: array
           items:
             type: object
-            required: 
+            required:
               - districtId
               - nameTh
               - nameEn
@@ -93,14 +93,14 @@ components:
                 type: string
     ListSubDistrictsResponseData:
       type: object
-      required: 
+      required:
         - list
       properties:
         list:
           type: array
           items:
             type: object
-            required: 
+            required:
               - subDistrictId
               - nameTh
               - nameEn
@@ -113,14 +113,14 @@ components:
                 type: string
     ListPostalCodesResponseData:
       type: object
-      required: 
+      required:
         - list
       properties:
         list:
           type: array
           items:
             type: object
-            required: 
+            required:
               - postalCode
             properties:
               postalCode:
@@ -140,7 +140,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListBanksResponseData'
+                $ref: "#/components/schemas/ListBanksResponseData"
   /references/getConsentDocument:
     get:
       tags:
@@ -167,7 +167,7 @@ paths:
           example: en
           schema:
             type: string
-            enum: 
+            enum:
               - th
               - en
       responses:
@@ -190,7 +190,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListOccupationsResponseData'
+                $ref: "#/components/schemas/ListOccupationsResponseData"
 
   /references/listProvinces:
     get:
@@ -205,7 +205,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListProvincesResponseData'
+                $ref: "#/components/schemas/ListProvincesResponseData"
 
   /references/listDistricts:
     get:
@@ -229,7 +229,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListDistrictsResponseData'
+                $ref: "#/components/schemas/ListDistrictsResponseData"
 
   /references/listSubDistricts:
     get:
@@ -253,7 +253,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListSubDistrictsResponseData'
+                $ref: "#/components/schemas/ListSubDistrictsResponseData"
 
   /references/listPostalCodes:
     get:
@@ -277,4 +277,4 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListPostalCodesResponseData'
+                $ref: "#/components/schemas/ListPostalCodesResponseData"
