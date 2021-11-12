@@ -228,8 +228,6 @@ components:
           properties:
             totalCount:
               type: number
-            sumAmount:
-              type: number
         list:
           type: array
           items:
@@ -240,9 +238,9 @@ components:
               referenceTransactionId:
                 type: string
               srcAccountNumber:
-                type: number
+                type: string
               destAccountNumber:
-                type: number
+                type: string
               destBankCode:
                 type: string
               amount:
