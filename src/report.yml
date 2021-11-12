@@ -227,7 +227,7 @@ components:
             - sumAmount
           properties:
             totalCount:
-              type: number
+              type: integer
         list:
           type: array
           items:
