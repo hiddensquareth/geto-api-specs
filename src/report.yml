@@ -110,7 +110,7 @@ components:
             - totalCount
           properties:
             totalCount:
-              type: number
+              type: integer
         list:
           type: array
           items:
@@ -124,7 +124,7 @@ components:
               companyName:
                 type: string
               orderCount:
-                type: number
+                type: integer
               sumPaymentAmount:
                 type: number
               sumCashAmount:
