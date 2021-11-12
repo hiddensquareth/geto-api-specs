@@ -568,10 +568,6 @@ paths:
             enum:
               - PENDING
               - ERROR
-        - $ref: "#/components/parameters/companyUuid"
-        - $ref: "#/components/parameters/searchKeyword"
-        - $ref: "#/components/parameters/startDate"
-        - $ref: "#/components/parameters/endDate"
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/rowsPerPage"
         - $ref: "#/components/parameters/sortField"
