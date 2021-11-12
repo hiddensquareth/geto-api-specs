@@ -224,7 +224,6 @@ components:
           type: object
           required:
             - totalCount
-            - sumAmount
           properties:
             totalCount:
               type: integer
