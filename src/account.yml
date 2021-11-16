@@ -85,6 +85,63 @@ components:
         message:
           type: string
           example: ok
+    ApplyKycRequestData:
+      type: object
+      properties:
+        citizenId:
+          type: string
+          pattern: "^[0-9]{13}$"
+          example: "0000000000000"
+        laserNo:
+          type: string
+          pattern: "^[A-Z][A-Z][0-9]{10}$"
+          example: "AA0000000000"
+        idCardIssueDate:
+          type: string
+          maxLength: 50
+          minLength: 1
+        idCardExpDate:
+          type: string
+          maxLength: 50
+          minLength: 1
+        dateOfBirth:
+          type: string
+          maxLength: 50
+          minLength: 1
+        passportIssueDate:
+          type: string
+          maxLength: 50
+          minLength: 1
+        passportExpDate:
+          type: string
+          maxLength: 50
+          minLength: 1
+        ownerPhotoUrl:
+          type: string
+          maxLength: 1000
+          minLength: 1
+          example: John
+        idCardPhotoUrl:
+          type: string
+          maxLength: 1000
+          minLength: 1
+          example: John
+        idCardWithOwnerPhotoUrl:
+          type: string
+          maxLength: 1000
+          minLength: 1
+          example: John
+        passportPhotoUrl:
+          type: string
+          maxLength: 1000
+          minLength: 1
+          example: John
+        passportWithOwnerPhotoUrl:
+          type: string
+          maxLength: 1000
+          minLength: 1
+          example: John
+
     UpdateUserRequestData:
       type: object
       required:
@@ -92,8 +149,8 @@ components:
       properties:
         profileImageUrl:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
     ResendCustomerRegistrationEmailRequestData:
       type: object
       required:
@@ -103,7 +160,7 @@ components:
           type: string
           format: email
           pattern: '[^\.]+\.[^\.]+$'
-          example: 'maw-dev@littlepawcraft.com'
+          example: "maw-dev@littlepawcraft.com"
 
     UpdateCustomerRequestData:
       type: object
@@ -117,8 +174,8 @@ components:
       properties:
         profileImageUrl:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         nationality:
           type: string
           enum:
@@ -138,7 +195,7 @@ components:
         mobileNo:
           type: string
           pattern: '^\+[1-9][0-9]{3,14}$'
-          example: '+66999999999'
+          example: "+66999999999"
         occupationId:
           type: string
           maxLength: 50
@@ -146,7 +203,7 @@ components:
           example: 10000
     RegisterCustomerRequestData:
       type: object
-      required: 
+      required:
         - profileImageUrl
         - email
         - nationality
@@ -166,13 +223,13 @@ components:
       properties:
         profileImageUrl:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         email:
           type: string
           format: email
           pattern: '[^\.]+\.[^\.]+$'
-          example: 'maw-dev@littlepawcraft.com'
+          example: "maw-dev@littlepawcraft.com"
         nationality:
           type: string
           enum:
@@ -192,7 +249,7 @@ components:
         mobileNo:
           type: string
           pattern: '^\+[1-9][0-9]{3,14}$'
-          example: '+66999999999'
+          example: "+66999999999"
         occupationId:
           type: string
           maxLength: 50
@@ -207,11 +264,11 @@ components:
           type: string
           maxLength: 300
           minLength: 1
-          example: 'GG Apartment Soi 18, Kaosan Rd.'
+          example: "GG Apartment Soi 18, Kaosan Rd."
         addressPhoneNo:
           type: string
-          pattern: '^[0-9]{9,10}$'
-          example: '021234567'
+          pattern: "^[0-9]{9,10}$"
+          example: "021234567"
         provinceId:
           type: string
           maxLength: 50
@@ -237,38 +294,38 @@ components:
           description: latitude
           maxLength: 50
           minLength: 1
-          example: '1.1234'
+          example: "1.1234"
         mapLocationLng:
           type: string
           description: longitude
           maxLength: 50
           minLength: 1
-          example: '3.3456'
+          example: "3.3456"
         mapLocationLngPlaceDetails:
           type: string
-          description: 'Any text. From Map provider such as Google Map'
+          description: "Any text. From Map provider such as Google Map"
           maxLength: 1000
           minLength: 1
-          example: 'GG Apartment Soi 18, Kaosan Rd. Bangkok'
+          example: "GG Apartment Soi 18, Kaosan Rd. Bangkok"
         mapLocationLngPlaceTitle:
           type: string
-          description: 'Any text. From Map provider such as Google Map'
+          description: "Any text. From Map provider such as Google Map"
           maxLength: 1000
           minLength: 1
-          example: 'Piyavate Hospital'
+          example: "Piyavate Hospital"
         mapLocationLngPlaceId:
           type: string
-          description: 'For reference with Google Map'
+          description: "For reference with Google Map"
           maxLength: 1000
           minLength: 1
         preferredDeliveryTime:
           type: string
-          description: '1|0 string, each digit represents true or false value of checkbox, starting from Monday_Morning, Monday_Evening, Tuesday_Morning, and so on'
-          pattern: '^[01]{14}$'
-          example: '10101010101010'
+          description: "1|0 string, each digit represents true or false value of checkbox, starting from Monday_Morning, Monday_Evening, Tuesday_Morning, and so on"
+          pattern: "^[01]{14}$"
+          example: "10101010101010"
         password:
           type: string
-          description: 'Minimum eight characters, at least one letter, one number and one special character'
+          description: "Minimum eight characters, at least one letter, one number and one special character"
           pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,20}$'
           example: P@ssw0rd
     GetAuthenticatedUserForCmsResponseData:
@@ -281,13 +338,13 @@ components:
       properties:
         id:
           type: string
-          example: '5f01a072-9248-4d19-a2ce-e7e59e6150b5'
+          example: "5f01a072-9248-4d19-a2ce-e7e59e6150b5"
         email:
           type: string
-          example: 'john@example.com'
+          example: "john@example.com"
         profileImage:
           type: string
-          example: '/images/abc.png'
+          example: "/images/abc.png"
         companyAccesses:
           type: array
           items:
@@ -342,7 +399,7 @@ components:
                       type: string
     GetAuthenticatedUserForCustomerResponseData:
       type: object
-      required: 
+      required:
         - status
         - userUuid
         - email
@@ -407,7 +464,7 @@ components:
                 type: string
     RegisterCompanyStaffByInvitationCodeRequestData:
       type: object
-      required: 
+      required:
         - password
         - invitationToken
       properties:
@@ -425,7 +482,7 @@ components:
       properties:
         registrationToken:
           type: string
-          description: 'JWT token if need registration, or null if completed'
+          description: "JWT token if need registration, or null if completed"
           maxLength: 5000
           minLength: 1
     SearchCustomerResponseData:
@@ -766,7 +823,7 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         version:
           type: integer
           minimum: 0
@@ -780,106 +837,106 @@ components:
           type: string
           minLength: 1
           maxLength: 100
-          example: 'บริษัทจำกัด'
+          example: "บริษัทจำกัด"
         juristicNameEn:
           type: string
           minLength: 1
           maxLength: 100
-          example: 'Example Company'
+          example: "Example Company"
         corporateRegistrationNumber:
           type: string
           pattern: '^\d{13}$'
-          example: '0000000000000'
+          example: "0000000000000"
         commercialRegistrationNumber:
           type: string
           pattern: '^\d{13}$'
-          example: '0000000000000'
+          example: "0000000000000"
         taxPayerIdentificationNumber:
           type: string
           pattern: '^\d{13}$'
-          example: '0000000000000'
+          example: "0000000000000"
         addressLine:
           type: string
           minLength: 1
           maxLength: 300
-          example: '1/1 Kaosan Road'
+          example: "1/1 Kaosan Road"
         provinceId:
           type: string
           minLength: 1
           maxLength: 50
-          example: '10'
+          example: "10"
         districtId:
           type: string
           minLength: 1
           maxLength: 50
-          example: '1015'
+          example: "1015"
         subDistrictId:
           type: string
           minLength: 1
           maxLength: 50
-          example: '101501'
+          example: "101501"
         postalCode:
           type: string
           minLength: 1
           maxLength: 50
-          example: '10600'
+          example: "10600"
         phoneNumber:
           type: string
-          pattern: '^[0-9]{9,10}$'
-          example: '029999999'
+          pattern: "^[0-9]{9,10}$"
+          example: "029999999"
         fax:
           type: string
-          pattern: '^[0-9]{9,10}$'
-          example: '029999999'
+          pattern: "^[0-9]{9,10}$"
+          example: "029999999"
         pContactFullName:
           type: string
           minLength: 1
           maxLength: 100
-          example: 'John Lennon'
+          example: "John Lennon"
         pContactPosition:
           type: string
           minLength: 1
           maxLength: 100
-          example: 'CEO'
+          example: "CEO"
         pContactEmail:
           type: string
           format: email
           pattern: '[^\.]+\.[^\.]+$'
-          example: 'maw-dev@littlepawcraft.com'
+          example: "maw-dev@littlepawcraft.com"
         pContactMobileNo:
           type: string
-          pattern: '^[0-9]{10}$'
-          example: '0999999999'
+          pattern: "^[0-9]{10}$"
+          example: "0999999999"
         sSameAsLegalAddress:
           type: string
-          enum: 
-            - 'true'
-            - 'false'
+          enum:
+            - "true"
+            - "false"
         sAddressLine:
           type: string
           minLength: 1
           maxLength: 300
-          example: '1/1 Kaosan Road'
+          example: "1/1 Kaosan Road"
         sProvinceId:
           type: string
           minLength: 1
           maxLength: 50
-          example: '10'
+          example: "10"
         sDistrictId:
           type: string
           minLength: 1
           maxLength: 50
-          example: '1015'
+          example: "1015"
         sSubDistrictId:
           type: string
           minLength: 1
           maxLength: 50
-          example: '101501'
+          example: "101501"
         sPostalCode:
           type: string
           minLength: 1
           maxLength: 50
-          example: '10600'
+          example: "10600"
         deliveryChannelType:
           type: string
           enum:
@@ -890,7 +947,7 @@ components:
           type: string
           format: email
           pattern: '[^\.]+\.[^\.]+$'
-          example: 'maw-dev@littlepawcraft.com'
+          example: "maw-dev@littlepawcraft.com"
         isMerchant:
           type: boolean
           example: true
@@ -917,90 +974,90 @@ components:
           type: string
           minLength: 8
           maxLength: 8
-          example: 'GOO-ZXCV'
+          example: "GOO-ZXCV"
         bAccountName:
           type: string
           minLength: 1
           maxLength: 100
-          example: 'John Lennon'
+          example: "John Lennon"
         bAccountNumber:
           type: string
           pattern: '^\d{10,13}$'
-          example: '0000000000000'
+          example: "0000000000000"
         bBankCode:
           type: string
           minLength: 1
           maxLength: 50
-          example: '001'
+          example: "001"
         fRegistrationCertification:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         fIdCardOrPassportOfAuthorizationOwner:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         fIdCardOrPasswordOfAuthorizedPerson:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         fIdCardOrPassportOfAuthorizedDirector:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         fPowerOfAttorney:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         fBankPassbookFirstPage:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         fVatLicense:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         fCompanyLogo:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         fRegistrationForm:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         fInformationChangeForm:
           type: string
-          pattern: '^https?://.+$'
-          example: 'https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png'
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
         mapLocationPlaceId:
           type: string
-          description: 'For reference with Google Map'
+          description: "For reference with Google Map"
           maxLength: 1000
           minLength: 1
         mapLocationPlaceTitle:
           type: string
-          description: 'Any text. From Map provider such as Google Map'
+          description: "Any text. From Map provider such as Google Map"
           maxLength: 1000
           minLength: 1
-          example: 'Piyavate Hospital'
+          example: "Piyavate Hospital"
         mapLocationPlaceDesc:
           type: string
-          description: 'Any text. From Map provider such as Google Map'
+          description: "Any text. From Map provider such as Google Map"
           maxLength: 1000
           minLength: 1
-          example: 'GG Apartment Soi 18, Kaosan Rd. Bangkok'
+          example: "GG Apartment Soi 18, Kaosan Rd. Bangkok"
         mapLocationLat:
           type: string
           description: latitude
           maxLength: 50
           minLength: 1
-          example: '1.1234'
+          example: "1.1234"
         mapLocationLng:
           type: string
           description: longitude
           maxLength: 50
           minLength: 1
-          example: '3.3456'
+          example: "3.3456"
 
     ListAllCompaniesResponseData:
       type: object
@@ -1036,14 +1093,14 @@ components:
                 type: string
     BulkUpdateCompanyStatusRequestData:
       type: object
-      required: 
+      required:
         - list
       properties:
         list:
           type: array
           items:
             type: object
-            required: 
+            required:
               - rejectReason
               - resentNote
               - version
@@ -1054,12 +1111,12 @@ components:
                 type: string
                 minLength: 1
                 maxLength: 1000
-                example: 'Invalid info'
+                example: "Invalid info"
               resentNote:
                 type: string
                 minLength: 1
                 maxLength: 1000
-                example: 'Incorrect image'
+                example: "Incorrect image"
               version:
                 type: integer
                 minimum: 0
@@ -1078,7 +1135,7 @@ components:
                   - REJECTED
     UpdateCompanyStatusRequestData:
       type: object
-      required: 
+      required:
         - rejectReason
         - resentNote
         - version
@@ -1089,12 +1146,12 @@ components:
           type: string
           minLength: 1
           maxLength: 1000
-          example: 'Invalid info'
+          example: "Invalid info"
         resentNote:
           type: string
           minLength: 1
           maxLength: 1000
-          example: 'Incorrect image'
+          example: "Incorrect image"
         version:
           type: integer
           minimum: 0
@@ -1121,7 +1178,7 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         list:
           type: array
           items:
@@ -1139,7 +1196,7 @@ components:
                 type: string
                 minLength: 1
                 maxLength: 50
-                example: 'abc'
+                example: "abc"
               status:
                 type: string
                 enum:
@@ -1163,7 +1220,7 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         version:
           type: integer
           minimum: 0
@@ -1172,26 +1229,26 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         firstName:
           type: string
           minLength: 1
           maxLength: 100
-          example: 'John'
+          example: "John"
         lastName:
           type: string
           minLength: 1
           maxLength: 100
-          example: 'Lennong'
+          example: "Lennong"
         mobileNo:
           type: string
-          pattern: '^[0-9]{10}$'
-          example: '0999999999'
+          pattern: "^[0-9]{10}$"
+          example: "0999999999"
         roleId:
           type: string
           minLength: 1
           maxLength: 100
-          example: '100'
+          example: "100"
     ListCompanyRolesResponseData:
       type: object
       required:
@@ -1210,17 +1267,17 @@ components:
                 type: string
                 minLength: 1
                 maxLength: 100
-                example: '100'
+                example: "100"
               nameTh:
                 type: string
                 minLength: 1
                 maxLength: 100
-                example: 'John'
+                example: "John"
               nameEn:
                 type: string
                 minLength: 1
                 maxLength: 100
-                example: 'Lennon'
+                example: "Lennon"
 
     InviteStaffRequestData:
       type: object
@@ -1236,31 +1293,31 @@ components:
           type: string
           minLength: 1
           maxLength: 50
-          example: 'abc'
+          example: "abc"
         roleId:
           type: string
           minLength: 1
           maxLength: 100
-          example: '100'
+          example: "100"
         email:
           type: string
           format: email
           pattern: '[^\.]+\.[^\.]+$'
-          example: 'maw-dev@littlepawcraft.com'
+          example: "maw-dev@littlepawcraft.com"
         firstName:
           type: string
           minLength: 1
           maxLength: 100
-          example: 'John'
+          example: "John"
         lastName:
           type: string
           minLength: 1
           maxLength: 100
-          example: 'Lennon'
+          example: "Lennon"
         mobileNo:
           type: string
-          pattern: '^[0-9]{10}$'
-          example: '0999999999'
+          pattern: "^[0-9]{10}$"
+          example: "0999999999"
 
     ListStaffsResponseData:
       type: object
@@ -1306,7 +1363,6 @@ components:
                 type: string
               status:
                 type: string
-                      
 
 paths:
   /accounts/updateUser:
@@ -1321,15 +1377,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateUserRequestData'
-       
+              $ref: "#/components/schemas/UpdateUserRequestData"
+
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/resendCustomerRegistrationEmail:
     post:
       tags:
@@ -1342,40 +1398,40 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ResendCustomerRegistrationEmailRequestData'
+              $ref: "#/components/schemas/ResendCustomerRegistrationEmailRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/updateCustomer:
     post:
       tags:
         - customer
-      summary: 'Update Customer Profile'
-      description: 'Update Customer Profile'
+      summary: "Update Customer Profile"
+      description: "Update Customer Profile"
       operationId: updateCustomer
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateCustomerRequestData'
+              $ref: "#/components/schemas/UpdateCustomerRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/verifyEmailForCustomerRegistration:
     get:
       tags:
         - registration
-      summary: 'Verify Email for customer registration'
-      description: 'Verify Email for customer registration'
+      summary: "Verify Email for customer registration"
+      description: "Verify Email for customer registration"
       operationId: verifyEmailForCustomerRegistration
       parameters:
         - in: query
@@ -1392,13 +1448,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/checkEmailValidForRegistration:
     post:
       tags:
         - registration
-      summary: 'Check if email is valid for registration'
-      description: 'Check if email is valid for registration'
+      summary: "Check if email is valid for registration"
+      description: "Check if email is valid for registration"
       operationId: checkEmailValidForRegistration
       parameters:
         - in: query
@@ -1409,40 +1465,40 @@ paths:
             type: string
             format: email
             pattern: '[^\.]+\.[^\.]+$'
-            example: 'maw-dev@littlepawcraft.com'
+            example: "maw-dev@littlepawcraft.com"
       responses:
         200:
           description: Email is valid
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/registerCustomer:
     post:
       tags:
         - registration
-      summary: 'Register customer from mobile app'
-      description: 'Register customer from mobile app'
+      summary: "Register customer from mobile app"
+      description: "Register customer from mobile app"
       operationId: registerCustomer
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RegisterCustomerRequestData'
+              $ref: "#/components/schemas/RegisterCustomerRequestData"
       responses:
         200:
           description: Registration succeeded
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/getAuthenticatedUserForCms:
     get:
       tags:
         - user
-      summary: 'Return authenticated user data'
-      description: 'Return authenticated user data'
+      summary: "Return authenticated user data"
+      description: "Return authenticated user data"
       operationId: getAuthenticatedUserForCms
       responses:
         200:
@@ -1450,13 +1506,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAuthenticatedUserForCmsResponseData'
+                $ref: "#/components/schemas/GetAuthenticatedUserForCmsResponseData"
   /accounts/getAuthenticatedUserForCustomer:
     get:
       tags:
         - user
-      summary: 'Return authenticated user data'
-      description: 'Return authenticated user data'
+      summary: "Return authenticated user data"
+      description: "Return authenticated user data"
       operationId: getAuthenticatedUserForCustomer
       responses:
         200:
@@ -1464,35 +1520,35 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAuthenticatedUserForCustomerResponseData'
-                
+                $ref: "#/components/schemas/GetAuthenticatedUserForCustomerResponseData"
+
   /accounts/registerCompanyStaffByInvitationCode:
     post:
       tags:
         - registration
-      summary: 'Register a company staff by invitation code'
-      description: 'Register a company staff by invitation code'
+      summary: "Register a company staff by invitation code"
+      description: "Register a company staff by invitation code"
       operationId: registerCompanyStaffByInvitationCode
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RegisterCompanyStaffByInvitationCodeRequestData'
+              $ref: "#/components/schemas/RegisterCompanyStaffByInvitationCodeRequestData"
       responses:
         200:
           description: Registration succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
 
   /accounts/acceptCompanyStaffInvitation:
     get:
       tags:
         - registration
-      summary: 'Accept invitation code for company staff'
-      description: 'Accept invitation code for company staff'
+      summary: "Accept invitation code for company staff"
+      description: "Accept invitation code for company staff"
       operationId: acceptCompanyStaffInvitation
       parameters:
         - in: query
@@ -1507,14 +1563,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AcceptCompanyStaffInvitationResponseData'
-                
+                $ref: "#/components/schemas/AcceptCompanyStaffInvitationResponseData"
+
   /accounts/emailAvailableForCustomerCreation:
     get:
       tags:
         - customer
-      summary: 'Check Customers Email Available'
-      description: 'Check Customers Email Available'
+      summary: "Check Customers Email Available"
+      description: "Check Customers Email Available"
       operationId: emailAvailableForCustomerCreation
       parameters:
         - in: query
@@ -1524,31 +1580,31 @@ paths:
             type: string
             format: email
             pattern: '[^\.]+\.[^\.]+$'
-            example: 'maw-dev@littlepawcraft.com'
+            example: "maw-dev@littlepawcraft.com"
       responses:
         200:
           description: Available
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/searchActiveCustomersByKeyword:
     get:
       tags:
         - customer
-      summary: 'Search customers'
-      description: 'Search customers'
+      summary: "Search customers"
+      description: "Search customers"
       operationId: searchActiveCustomersByKeyword
       parameters:
         - in: query
           name: keyword
           required: true
-          description: 'search keyword (email | first name | last name | mobile no)'
+          description: "search keyword (email | first name | last name | mobile no)"
           schema:
             type: string
             minLength: 1
             maxLength: 50
-            example: 'john@example.com'
+            example: "john@example.com"
         - in: query
           name: limit
           required: true
@@ -1561,27 +1617,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SearchCustomerResponseData'
+                $ref: "#/components/schemas/SearchCustomerResponseData"
   /accounts/bulkUpdateCompanyStatus:
     post:
       tags:
         - company
-      summary: 'Bulk update company status'
-      description: 'Bulk update company status'
+      summary: "Bulk update company status"
+      description: "Bulk update company status"
       operationId: bulkUpdateCompanyStatus
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BulkUpdateCompanyStatusRequestData'
+              $ref: "#/components/schemas/BulkUpdateCompanyStatusRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/updateCompanyStatus:
     post:
       tags:
@@ -1594,14 +1650,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateCompanyStatusRequestData'
+              $ref: "#/components/schemas/UpdateCompanyStatusRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/getCompany:
     get:
       tags:
@@ -1622,7 +1678,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetCompanyResponseData'
+                $ref: "#/components/schemas/GetCompanyResponseData"
   /accounts/updateCompany:
     post:
       tags:
@@ -1635,14 +1691,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateOrUpdateCompanyRequestData'
+              $ref: "#/components/schemas/CreateOrUpdateCompanyRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/createCompany:
     post:
       tags:
@@ -1655,14 +1711,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateOrUpdateCompanyRequestData'
+              $ref: "#/components/schemas/CreateOrUpdateCompanyRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/listAllCompanies:
     get:
       tags:
@@ -1676,7 +1732,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListAllCompaniesResponseData'
+                $ref: "#/components/schemas/ListAllCompaniesResponseData"
   /accounts/bulkUpdateStaffStatus:
     post:
       tags:
@@ -1689,14 +1745,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BulkUpdateStaffStatusRequestData'
+              $ref: "#/components/schemas/BulkUpdateStaffStatusRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/activateStaff:
     post:
       tags:
@@ -1729,7 +1785,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/inactivateStaff:
     post:
       tags:
@@ -1762,7 +1818,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/deleteStaff:
     post:
       tags:
@@ -1795,7 +1851,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/updateStaff:
     post:
       tags:
@@ -1808,14 +1864,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateStaffRequestData'
+              $ref: "#/components/schemas/UpdateStaffRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
   /accounts/checkEmailAvailableForStaffInvitation:
     post:
       tags:
@@ -1843,7 +1899,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
 
   /accounts/listCompanyRoles:
     get:
@@ -1858,14 +1914,14 @@ paths:
           description: the target company
           required: true
           schema:
-           type: string
+            type: string
       responses:
         200:
           description: Admin role
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListCompanyRolesResponseData'
+                $ref: "#/components/schemas/ListCompanyRolesResponseData"
   /accounts/listStaffs:
     get:
       tags:
@@ -1886,7 +1942,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListStaffsResponseData'
+                $ref: "#/components/schemas/ListStaffsResponseData"
   /accounts/inviteStaff:
     post:
       tags:
@@ -1899,11 +1955,61 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InviteStaffRequestData'
+              $ref: "#/components/schemas/InviteStaffRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"
+
+  /accounts/applyKyc:
+    post:
+      tags:
+        - customer
+      summary: applyKyc
+      description: applyKyc
+      operationId: applyKyc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplyKycRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
+
+  # /accounts/searchCustomers:
+  #   get:
+  #     tags:
+  #       - customer
+  #     summary: searchCustomers
+  #     description: searchCustomers
+  #     operationId: searchCustomers
+  # /accounts/getCustomer:
+  #   get:
+  #     tags:
+  #       - customer
+  #     summary: searchCustomers
+  #     description: searchCustomers
+  #     operationId: searchCustomers
+  # /accounts/updateCustomerKycStatus:
+  #   get:
+  #     tags:
+  #       - customer
+  #     summary: searchCustomers
+  #     description: searchCustomers
+  #     operationId: searchCustomers
+  # /accounts/checkCustomerDopa:
+  #   get:
+  #     tags:
+  #       - customer
+  #     summary: searchCustomers
+  #     description: searchCustomers
+  #     operationId: searchCustomers

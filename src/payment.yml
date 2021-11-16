@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: Payment
+  description: API to manage payments
+  version: 1.0.0
+
+paths:
+  /payments/generateWebPayUrl:
+    get:
+      tags:
+        - payment
+      summary: generateWebPayUrl
+      description: generateWebPayUrl
+      operationId: generateWebPayUrl
+      parameters:
+        - in: query
+          name: amount
+          description: amount
+          required: true
+          schema:
+            type: number
+            minimum: 0
+            maximum: 1000000
+        - in: query
+          name: orderId
+          description: orderId
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 15
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
+  /payments/scbNotify:
+    post:
+      tags:
+        - payment
+      summary: scbNotify
+      description: scbNotify
+      operationId: scbNotify
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
