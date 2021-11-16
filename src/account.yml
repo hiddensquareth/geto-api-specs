@@ -85,6 +85,87 @@ components:
         message:
           type: string
           example: ok
+    CheckCustomerDopaRequestData:
+      type: object
+      properties:
+        customerUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: "1234"
+    UpdateCustomerKycStatusRequestData:
+      type: object
+      properties:
+        customerUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: "1234"
+        status:
+          type: string
+          minLength: 1
+          maxLength: 50
+    CustomerList:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+        list:
+          type: array
+          items:
+            type: object
+            properties:
+              customerUuid:
+                type: string
+              customerName:
+                type: string
+              customerEmail:
+                type: string
+              customerMobileNo:
+                type: string
+              kycDate:
+                type: string
+              dopaStatus:
+                type: string
+              kycStatus:
+                type: string
+    GetCustomerResponseData:
+      type: object
+      properties:
+        customerUuid:
+          type: string
+        customerName:
+          type: string
+        citizenId:
+          type: string
+        birthDate:
+          type: string
+        idCardIssueDate:
+          type: string
+        idCardExpDate:
+          type: string
+        passportIssueDate:
+          type: string
+        passportExpDate:
+          type: string
+        dopaStatus:
+          type: string
+        kycStatus:
+          type: string
+        dopaNote:
+          type: string
+        riskLevel:
+          type: string
+        ownerPhotoUrl:
+          type: string
+        idCardPhotoUrl:
+          type: string
+        idCardWithOwnerPhotoUrl:
+          type: string
+        passportPhotoUrl:
+          type: string
+        passportWithOwnerPhotoUrl:
+          type: string
     ApplyKycRequestData:
       type: object
       properties:
@@ -1988,31 +2069,85 @@ paths:
               schema:
                 $ref: "#/components/schemas/DefaultResponse"
 
-  # /accounts/searchCustomers:
-  #   get:
-  #     tags:
-  #       - customer
-  #     summary: searchCustomers
-  #     description: searchCustomers
-  #     operationId: searchCustomers
-  # /accounts/getCustomer:
-  #   get:
-  #     tags:
-  #       - customer
-  #     summary: searchCustomers
-  #     description: searchCustomers
-  #     operationId: searchCustomers
-  # /accounts/updateCustomerKycStatus:
-  #   get:
-  #     tags:
-  #       - customer
-  #     summary: searchCustomers
-  #     description: searchCustomers
-  #     operationId: searchCustomers
-  # /accounts/checkCustomerDopa:
-  #   get:
-  #     tags:
-  #       - customer
-  #     summary: searchCustomers
-  #     description: searchCustomers
-  #     operationId: searchCustomers
+  /accounts/searchCustomers:
+    get:
+      tags:
+        - customer
+      summary: searchCustomers
+      description: searchCustomers
+      operationId: searchCustomers
+      parameters:
+        - $ref: "#/components/parameters/statusFilter"
+        - $ref: "#/components/parameters/searchKeyword"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerList"
+  /accounts/getCustomer:
+    get:
+      tags:
+        - customer
+      summary: getCustomer
+      description: getCustomer
+      operationId: getCustomer
+      parameters:
+        - in: query
+          name: customerUuid
+          description: uuid of the customer
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCustomerResponseData"
+  /accounts/updateCustomerKycStatus:
+    post:
+      tags:
+        - customer
+      summary: updateCustomerKycStatus
+      description: updateCustomerKycStatus
+      operationId: updateCustomerKycStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCustomerKycStatusRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
+  /accounts/checkCustomerDopa:
+    post:
+      tags:
+        - customer
+      summary: checkCustomerDopa
+      description: checkCustomerDopa
+      operationId: checkCustomerDopa
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckCustomerDopaRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
