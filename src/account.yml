@@ -409,8 +409,11 @@ components:
         - mobileNo
         - nationality
         - occupationId
+        - kycStatus
         - driverAccesses
       properties:
+        kycStatus:
+          type: string
         status:
           type: string
         userUuid:
