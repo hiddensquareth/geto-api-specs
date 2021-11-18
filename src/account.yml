@@ -105,6 +105,16 @@ components:
           type: string
           minLength: 1
           maxLength: 50
+        version:
+          type: integer
+        resentNote:
+          type: string
+          minLength: 1
+          maxLength: 500
+        rejectedReason:
+          type: string
+          minLength: 1
+          maxLength: 500
     CustomerList:
       type: object
       properties:
