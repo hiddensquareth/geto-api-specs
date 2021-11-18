@@ -139,9 +139,19 @@ components:
       properties:
         customerUuid:
           type: string
-        customerName:
+        firstName:
+          type: string
+        lastName:
           type: string
         citizenId:
+          type: string
+        laserNumber:
+          type: string
+        passportNumber:
+          type: string
+        presentHomelandTh:
+          type: string
+        presentHomelandEn:
           type: string
         birthDate:
           type: string
