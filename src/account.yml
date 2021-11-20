@@ -181,6 +181,8 @@ components:
           type: string
         passportWithOwnerPhotoUrl:
           type: string
+        nationality:
+          type: string
     ApplyKycRequestData:
       type: object
       properties:
