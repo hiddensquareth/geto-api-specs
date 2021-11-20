@@ -192,6 +192,14 @@ components:
           type: string
           pattern: "^[A-Z][A-Z][0-9]{10}$"
           example: "AA0000000000"
+        passportNumber:
+          type: string
+          minLength: 1
+          maxLength: 20
+        presentHomelandCountryCode:
+          type: string
+          minLength: 1
+          maxLength: 10
         idCardIssueDate:
           type: string
           maxLength: 50
