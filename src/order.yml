@@ -934,8 +934,11 @@ components:
               - companyUuid
               - nameTh
               - nameEn
+              - companyCode
             properties:
               companyUuid:
+                type: string
+              companyCode:
                 type: string
               nameTh:
                 type: string
