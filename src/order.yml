@@ -351,6 +351,12 @@ components:
         - paymentOption
         - enabledCod
       properties:
+        referenceOrderId:
+          type: string
+        referenceMerchantId:
+          type: string
+        referenceCustomerId:
+          type: string
         orderId:
           type: string
         createdAt:
