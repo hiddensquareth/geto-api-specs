@@ -351,14 +351,6 @@ components:
         - paymentOption
         - enabledCod
       properties:
-        createdAt:
-          type: string
-        createdBy:
-          type: string
-        lastUpdatedAt:
-          type: string
-        lastUpdatedBy:
-          type: string
         referenceOrderId:
           type: string
         referenceMerchantId:
