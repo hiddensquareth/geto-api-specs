@@ -127,6 +127,8 @@ components:
                 type: integer
               sumPaymentAmount:
                 type: number
+              sumOnlineAmount:
+                type: number
               sumCashAmount:
                 type: number
               sumCreditCardAmount:
