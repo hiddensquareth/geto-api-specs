@@ -149,7 +149,7 @@ components:
             - totalCount
           properties:
             totalCount:
-              type: number
+              type: integer
         list:
           type: array
           items:
@@ -160,20 +160,18 @@ components:
               - orderDate
               - orderPrice
               - creditCardAmount
-              - creditCardBankFeeRate
-              - creditCardGetoFeeRate
-              - creditCardBankFeeAmonnt
-              - creditCardGetoFeeAmount
-              - creditCardMerchantReceivedAmount
-              - creditCardTransferToMerchantStatus
+              - creditCardFeeRate
+              - creditCardFeeAmount
+              - serviceFeeRate
+              - serviceFeeAmount
+              - creditCardAmountForMerchant
+              - merchantSettlementStatus
               - directDebitAmount
-              - directDebitReceivedFromCustomerAmount
-              - directDebitBankFeeRate
-              - directDebitGetoFeeRate
-              - directDebitBankFeeAmount
-              - directDebitGetoFeeAmount
-              - directDebitMerchantReceivedAmount
-              - directDebitTransferToMerchantStatus
+              - directDebitFeeRate
+              - directDebitFeeAmount
+              - directDebitFeeRateGeto
+              - directDebitFeeAmountGeto
+              - directDebitAmountForMerchant
               - cashAmount
             properties:
               orderId:
@@ -186,34 +184,30 @@ components:
                 type: number
               creditCardAmount:
                 type: number
-              creditCardBankFeeRate:
+              creditCardFeeRate:
                 type: number
-              creditCardGetoFeeRate:
+              creditCardFeeAmount:
                 type: number
-              creditCardBankFeeAmonnt:
+              serviceFeeRate:
                 type: number
-              creditCardGetoFeeAmount:
+              serviceFeeAmount:
                 type: number
-              creditCardMerchantReceivedAmount:
+              creditCardAmountForMerchant:
                 type: number
-              creditCardTransferToMerchantStatus:
+              merchantSettlementStatus:
                 type: string
               directDebitAmount:
                 type: number
-              directDebitReceivedFromCustomerAmount:
+              directDebitFeeRate:
                 type: number
-              directDebitBankFeeRate:
+              directDebitFeeAmount:
                 type: number
-              directDebitGetoFeeRate:
+              directDebitFeeRateGeto:
                 type: number
-              directDebitBankFeeAmount:
+              directDebitFeeAmountGeto:
                 type: number
-              directDebitGetoFeeAmount:
+              directDebitAmountForMerchant:
                 type: number
-              directDebitMerchantReceivedAmount:
-                type: number
-              directDebitTransferToMerchantStatus:
-                type: string
               cashAmount:
                 type: number
 
