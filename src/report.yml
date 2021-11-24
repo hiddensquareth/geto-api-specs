@@ -588,6 +588,17 @@ paths:
       description: searchReportRiskAssessmentOfEndUsers
       operationId: searchReportRiskAssessmentOfEndUsers
       parameters:
+        - in: query
+          name: riskLevel
+          description: riskLevel
+          required: false
+          schema:
+            type: string
+            enum:
+              - HIGH
+              - MEDIUM
+              - LOW
+              - ALL
         - $ref: "#/components/parameters/searchKeyword"
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/rowsPerPage"
