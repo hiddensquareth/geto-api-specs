@@ -292,7 +292,7 @@ components:
             - totalCount
           properties:
             totalCount:
-              type: number
+              type: integer
         list:
           type: array
           items:
@@ -621,7 +621,6 @@ paths:
       operationId: searchReportCustomers
       parameters:
         - $ref: "#/components/parameters/searchKeyword"
-        - $ref: "#/components/parameters/statusFilter"
         - $ref: "#/components/parameters/startDate"
         - $ref: "#/components/parameters/endDate"
         - $ref: "#/components/parameters/page"
