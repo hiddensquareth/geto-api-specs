@@ -258,7 +258,7 @@ components:
             - totalCount
           properties:
             totalCount:
-              type: number
+              type: integer
         list:
           type: array
           items:
@@ -275,7 +275,7 @@ components:
               nationality:
                 type: string
               riskLevel:
-                type: number
+                type: string
               presentHomeland:
                 type: string
               occupation:
