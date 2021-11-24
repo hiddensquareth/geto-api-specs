@@ -589,9 +589,6 @@ paths:
       operationId: searchReportRiskAssessmentOfEndUsers
       parameters:
         - $ref: "#/components/parameters/searchKeyword"
-        - $ref: "#/components/parameters/statusFilter"
-        - $ref: "#/components/parameters/startDate"
-        - $ref: "#/components/parameters/endDate"
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/rowsPerPage"
         - $ref: "#/components/parameters/sortField"
