@@ -223,6 +223,8 @@ components:
           properties:
             totalCount:
               type: integer
+            totalTransferAmount:
+              type: number
         list:
           type: array
           items:
@@ -230,16 +232,20 @@ components:
             required:
               - orderId
             properties:
-              referenceTransactionId:
+              orderId:
                 type: string
-              srcAccountNumber:
+              merchantBankAccountNumber:
                 type: string
-              destAccountNumber:
+              merchantBankCode:
                 type: string
-              destBankCode:
+              merchantBankAccountName:
                 type: string
-              amount:
+              transferAmount:
                 type: number
+              getoIntermediateBankAccountNumber:
+                type: string
+              getoIntermediateBankCode:
+                type: string
 
     SearchReportRiskAssessmentOfEndUsersResponseData:
       type: object
