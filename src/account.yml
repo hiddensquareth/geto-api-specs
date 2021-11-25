@@ -147,6 +147,10 @@ components:
           type: string
         version:
           type: integer
+        rejectedReason:
+          type: string
+        resentNote:
+          type: string
         customerUuid:
           type: string
         firstName:
