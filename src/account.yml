@@ -96,6 +96,12 @@ components:
           minLength: 1
           maxLength: 50
           example: "1234"
+        riskLevel:
+          type: string
+          enum:
+            - HIGH
+            - MEDIUM
+            - LOW
         status:
           type: string
           minLength: 1
