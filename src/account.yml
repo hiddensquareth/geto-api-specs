@@ -137,6 +137,14 @@ components:
     GetCustomerResponseData:
       type: object
       properties:
+        createdAt:
+          type: string
+        createdBy:
+          type: string
+        lastUpdatedAt:
+          type: string
+        lastUpdatedBy:
+          type: string
         customerUuid:
           type: string
         firstName:
