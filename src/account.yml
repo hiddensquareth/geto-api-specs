@@ -1220,6 +1220,8 @@ components:
                 type: string
               status:
                 type: string
+              companyServiceType:
+                type: string
     BulkUpdateCompanyStatusRequestData:
       type: object
       required:
