@@ -125,6 +125,26 @@ components:
             properties:
               postalCode:
                 type: string
+    ListCountriesResponseData:
+      type: object
+      required:
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - countryId
+              - nameTh
+              - nameEn
+            properties:
+              countryId:
+                type: string
+              nameTh:
+                type: string
+              nameEn:
+                type: string
 
 paths:
   /references/listBanks:
@@ -278,3 +298,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListPostalCodesResponseData"
+  /references/listCountries:
+    get:
+      tags:
+        - reference
+      summary: Get list of countries
+      description: Get list of countries
+      operationId: listCountries
+      responses:
+        200:
+          description: The list of postalcodes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCountriesResponseData"
