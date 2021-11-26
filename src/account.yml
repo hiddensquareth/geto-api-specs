@@ -290,13 +290,6 @@ components:
 
     UpdateCustomerRequestData:
       type: object
-      required:
-        - profileImageUrl
-        - nationality
-        - firstName
-        - lastName
-        - mobileNo
-        - occupationId
       properties:
         profileImageUrl:
           type: string
