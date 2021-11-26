@@ -2154,6 +2154,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetCustomerResponseData"
+  /accounts/getAuthenticatedUserKycInfo:
+    get:
+      tags:
+        - user
+      summary: getAuthenticatedUserKycInfo
+      description: getAuthenticatedUserKycInfo
+      operationId: getAuthenticatedUserKycInfo
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCustomerResponseData"
   /accounts/updateCustomerKycStatus:
     post:
       tags:
