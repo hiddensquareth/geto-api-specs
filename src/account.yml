@@ -529,9 +529,12 @@ components:
         - nationality
         - occupationId
         - kycStatus
+        - kycStatusNote
         - driverAccesses
       properties:
         kycStatus:
+          type: string
+        kycStatusNote:
           type: string
         status:
           type: string
