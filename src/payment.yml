@@ -3,7 +3,21 @@ info:
   title: Payment
   description: API to manage payments
   version: 1.0.0
-
+components:
+  schemas:
+    DefaultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "ok"
+    GenerateWebPayUrlResponseData:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
 paths:
   /payments/generateWebPayUrl:
     get:
@@ -35,14 +49,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DefaultResponse"
-  /payments/scbNotify:
+                $ref: "#/components/schemas/GenerateWebPayUrlResponseData"
+  /payments/checkAndUpdatePaymentStatus:
     post:
       tags:
         - payment
-      summary: scbNotify
-      description: scbNotify
-      operationId: scbNotify
+      summary: checkPaymentStatus
+      description: checkPaymentStatus
+      operationId: checkPaymentStatus
       responses:
         200:
           description: Success
