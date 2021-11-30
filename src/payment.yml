@@ -18,11 +18,7 @@ components:
       properties:
         url:
           type: string
-    CheckAndUpdatePaymentStatusRequestData:
-      type: object
-      properties:
-        orderId:
-          type: string
+
 paths:
   /payments/generateWebPayUrl:
     get:
@@ -55,23 +51,3 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenerateWebPayUrlResponseData"
-  /payments/checkAndUpdatePaymentStatus:
-    post:
-      tags:
-        - payment
-      summary: checkAndUpdatePaymentStatus
-      description: checkAndUpdatePaymentStatus
-      operationId: checkAndUpdatePaymentStatus
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CheckAndUpdatePaymentStatusRequestData"
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DefaultResponse"
