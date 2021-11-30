@@ -965,14 +965,15 @@ components:
           type: string
           pattern: "^https?://.+$"
           example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
-    checkWebPayStatusRequestData:
+    CheckWebPayStatusRequestData:
       type: object
       properties:
         orderId:
           type: string
-        amount:
-          type: number
-        refDate:
+    CheckWebPayStatusResponseData:
+      type: object
+      properties:
+        status:
           type: string
     PrepareWebPayRequestData:
       type: object
@@ -1718,14 +1719,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/checkWebPayStatusRequestData"
+              $ref: "#/components/schemas/CheckWebPayStatusRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DefaultResponse"
+                $ref: "#/components/schemas/CheckWebPayStatusResponseData"
   /orders/prepareWebPay:
     post:
       tags:
