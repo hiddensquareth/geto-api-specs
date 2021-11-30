@@ -965,7 +965,7 @@ components:
           type: string
           pattern: "^https?://.+$"
           example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
-    CheckAndUpdatePaymentStatusRequestData:
+    checkWebPayStatusRequestData:
       type: object
       properties:
         orderId:
@@ -973,6 +973,20 @@ components:
         amount:
           type: number
         refDate:
+          type: string
+    PrepareWebPayRequestData:
+      type: object
+      properties:
+        orderId:
+          type: string
+        amount:
+          type: number
+    PrepareWebPayResponseData:
+      type: object
+      required:
+        - url
+      properties:
+        url:
           type: string
 
 paths:
@@ -1692,19 +1706,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListShippingCompaniesResponseData"
-  /orders/checkAndUpdatePaymentStatus:
+  /orders/checkWebPayStatus:
     post:
       tags:
         - order
-      summary: checkAndUpdatePaymentStatus
-      description: checkAndUpdatePaymentStatus
-      operationId: checkAndUpdatePaymentStatus
+      summary: checkWebPayStatus
+      description: checkWebPayStatus
+      operationId: checkWebPayStatus
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CheckAndUpdatePaymentStatusRequestData"
+              $ref: "#/components/schemas/checkWebPayStatusRequestData"
       responses:
         200:
           description: Success
@@ -1712,3 +1726,23 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DefaultResponse"
+  /orders/prepareWebPay:
+    post:
+      tags:
+        - order
+      summary: prepareWebPay
+      description: prepareWebPay
+      operationId: prepareWebPay
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PrepareWebPayRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrepareWebPayResponseData"
