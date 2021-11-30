@@ -1692,7 +1692,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListShippingCompaniesResponseData"
-  /payments/checkAndUpdatePaymentStatus:
+  /orders/checkAndUpdatePaymentStatus:
     post:
       tags:
         - order
