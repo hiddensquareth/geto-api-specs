@@ -1747,3 +1747,25 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PrepareWebPayResponseData"
+
+  /orders/getImportDetail:
+    get:
+      tags:
+        - order
+      summary: getImportDetail
+      description: getImportDetail
+      operationId: getImportDetail
+      parameters:
+        - in: query
+          name: importId
+          description: id of the import
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateOrderRequestData"
