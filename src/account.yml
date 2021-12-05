@@ -1492,7 +1492,11 @@ components:
                 type: string
               status:
                 type: string
-
+    CheckRegistrationStatusByOauthProviderResponseData:
+      type: object
+      properties:
+        status:
+          type: string
 paths:
   /accounts/updateUser:
     post:
@@ -2210,3 +2214,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DefaultResponse"
+  /accounts/checkRegistrationStatusByOauthProvider:
+    get:
+      tags:
+        - registration
+      summary: checkRegistrationStatusByOauthProvider
+      description: checkRegistrationStatusByOauthProvider
+      operationId: checkRegistrationStatusByOauthProvider
+      parameters:
+        - in: query
+          name: providerId
+          description: providerId
+          required: true
+          schema:
+            type: string
+            enum:
+              - GOOGLE
+              - FACEBOOK
+              - APPLE
+              - LINE
+        - in: query
+          name: oauthUserId
+          description: oauthUserId
+          required: true
+          schema:
+            type: string
+            minimum: 1
+            maximum: 50
+      responses:
+        200:
+          description: result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckRegistrationStatusByOauthProviderResponseData"
