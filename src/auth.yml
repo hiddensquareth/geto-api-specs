@@ -1,0 +1,217 @@
+openapi: 3.0.0
+info:
+  title: Auth
+  description: API to manage authentication
+  version: 1.0.0
+components:
+  schemas:
+    LoginUserWithLineRequestData:
+      type: object
+      required:
+        - lineUserId
+        - lineAccessToken
+      properties:
+        lineUserId:
+          type: string
+          minimum: 1
+          maximum: 50
+        lineAccessToken:
+          type: string
+          minimum: 1
+          maximum: 1000
+    LoginUserWithLineReponseData:
+      type: object
+      required:
+        - firebaseCustomToken
+      properties:
+        firebaseCustomToken:
+          type: string
+    LoginUserWithEmailRequestData:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          minimum: 1
+          maximum: 100
+        password:
+          type: string
+          minimum: 1
+          maximum: 100
+    LoginUserWithEmailReponseData:
+      type: object
+      required:
+        - firebaseCustomToken
+      properties:
+        firebaseCustomToken:
+          type: string
+    InitiateLoginCmsRequestData:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          minimum: 1
+          maximum: 100
+        password:
+          type: string
+          minimum: 1
+          maximum: 100
+    InitiateLoginCmsResponseData:
+      type: object
+      required:
+        - temporaryToken
+        - qrCodeData
+      properties:
+        temporaryToken:
+          type: string
+        qrCodeData:
+          type: string
+    LoginCmsWithNewMfaRequestData:
+      type: object
+      required:
+        - temporaryToken
+        - otpCode
+      properties:
+        temporaryToken:
+          type: string
+          minimum: 1
+          maximum: 1000
+        otpCode:
+          type: string
+          minimum: 1
+          maximum: 100
+    LoginCmsWithNewMfaResponseData:
+      type: object
+      required:
+        - firebaseCustomToken
+      properties:
+        firebaseCustomToken:
+          type: string
+    LoginCmsWithExistingMfaRequestData:
+      type: object
+      required:
+        - temporaryToken
+        - otpCode
+      properties:
+        temporaryToken:
+          type: string
+          minimum: 1
+          maximum: 1000
+        otpCode:
+          type: string
+          minimum: 1
+          maximum: 100
+    LoginCmsWithExistingMfaResponseData:
+      type: object
+      required:
+        - firebaseCustomToken
+      properties:
+        firebaseCustomToken:
+          type: string
+
+paths:
+  /auth/loginUserWithLine:
+    post:
+      tags:
+        - auth
+      summary: loginUserWithLine
+      description: loginUserWithLine
+      operationId: loginUserWithLine
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginUserWithLineRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginUserWithLineReponseData"
+  /auth/loginUserWithEmail:
+    post:
+      tags:
+        - auth
+      summary: loginUserWithEmail
+      description: loginUserWithEmail
+      operationId: loginUserWithEmail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginUserWithEmailRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginUserWithEmailReponseData"
+  /auth/initiateLoginCms:
+    post:
+      tags:
+        - auth
+      summary: initiateLoginCms
+      description: initiateLoginCms
+      operationId: initiateLoginCms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InitiateLoginCmsRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InitiateLoginCmsResponseData"
+  /auth/loginCmsWithNewMfa:
+    post:
+      tags:
+        - auth
+      summary: loginCmsWithNewMfa
+      description: loginCmsWithNewMfa
+      operationId: loginCmsWithNewMfa
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginCmsWithNewMfaRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginCmsWithNewMfaResponseData"
+  /auth/loginCmsWithExistingMfa:
+    post:
+      tags:
+        - auth
+      summary: loginCmsWithExistingMfa
+      description: loginCmsWithExistingMfa
+      operationId: loginCmsWithExistingMfa
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginCmsWithExistingMfaRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginCmsWithExistingMfaResponseData"
