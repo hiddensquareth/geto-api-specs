@@ -322,6 +322,13 @@ components:
           maxLength: 50
           minLength: 1
           example: 10000
+    RegisterCustomerResponseData:
+      type: object
+      required:
+        - firebaseCustomToken
+      properties:
+        firebaseCustomToken:
+          type: string
     RegisterCustomerRequestData:
       type: object
       required:
@@ -1632,7 +1639,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DefaultResponse"
+                $ref: "#/components/schemas/RegisterCustomerResponseData"
   /accounts/getAuthenticatedUserForCms:
     get:
       tags:

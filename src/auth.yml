@@ -5,6 +5,12 @@ info:
   version: 1.0.0
 components:
   schemas:
+    DefaultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: ok
     LoginUserWithLineRequestData:
       type: object
       required:
@@ -113,6 +119,13 @@ components:
       properties:
         firebaseCustomToken:
           type: string
+    LinkUserWithLineRequestData:
+      type: object
+      properties:
+        token:
+          type: string
+          minimum: 1
+          maximum: 1000
 
 paths:
   /auth/loginUserWithLine:
@@ -135,6 +148,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LoginUserWithLineReponseData"
+  /auth/linkUserWithLine:
+    post:
+      tags:
+        - auth
+      summary: linkUserWithLine
+      description: linkUserWithLine
+      operationId: linkUserWithLine
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LinkUserWithLineRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
   /auth/loginUserWithEmail:
     post:
       tags:
