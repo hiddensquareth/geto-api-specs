@@ -2253,8 +2253,8 @@ paths:
           required: true
           schema:
             type: string
-            minimum: 1
-            maximum: 1000
+            minLength: 1
+            maxLength: 1000
       responses:
         200:
           description: result
@@ -2277,8 +2277,8 @@ paths:
           required: true
           schema:
             type: string
-            minimum: 1
-            maximum: 50
+            minLength: 1
+            maxLength: 50
       responses:
         200:
           description: result
