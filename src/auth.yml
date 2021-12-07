@@ -119,13 +119,21 @@ components:
       properties:
         firebaseCustomToken:
           type: string
-    LinkUserWithLineRequestData:
+    LinkUserWithOAuthProviderRequestData:
       type: object
       properties:
         token:
           type: string
           minLength: 1
           maxLength: 1000
+        providerId:
+          type: string
+          minLength: 1
+          maxLength: 50
+        providerUserId:
+          type: string
+          minLength: 1
+          maxLength: 100
 
 paths:
   /auth/loginUserWithLine:
@@ -148,19 +156,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LoginUserWithLineReponseData"
-  /auth/linkUserWithLine:
+  /auth/linkUserWithOAuthProvider:
     post:
       tags:
         - auth
-      summary: linkUserWithLine
-      description: linkUserWithLine
-      operationId: linkUserWithLine
+      summary: linkUserWithOAuthProvider
+      description: linkUserWithOAuthProvider
+      operationId: linkUserWithOAuthProvider
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/LinkUserWithLineRequestData"
+              $ref: "#/components/schemas/LinkUserWithOAuthProviderRequestData"
       responses:
         200:
           description: Success
