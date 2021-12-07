@@ -2242,11 +2242,8 @@ paths:
           required: true
           schema:
             type: string
-            enum:
-              - GOOGLE
-              - FACEBOOK
-              - APPLE
-              - LINE
+            minLength: 1
+            maxLength: 50
         - in: query
           name: oauthUserId
           description: oauthUserId
