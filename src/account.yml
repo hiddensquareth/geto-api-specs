@@ -1514,7 +1514,8 @@ components:
     ResetPasswordRequestData:
       type: object
       required:
-        - password
+        - oldPassword
+        - newPassword
       properties:
         oldPassword:
           type: string
