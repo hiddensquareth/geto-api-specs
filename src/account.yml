@@ -1516,7 +1516,12 @@ components:
       required:
         - password
       properties:
-        password:
+        oldPassword:
+          type: string
+          description: "Minimum eight characters, at least one letter, one number and one special character"
+          pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,20}$'
+          example: P@ssw0rd
+        newPassword:
           type: string
           description: "Minimum eight characters, at least one letter, one number and one special character"
           pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,20}$'
