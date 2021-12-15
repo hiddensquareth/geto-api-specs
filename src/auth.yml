@@ -159,6 +159,21 @@ components:
           type: string
         refCode:
           type: string
+    ResetPasswordRequestData:
+      type: object
+      required:
+        - password
+        - grantToken
+      properties:
+        password:
+          type: string
+          description: "Minimum eight characters, at least one letter, one number and one special character"
+          pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,20}$'
+          example: P@ssw0rd
+        grantToken:
+          type: string
+          minLength: 1
+          maxLength: 1000
 
 paths:
   /auth/loginUserWithLine:
@@ -301,3 +316,23 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SendOtpResponseData"
+  /auth/resetPassword:
+    post:
+      tags:
+        - auth
+      summary: resetPassword
+      description: resetPassword
+      operationId: resetPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetPasswordRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
