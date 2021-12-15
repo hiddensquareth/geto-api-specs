@@ -159,6 +159,27 @@ components:
           type: string
         refCode:
           type: string
+    CheckOtpRequestData:
+      type: object
+      required:
+        - otpCode
+        - refToken
+      properties:
+        otpCode:
+          type: string
+          minLength: 1
+          maxLength: 20
+        refToken:
+          type: string
+          minLength: 1
+          maxLength: 1000
+    CheckOtpResponseData:
+      type: object
+      required:
+        - grantToken
+      properties:
+        grantToken:
+          type: string
     ResetPasswordRequestData:
       type: object
       required:
@@ -316,6 +337,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SendOtpResponseData"
+  /auth/checkOtp:
+    post:
+      tags:
+        - auth
+      summary: checkOtp
+      description: checkOtp
+      operationId: checkOtp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckOtpRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckOtpResponseData"
   /auth/resetPassword:
     post:
       tags:
