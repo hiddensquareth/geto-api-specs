@@ -1511,6 +1511,17 @@ components:
           type: array
           items:
             type: string
+    ResetPasswordRequestData:
+      type: object
+      required:
+        - password
+      properties:
+        password:
+          type: string
+          description: "Minimum eight characters, at least one letter, one number and one special character"
+          pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,20}$'
+          example: P@ssw0rd
+
 paths:
   /accounts/updateUser:
     post:
@@ -2283,3 +2294,23 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CheckLoginMethodsByEmailResponse"
+  /accounts/resetPassword:
+    post:
+      tags:
+        - user
+      summary: resetPassword
+      description: resetPassword
+      operationId: resetPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetPasswordRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
