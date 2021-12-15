@@ -134,6 +134,31 @@ components:
           type: string
           minLength: 1
           maxLength: 100
+    SendOtpRequestData:
+      type: object
+      required:
+        - email
+        - scope
+      properties:
+        email:
+          type: string
+          format: email
+          pattern: '[^\.]+\.[^\.]+$'
+          example: "maw-dev@littlepawcraft.com"
+        scope:
+          type: string
+          minLength: 1
+          maxLength: 100
+    SendOtpResponse:
+      type: object
+      required:
+        - refToken
+        - refCode
+      properties:
+        refToken:
+          type: string
+        refCode:
+          type: string
 
 paths:
   /auth/loginUserWithLine:
@@ -256,3 +281,23 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LoginCmsWithExistingMfaResponseData"
+  /auth/sendOtp:
+    post:
+      tags:
+        - auth
+      summary: sendOtp
+      description: sendOtp
+      operationId: sendOtp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendOtpRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SendOtpResponseData"
