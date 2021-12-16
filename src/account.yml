@@ -1660,6 +1660,15 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/CustomerAddressData"
+    DeleteCustomerAddressRequestData:
+      type: object
+      required:
+        - addressId
+      properties:
+        addressId:
+          type: string
+          minLength: 1
+          maxLength: 100
 
 paths:
   /accounts/updateUser:
@@ -2510,3 +2519,23 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetCustomerAddressResponseData"
+  /accounts/deleteCustomerAddress:
+    post:
+      tags:
+        - customer
+      summary: deleteCustomerAddress
+      description: deleteCustomerAddress
+      operationId: deleteCustomerAddress
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteCustomerAddressRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
