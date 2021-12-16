@@ -1653,6 +1653,13 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/CustomerAddressData"
+    GetCustomerAddressesResponseData:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: "#/components/schemas/CustomerAddressData"
 
 paths:
   /accounts/updateUser:
@@ -2480,3 +2487,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListCustomerAddressesResponseData"
+  /accounts/getCustomerAddresses:
+    get:
+      tags:
+        - customer
+      summary: getCustomerAddresses
+      description: getCustomerAddresses
+      operationId: getCustomerAddresses
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCustomerAddressesResponseData"
