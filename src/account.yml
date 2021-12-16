@@ -1527,6 +1527,132 @@ components:
           description: "Minimum eight characters, at least one letter, one number and one special character"
           pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,20}$'
           example: P@ssw0rd
+    CustomerAddressData:
+      type: object
+      required:
+        - isPrimary
+        - addressName
+        - addressPhone
+        - addressLine
+        - provinceId
+        - districtId
+        - subDistrictId
+        - postalCode
+        - deliveryTime
+      properties:
+        addressId:
+          type: string
+          minLength: 1
+          maxLength: 100
+        addressName:
+          type: string
+          minLength: 1
+          maxLength: 100
+        isPrimary:
+          type: boolean
+        addressPhone:
+          type: string
+          pattern: "^[0-9]{9,10}$"
+          example: "021234567"
+        deliveryTime:
+          type: string
+          description: "1|0 string, each digit represents true or false value of checkbox, starting from Monday_Morning, Monday_Evening, Tuesday_Morning, and so on"
+          pattern: "^[01]{14}$"
+          example: "10101010101010"
+        mapLocationLat:
+          type: string
+          description: latitude
+          maxLength: 50
+          minLength: 1
+          example: "1.1234"
+        mapLocationLng:
+          type: string
+          description: longitude
+          maxLength: 50
+          minLength: 1
+          example: "3.3456"
+        mapLocationLngPlaceId:
+          type: string
+          description: "For reference with Google Map"
+          maxLength: 1000
+          minLength: 1
+        mapLocationLngPlaceDetails:
+          type: string
+          description: "Any text. From Map provider such as Google Map"
+          maxLength: 1000
+          minLength: 1
+          example: "GG Apartment Soi 18, Kaosan Rd. Bangkok"
+        mapLocationPlaceTitle:
+          type: string
+          description: "Any text. From Map provider such as Google Map"
+          maxLength: 1000
+          minLength: 1
+          example: "Piyavate Hospital"
+        addressLine:
+          type: string
+          maxLength: 300
+          minLength: 1
+          example: "GG Apartment Soi 18, Kaosan Rd."
+        provinceId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 10
+        provinceNameEn:
+          type: string
+          minLength: 1
+          maxLength: 100
+        provinceNameTh:
+          type: string
+          minLength: 1
+          maxLength: 100
+        districtId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 1015
+        districtNameEn:
+          type: string
+          minLength: 1
+          maxLength: 100
+        districtNameTh:
+          type: string
+          minLength: 1
+          maxLength: 100
+        subDistrictId:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 101501
+        subDistrictNameEn:
+          type: string
+          minLength: 1
+          maxLength: 100
+        subDistrictNameTh:
+          type: string
+          minLength: 1
+          maxLength: 100
+        postalCode:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: 10600
+    CreateOrUpdateAddressRequestData:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: "#/components/schemas/CustomerAddressData"
+    ListCustomerAddressesResponseData:
+      type: object
+      required:
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/CustomerAddressData"
 
 paths:
   /accounts/updateUser:
@@ -2320,3 +2446,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DefaultResponse"
+  /accounts/createOrUpdateAddress:
+    post:
+      tags:
+        - customer
+      summary: createOrUpdateAddress
+      description: createOrUpdateAddress
+      operationId: createOrUpdateAddress
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateAddressRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
+  /accounts/listCustomerAddresses:
+    get:
+      tags:
+        - customer
+      summary: listCustomerAddresses
+      description: listCustomerAddresses
+      operationId: listCustomerAddresses
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCustomerAddressesResponseData"
