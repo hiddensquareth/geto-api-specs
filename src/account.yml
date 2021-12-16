@@ -1653,7 +1653,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/CustomerAddressData"
-    GetCustomerAddressesResponseData:
+    GetCustomerAddressResponseData:
       type: object
       required:
         - data
@@ -2487,17 +2487,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListCustomerAddressesResponseData"
-  /accounts/getCustomerAddresses:
+  /accounts/getCustomerAddress:
     get:
       tags:
         - customer
-      summary: getCustomerAddresses
-      description: getCustomerAddresses
-      operationId: getCustomerAddresses
+      summary: getCustomerAddress
+      description: getCustomerAddress
+      operationId: getCustomerAddress
+      parameters:
+        - in: query
+          name: addressId
+          description: addressId
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetCustomerAddressesResponseData"
+                $ref: "#/components/schemas/GetCustomerAddressResponseData"
