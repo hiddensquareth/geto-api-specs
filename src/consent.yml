@@ -1,0 +1,197 @@
+openapi: 3.0.0
+info:
+  title: Consent
+  description: API to manage consent
+  version: 1.0.0
+components:
+  schemas:
+    DefaultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: ok
+    HeadConsentDocumentsResponseData:
+      type: object
+      required:
+        - list
+      properties:
+        list:
+          type: array
+          required:
+            - consentId
+            - status
+            - subjectEn
+            - subjectTh
+            - consentType
+            - lastUpdatedAt
+            - lastUpdatedBy
+            - consentVersion
+            - version
+          items:
+            type: object
+            properties:
+              consentId:
+                type: string
+              status:
+                type: string
+              subjectTh:
+                type: string
+              subjectEn:
+                type: string
+              consentType:
+                type: string
+              lastUpdatedAt:
+                type: string
+              lastUpdatedBy:
+                type: string
+              consentVersion:
+                type: string
+              version:
+                type: number
+    GetConsentDocumentFullResponseData:
+      type: object
+      required:
+        - consentId
+        - status
+        - contentTh
+        - contentEn
+        - subjectEn
+        - subjectTh
+        - consentType
+        - lastUpdatedAt
+        - lastUpdatedBy
+        - consentVersion
+        - version
+      properties:
+        consentId:
+          type: string
+        contentTh:
+          type: string
+        contentEn:
+          type: string
+        status:
+          type: string
+        subjectTh:
+          type: string
+        subjectEn:
+          type: string
+        consentType:
+          type: string
+        lastUpdatedAt:
+          type: string
+        lastUpdatedBy:
+          type: string
+        consentVersion:
+          type: string
+        version:
+          type: number
+    UpdateConsentDocumentRequestData:
+      type: object
+      required:
+        - consentId
+        - contentTh
+        - contentEn
+        - subjectEn
+        - subjectTh
+        - version
+      properties:
+        consentId:
+          type: string
+        contentTh:
+          type: string
+        contentEn:
+          type: string
+        subjectTh:
+          type: string
+        subjectEn:
+          type: string
+        version:
+          type: number
+
+paths:
+  /consents/getConsentDocument:
+    get:
+      tags:
+        - consent
+      summary: Get consent document such as Terms and Conditions, Privacy Policy ...
+      description: Get consent document such as Terms and Conditions, Privacy Policy ...
+      operationId: getConsentDocument
+      parameters:
+        - in: query
+          name: documentType
+          required: true
+          description: TC_USER | TC_CARRIAGE | PRIVACY | TC_KYC
+          example: TC_USER
+          schema:
+            type: string
+            enum:
+              - TC_USER
+              - TC_CARRIAGE
+              - TC_KYC
+              - PRIVACY
+        - in: query
+          name: language
+          required: true
+          description: th | en
+          example: en
+          schema:
+            type: string
+            enum:
+              - th
+              - en
+      responses:
+        200:
+          description: The consent document HTML
+          content:
+            text/html:
+              schema:
+                type: string
+  /consents/headConsentDocuments:
+    get:
+      tags:
+        - consent
+      summary: headConsentDocuments
+      description: headConsentDocuments
+      operationId: headConsentDocuments
+      responses:
+        200:
+          description: list of consent documents without full content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeadConsentDocumentsResponseData"
+  /consents/getConsentDocumentFull:
+    get:
+      tags:
+        - consent
+      summary: getConsentDocumentFull
+      description: getConsentDocumentFull
+      operationId: getConsentDocumentFull
+      responses:
+        200:
+          description: Consent document with full content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetConsentDocumentFullResponseData"
+  /consents/updateConsentDocument:
+    post:
+      tags:
+        - consent
+      summary: updateConsentDocument
+      description: updateConsentDocument
+      operationId: updateConsentDocument
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateConsentDocumentRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
