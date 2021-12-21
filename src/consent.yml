@@ -107,7 +107,7 @@ components:
         subjectEn:
           type: string
         version:
-          type: number
+          type: integer
 
 paths:
   /consents/getConsentDocument:
