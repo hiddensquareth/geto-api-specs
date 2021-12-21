@@ -108,6 +108,16 @@ components:
           type: string
         version:
           type: integer
+    PublishRequestData:
+      type: object
+      required:
+        - consentId
+        - version
+      properties:
+        consentId:
+          type: string
+        version:
+          type: integer
 
 paths:
   /consents/getConsentDocument:
@@ -214,6 +224,26 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/UpdateConsentDocumentRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
+  /consents/publish:
+    post:
+      tags:
+        - consent
+      summary: publish
+      description: publish
+      operationId: publish
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PublishRequestData"
       responses:
         200:
           description: Success
