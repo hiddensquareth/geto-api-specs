@@ -140,6 +140,23 @@ paths:
             enum:
               - th
               - en
+        - in: query
+          name: version
+          required: false
+          description: consent version, latest if not specified
+          example: "1"
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 10
+        - in: query
+          name: previewToken
+          required: false
+          description: needed to see DRAFT consent
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 1000
       responses:
         200:
           description: The consent document HTML
@@ -168,6 +185,15 @@ paths:
       summary: getConsentDocumentFull
       description: getConsentDocumentFull
       operationId: getConsentDocumentFull
+      parameters:
+        - in: query
+          name: consentId
+          required: true
+          description: uuid of the consent document
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
       responses:
         200:
           description: Consent document with full content
