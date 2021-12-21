@@ -28,6 +28,7 @@ components:
             - lastUpdatedBy
             - consentVersion
             - version
+            - previewToken
           items:
             type: object
             properties:
@@ -49,6 +50,12 @@ components:
                 type: string
               version:
                 type: integer
+              publishedDate:
+                type: string
+              cancelledDate:
+                type: string
+              previewToken:
+                type: string
     GetConsentDocumentFullResponseData:
       type: object
       required:
@@ -63,6 +70,7 @@ components:
         - lastUpdatedBy
         - consentVersion
         - version
+        - previewToken
       properties:
         consentId:
           type: string
@@ -86,6 +94,12 @@ components:
           type: string
         version:
           type: integer
+        publishedDate:
+          type: string
+        cancelledDate:
+          type: string
+        previewToken:
+          type: string
     UpdateConsentDocumentRequestData:
       type: object
       required:
