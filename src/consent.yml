@@ -48,7 +48,7 @@ components:
               consentVersion:
                 type: string
               version:
-                type: number
+                type: integer
     GetConsentDocumentFullResponseData:
       type: object
       required:
@@ -85,7 +85,7 @@ components:
         consentVersion:
           type: string
         version:
-          type: number
+          type: integer
     UpdateConsentDocumentRequestData:
       type: object
       required:
