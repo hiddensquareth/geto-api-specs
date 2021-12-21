@@ -18,19 +18,19 @@ components:
       properties:
         list:
           type: array
-          required:
-            - consentId
-            - status
-            - subjectEn
-            - subjectTh
-            - consentType
-            - lastUpdatedAt
-            - lastUpdatedBy
-            - consentVersion
-            - version
-            - previewToken
           items:
             type: object
+            required:
+              - consentId
+              - status
+              - subjectEn
+              - subjectTh
+              - consentType
+              - lastUpdatedAt
+              - lastUpdatedBy
+              - consentVersion
+              - version
+              - previewToken
             properties:
               consentId:
                 type: string
