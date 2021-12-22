@@ -96,7 +96,7 @@ paths:
   /settings/getSettings:
     get:
       tags:
-        - settings
+        - setting
       summary: getSettings
       description: getSettings
       operationId: getSettings
@@ -123,7 +123,7 @@ paths:
   /settings/updateSettings:
     post:
       tags:
-        - settings
+        - setting
       summary: updateSettings
       description: updateSettings
       operationId: updateSettings
