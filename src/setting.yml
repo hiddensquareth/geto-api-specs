@@ -10,10 +10,10 @@ components:
       properties:
         message:
           type: string
-          example: 'ok'
+          example: "ok"
     ListGeneralSettingsResponseData:
       type: object
-      required: 
+      required:
         - mobileMinimumSupportedVersion
         - mobileMinimumSupportedVersionAndroid
       properties:
@@ -21,6 +21,62 @@ components:
           type: string
         mobileMinimumSupportedVersionAndroid:
           type: string
+    Settings:
+      type: object
+      properties:
+        mobile:
+          type: object
+          required:
+            - iosMinVersion
+            - androidMinVersion
+            - idleTimeout
+          properties:
+            iosMinVersion:
+              type: string
+              pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+            androidMinVersion:
+              type: string
+              pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+            idleTimeout:
+              type: integer
+              minimum: 0
+        cms:
+          type: object
+          required:
+            - idleTimeout
+          properties:
+            idleTimeout:
+              type: integer
+              minimum: 0
+        contactInformation:
+          type: object
+          required:
+            - callCenterPhoneNo
+            - contactEmail
+          properties:
+            callCenterPhoneNo:
+              type: string
+              minLength: 1
+              maxLength: 100
+            contactEmail:
+              type: string
+              format: email
+            facebookUrl:
+              type: string
+              pattern: "^https://.+"
+              maxLength: 100
+            youtubeUrl:
+              type: string
+              pattern: "^https://.+"
+              maxLength: 100
+            twitterUrl:
+              type: string
+              pattern: "^https://.+"
+              maxLength: 100
+            instagramUrl:
+              type: string
+              pattern: "^https://.+"
+              maxLength: 100
 
 paths:
   /settings/listGeneralSettings:
@@ -36,4 +92,51 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListGeneralSettingsResponseData'
+                $ref: "#/components/schemas/ListGeneralSettingsResponseData"
+  /settings/getSettings:
+    get:
+      tags:
+        - settings
+      summary: getSettings
+      description: getSettings
+      operationId: getSettings
+      parameters:
+        - in: query
+          name: group
+          description: list of group names
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - mobile
+                - cms
+                - contactInformation
+      responses:
+        200:
+          description: the settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Settings"
+  /settings/updateSettings:
+    post:
+      tags:
+        - settings
+      summary: updateSettings
+      description: updateSettings
+      operationId: updateSettings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Settings"
+      responses:
+        200:
+          description: the settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
