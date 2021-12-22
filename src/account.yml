@@ -540,7 +540,10 @@ components:
         - kycStatus
         - kycStatusNote
         - driverAccesses
+        - emailVerified
       properties:
+        emailVerified:
+          type: string
         kycStatus:
           type: string
         kycStatusNote:
