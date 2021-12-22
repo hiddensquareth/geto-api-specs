@@ -71,11 +71,12 @@ components:
       type: object
       required:
         - temporaryToken
-        - qrCodeData
       properties:
         temporaryToken:
           type: string
         qrCodeData:
+          type: string
+        firebaseCustomToken:
           type: string
     LoginCmsWithNewMfaRequestData:
       type: object
