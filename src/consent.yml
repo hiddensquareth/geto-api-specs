@@ -78,10 +78,6 @@ components:
           type: string
         status:
           type: string
-        subjectTh:
-          type: string
-        subjectEn:
-          type: string
         consentType:
           type: string
         lastUpdatedAt:
@@ -108,8 +104,6 @@ components:
         - draftJsDataEn
         - contentTh
         - contentEn
-        - subjectEn
-        - subjectTh
         - version
       properties:
         draftJsDataTh:
