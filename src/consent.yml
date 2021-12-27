@@ -23,8 +23,6 @@ components:
             required:
               - consentId
               - status
-              - subjectEn
-              - subjectTh
               - consentType
               - lastUpdatedAt
               - lastUpdatedBy
@@ -35,10 +33,6 @@ components:
               consentId:
                 type: string
               status:
-                type: string
-              subjectTh:
-                type: string
-              subjectEn:
                 type: string
               consentType:
                 type: string
@@ -65,8 +59,8 @@ components:
         - status
         - contentTh
         - contentEn
-        - subjectEn
-        - subjectTh
+        - draftJsDataTh
+        - draftJsDataEn
         - consentType
         - lastUpdatedAt
         - lastUpdatedBy
@@ -79,6 +73,10 @@ components:
         contentTh:
           type: string
         contentEn:
+          type: string
+        draftJsDataTh:
+          type: string
+        draftJsDataEn:
           type: string
         status:
           type: string
@@ -108,12 +106,18 @@ components:
       type: object
       required:
         - consentId
+        - draftJsDataTh
+        - draftJsDataEn
         - contentTh
         - contentEn
         - subjectEn
         - subjectTh
         - version
       properties:
+        draftJsDataTh:
+          type: string
+        draftJsDataEn:
+          type: string
         consentId:
           type: string
         contentTh:
