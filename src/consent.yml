@@ -59,8 +59,6 @@ components:
         - status
         - contentTh
         - contentEn
-        - draftJsDataTh
-        - draftJsDataEn
         - consentType
         - lastUpdatedAt
         - lastUpdatedBy
@@ -123,10 +121,6 @@ components:
         contentTh:
           type: string
         contentEn:
-          type: string
-        subjectTh:
-          type: string
-        subjectEn:
           type: string
         version:
           type: integer
