@@ -177,6 +177,10 @@ components:
           type: string
         proofOfRefundRequestUrl:
           type: string
+        rejectedReason:
+          type: string
+        resentNote:
+          type: string
 
     CustomerCancelRequestData:
       type: object
