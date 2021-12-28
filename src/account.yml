@@ -516,15 +516,8 @@ components:
               permissions:
                 type: array
                 items:
-                  type: object
-                  required:
-                    - action
-                    - resource
-                  properties:
-                    action:
-                      type: string
-                    resource:
-                      type: string
+                  type: string
+
     GetAuthenticatedUserForCustomerResponseData:
       type: object
       required:
