@@ -118,7 +118,21 @@ components:
         - cashAmount
         - proofOfTransferUrl
         - proofOfRefundRequestUrl
+        - createdAt
+        - createdBy
+        - lastUpdatedAt
+        - lastUpdatedBy
       properties:
+        createdAt:
+          type: string
+        createdBy:
+          type: string
+        lastUpdatedAt:
+          type: string
+        lastUpdatedBy:
+          type: string
+        version:
+          type: integer
         refundId:
           type: string
         orderId:
