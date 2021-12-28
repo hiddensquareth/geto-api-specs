@@ -122,6 +122,8 @@ components:
         - createdBy
         - lastUpdatedAt
         - lastUpdatedBy
+        - rejectedReason
+        - resentNote
       properties:
         createdAt:
           type: string
