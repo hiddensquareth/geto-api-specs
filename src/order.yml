@@ -886,7 +886,7 @@ components:
           example: "abc"
         rejectReason:
           type: string
-          minLength: 1
+          minLength: 0
           maxLength: 1000
           example: "Incorrect image"
     UpdateRefundRequestApproveRequestData:
