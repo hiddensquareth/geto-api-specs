@@ -197,6 +197,131 @@ components:
           minLength: 1
           maxLength: 1000
 
+    DeviceInfo:
+      type: object
+      properties:
+        os:
+          type: string
+          minLength: 1
+          maxLength: 500
+        userAgent:
+          type: string
+          minLength: 1
+          maxLength: 500
+        deviceName:
+          type: string
+          minLength: 1
+          maxLength: 500
+        deviceModel:
+          type: string
+          minLength: 1
+          maxLength: 500
+        deviceBrand:
+          type: string
+          minLength: 1
+          maxLength: 500
+    InitiateLogInUserByEmailRequestData:
+      type: object
+      required:
+        - email
+        - password
+        - deviceId
+        - deviceInfo
+      properties:
+        email:
+          type: string
+          minLength: 1
+          maxLength: 500
+        password:
+          type: string
+          minLength: 1
+          maxLength: 500
+        deviceId:
+          type: string
+          minLength: 1
+          maxLength: 500
+        deviceInfo:
+          $ref: "#/components/schemas/DeviceInfo"
+
+    InitiateLogInUserByEmailResponseData:
+      type: object
+      properties:
+        temporaryToken:
+          type: string
+        firebaseCustomToken:
+          type: string
+
+    InitiateLogInUserByOAuthProviderRequestData:
+      type: object
+      required:
+        - email
+        - password
+        - deviceId
+        - deviceInfo
+      properties:
+        providerUserId:
+          type: string
+          minLength: 1
+          maxLength: 500
+        providerAccessToken:
+          type: string
+          minLength: 1
+          maxLength: 500
+        providerId:
+          type: string
+          minLength: 1
+          maxLength: 500
+        deviceId:
+          type: string
+          minLength: 1
+          maxLength: 500
+        deviceInfo:
+          $ref: "#/components/schemas/DeviceInfo"
+
+    InitiateLogInUserByOAuthProviderResponseData:
+      type: object
+      properties:
+        temporaryToken:
+          type: string
+        firebaseCustomToken:
+          type: string
+    SetUpPinCodeRequestData:
+      type: object
+      properties:
+        pinCode:
+          type: string
+          minLength: 1
+          maxLength: 10
+        temporaryToken:
+          type: string
+          minLength: 1
+          maxLength: 1000
+    SetUpPinCodeResponseData:
+      type: object
+      properties:
+        firebaseCustomToken:
+          type: string
+    RefreshTokenWithPinCodeRequestData:
+      type: object
+      properties:
+        userUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+        deviceId:
+          type: string
+          minLength: 1
+          maxLength: 500
+        pinCode:
+          type: string
+          minLength: 1
+          maxLength: 10
+    RefreshTokenWithPinCodeResponseData:
+      type: object
+      properties:
+        firebaseCustomToken:
+          type: string
+
 paths:
   /auth/loginUserWithLine:
     post:
@@ -378,3 +503,87 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DefaultResponse"
+
+  /auth/initiateLogInUserByEmail:
+    post:
+      tags:
+        - auth
+      summary: initiateLogInUserByEmail
+      description: initiateLogInUserByEmail
+      operationId: initiateLogInUserByEmail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InitiateLogInUserByEmailRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InitiateLogInUserByEmailResponseData"
+
+  /auth/initiateLogInUserByOAuthProvider:
+    post:
+      tags:
+        - auth
+      summary: initiateLogInUserByOAuthProvider
+      description: initiateLogInUserByOAuthProvider
+      operationId: initiateLogInUserByOAuthProvider
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InitiateLogInUserByOAuthProviderRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InitiateLogInUserByOAuthProviderResponseData"
+
+  /auth/setUpPinCode:
+    post:
+      tags:
+        - auth
+      summary: setUpPinCode
+      description: setUpPinCode
+      operationId: setUpPinCode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetUpPinCodeRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SetUpPinCodeResponseData"
+
+  /auth/refreshTokenWithPinCode:
+    post:
+      tags:
+        - auth
+      summary: refreshTokenWithPinCode
+      description: refreshTokenWithPinCode
+      operationId: refreshTokenWithPinCode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefreshTokenWithPinCodeRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RefreshTokenWithPinCodeResponseData"
