@@ -130,6 +130,9 @@ components:
           type: integer
     GetConsentToAcceptResponseData:
       type: object
+      required:
+        - consentVersion
+        - content
       properties:
         consentVersion:
           type: string
