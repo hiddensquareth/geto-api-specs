@@ -128,6 +128,13 @@ components:
           type: string
         version:
           type: integer
+    GetConsentToAcceptResponseData:
+      type: object
+      properties:
+        consentVersion:
+          type: string
+        content:
+          type: string
 
 paths:
   /consents/getConsentDocument:
@@ -141,7 +148,7 @@ paths:
         - in: query
           name: documentType
           required: true
-          description: TC_USER | TC_CARRIAGE | PRIVACY | TC_KYC
+          description: TC_USER | TC_USER_X_PRIVACY | TC_CMS | PRIVACY | COOKIE | TC_PAYMENT
           example: TC_USER
           schema:
             type: string
@@ -184,6 +191,52 @@ paths:
             text/html:
               schema:
                 type: string
+  /consents/getConsentToAccept:
+    get:
+      tags:
+        - consent
+      summary: getConsentToAccept
+      description: getConsentToAccept
+      operationId: getConsentToAccept
+      parameters:
+        - in: query
+          name: documentType
+          required: true
+          description: TC_USER | TC_USER_X_PRIVACY | TC_CMS | PRIVACY | COOKIE | TC_PAYMENT
+          example: TC_USER
+          schema:
+            type: string
+            enum:
+              - TC_USER
+              - TC_CARRIAGE
+              - TC_KYC
+              - PRIVACY
+        - in: query
+          name: language
+          required: true
+          description: th | en
+          example: en
+          schema:
+            type: string
+            enum:
+              - th
+              - en
+        - in: query
+          name: acceptedConsentVersion
+          required: false
+          description: previously accepted version for this document
+          example: "1"
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 10
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetConsentToAcceptResponseData"
   /consents/headConsentDocuments:
     get:
       tags:

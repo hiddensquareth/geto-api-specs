@@ -269,6 +269,11 @@ components:
           maxLength: 1000
           minLength: 1
           example: John
+    ApplyKycResponseData:
+      type: object
+      properties:
+        errorCode:
+          type: string
 
     UpdateUserRequestData:
       type: object
@@ -2285,7 +2290,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DefaultResponse"
+                $ref: "#/components/schemas/ApplyKycResponseData"
 
   /accounts/searchCustomers:
     get:
