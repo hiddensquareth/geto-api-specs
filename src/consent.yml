@@ -154,9 +154,11 @@ paths:
             type: string
             enum:
               - TC_USER
-              - TC_CARRIAGE
-              - TC_KYC
+              - TC_USER_X_PRIVACY
+              - TC_CMS
               - PRIVACY
+              - COOKIE
+              - TC_PAYMENT
         - in: query
           name: language
           required: true
@@ -208,9 +210,11 @@ paths:
             type: string
             enum:
               - TC_USER
-              - TC_CARRIAGE
-              - TC_KYC
+              - TC_USER_X_PRIVACY
+              - TC_CMS
               - PRIVACY
+              - COOKIE
+              - TC_PAYMENT
         - in: query
           name: language
           required: true
