@@ -191,6 +191,8 @@ components:
           type: string
         dopaNote:
           type: string
+        amloNote:
+          type: string
         riskLevel:
           type: string
         ownerPhotoUrl:
