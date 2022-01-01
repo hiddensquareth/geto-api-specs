@@ -272,7 +272,7 @@ components:
     ApplyKycResponseData:
       type: object
       properties:
-        errorCode:
+        rejectedReason:
           type: string
 
     UpdateUserRequestData:
