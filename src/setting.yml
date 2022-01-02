@@ -26,9 +26,9 @@ components:
         mobileMinimumSupportedVersionAndroid:
           type: string
         mobileIdleTimeout:
-          type: string
+          type: integer
         cmsIdleTimeout:
-          type: string
+          type: integer
         callCenterPhoneNo:
           type: string
         contactEmail:
