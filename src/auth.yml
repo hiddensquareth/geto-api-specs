@@ -321,6 +321,13 @@ components:
       properties:
         firebaseCustomToken:
           type: string
+    ResetPinRequestData:
+      type: object
+      properties:
+        newPinCode:
+          type: string
+        deviceId:
+          type: string
 
 paths:
   /auth/loginUserWithLine:
@@ -587,3 +594,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RefreshTokenWithPinCodeResponseData"
+  /auth/removePin:
+    post:
+      tags:
+        - auth
+      summary: removePin
+      description: removePin
+      operationId: removePin
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
+  /auth/resetPin:
+    post:
+      tags:
+        - auth
+      summary: resetPin
+      description: resetPin
+      operationId: resetPin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetPinRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
