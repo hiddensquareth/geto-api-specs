@@ -323,11 +323,27 @@ components:
           type: string
     ResetPinRequestData:
       type: object
+      required:
+        - newPinCode
+        - deviceId
       properties:
         newPinCode:
           type: string
+          minLength: 1
+          maxLength: 10
         deviceId:
           type: string
+          minLength: 1
+          maxLength: 500
+    RemovePinRequestData:
+      type: object
+      required:
+        - deviceId
+      properties:
+        deviceId:
+          type: string
+          minLength: 1
+          maxLength: 500
 
 paths:
   /auth/loginUserWithLine:
@@ -601,6 +617,12 @@ paths:
       summary: removePin
       description: removePin
       operationId: removePin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemovePinRequestData"
       responses:
         200:
           description: Success
