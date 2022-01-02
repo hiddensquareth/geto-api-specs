@@ -16,10 +16,30 @@ components:
       required:
         - mobileMinimumSupportedVersion
         - mobileMinimumSupportedVersionAndroid
+        - mobileIdleTimeout
+        - cmsIdleTimeout
+        - callCenterPhoneNo
+        - contactEmail
       properties:
         mobileMinimumSupportedVersion:
           type: string
         mobileMinimumSupportedVersionAndroid:
+          type: string
+        mobileIdleTimeout:
+          type: string
+        cmsIdleTimeout:
+          type: string
+        callCenterPhoneNo:
+          type: string
+        contactEmail:
+          type: string
+        facebookUrl:
+          type: string
+        youtubeUrl:
+          type: string
+        twitterUrl:
+          type: string
+        instagramUrl:
           type: string
     Settings:
       type: object
