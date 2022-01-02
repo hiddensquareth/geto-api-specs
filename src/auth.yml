@@ -290,8 +290,7 @@ components:
       properties:
         pinCode:
           type: string
-          minLength: 1
-          maxLength: 10
+          pattern: "^[0-9]{6}$"
         temporaryToken:
           type: string
           minLength: 1
@@ -314,8 +313,8 @@ components:
           maxLength: 500
         pinCode:
           type: string
-          minLength: 1
-          maxLength: 10
+          pattern: "^[0-9]{6}$"
+
     RefreshTokenWithPinCodeResponseData:
       type: object
       properties:
@@ -329,8 +328,7 @@ components:
       properties:
         newPinCode:
           type: string
-          minLength: 1
-          maxLength: 10
+          pattern: "^[0-9]{6}$"
         deviceId:
           type: string
           minLength: 1
