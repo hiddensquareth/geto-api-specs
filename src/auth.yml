@@ -363,6 +363,8 @@ components:
           type: string
         firebaseCustomToken:
           type: string
+        loginGrantToken:
+          type: string
 
 paths:
   /auth/loginUserWithLine:
