@@ -250,12 +250,15 @@ components:
           type: string
         firebaseCustomToken:
           type: string
+        loginGrantToken:
+          type: string
 
     InitiateLogInUserByOAuthProviderRequestData:
       type: object
       required:
-        - email
-        - password
+        - providerUserId
+        - providerAccessToken
+        - providerId
         - deviceId
         - deviceInfo
       properties:
@@ -284,6 +287,8 @@ components:
         temporaryToken:
           type: string
         firebaseCustomToken:
+          type: string
+        loginGrantToken:
           type: string
     SetUpPinCodeRequestData:
       type: object
@@ -342,6 +347,22 @@ components:
           type: string
           minLength: 1
           maxLength: 500
+    InitiateLoginUserByGrantTokenRequestData:
+      type: object
+      required:
+        - loginGrantToken
+      properties:
+        loginGrantToken:
+          type: string
+          minLength: 1
+          maxLength: 2000
+    InitiateLoginUserByGrantTokenResponseData:
+      type: object
+      properties:
+        temporaryToken:
+          type: string
+        firebaseCustomToken:
+          type: string
 
 paths:
   /auth/loginUserWithLine:
@@ -648,3 +669,23 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DefaultResponse"
+  /auth/initiateLoginUserByGrantToken:
+    post:
+      tags:
+        - auth
+      summary: initiateLoginUserByGrantToken
+      description: initiateLoginUserByGrantToken
+      operationId: initiateLoginUserByGrantToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InitiateLoginUserByGrantTokenRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InitiateLoginUserByGrantTokenResponseData"
