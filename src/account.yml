@@ -766,6 +766,8 @@ components:
         - version
         - status
         - registerLocation
+        - displayNameTh
+        - displayNameEn
         - juristicNameTh
         - juristicNameEn
         - corporateRegistrationNumber
@@ -829,6 +831,10 @@ components:
         status:
           type: string
         registerLocation:
+          type: string
+        displayNameTh:
+          type: string
+        displayNameEn:
           type: string
         juristicNameTh:
           type: string
@@ -961,6 +967,8 @@ components:
       required:
         - companyUuid
         - version
+        - displayNameTh
+        - displayNameEn
         - registerLocation
         - juristicNameTh
         - juristicNameEn
@@ -1013,6 +1021,16 @@ components:
           enum:
             - THAI
             - NON_THAI
+        displayNameTh:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: "บริษัทจำกัด"
+        displayNameEn:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: "Example Company"
         juristicNameTh:
           type: string
           minLength: 1
