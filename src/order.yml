@@ -485,6 +485,8 @@ components:
           type: string
         shippingCompanyNameEn:
           type: string
+        shippingCompanyUseGetoShipping:
+          type: string
         dueDate:
           type: string
         dueTime:
@@ -970,6 +972,8 @@ components:
                 type: string
               nameEn:
                 type: string
+              useGetoShipping:
+                type: boolean
     CreateImportRequestData:
       type: object
       required:
