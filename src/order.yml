@@ -486,7 +486,7 @@ components:
         shippingCompanyNameEn:
           type: string
         shippingCompanyUseGetoShipping:
-          type: string
+          type: boolean
         dueDate:
           type: string
         dueTime:
