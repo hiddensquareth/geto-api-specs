@@ -138,7 +138,23 @@ components:
           type: string
         content:
           type: string
-
+    AccpetRequestData:
+      type: object
+      required:
+      properties:
+        documentType:
+          type: string
+          enum:
+            - TC_USER
+            - TC_USER_X_PRIVACY
+            - TC_CMS
+            - PRIVACY
+            - COOKIE
+            - TC_PAYMENT
+        consentVersion:
+          type: string
+          minLength: 1
+          maxLength: 10
 paths:
   /consents/getConsentDocument:
     get:
@@ -314,6 +330,26 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/PublishRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
+  /consents/accept:
+    post:
+      tags:
+        - consent
+      summary: accept
+      description: accept
+      operationId: accept
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccpetRequestData"
       responses:
         200:
           description: Success
