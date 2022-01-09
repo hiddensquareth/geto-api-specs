@@ -1013,6 +1013,13 @@ components:
       properties:
         url:
           type: string
+    ExportImportDetailsResponseData:
+      type: object
+      properties:
+        csvUrl:
+          type: string
+        gSheetUrl:
+          type: string
 
 paths:
   /orders/createImport:
@@ -1793,3 +1800,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateOrderRequestData"
+
+  /orders/exportImportDetails:
+    get:
+      tags:
+        - order
+      summary: exportImportDetails
+      description: exportImportDetails
+      operationId: exportImportDetails
+      parameters:
+        - in: query
+          name: status
+          description: status to include
+          required: true
+          schema:
+            type: string
+            enum:
+              - ALL
+              - SUCCESS
+              - ERROR
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExportImportDetailsResponseData"
