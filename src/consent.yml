@@ -141,6 +141,8 @@ components:
     AccpetRequestData:
       type: object
       required:
+        - documentType
+        - consentVersion
       properties:
         documentType:
           type: string
