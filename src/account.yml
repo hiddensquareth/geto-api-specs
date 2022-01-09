@@ -584,7 +584,16 @@ components:
         - kycStatusNote
         - driverAccesses
         - emailVerified
+        - tcUserLastAcceptedVersion
+        - privacyPolicyLastAcceptedVersion
+        - tcPaymentLastAcceptedVersion
       properties:
+        tcUserLastAcceptedVersion:
+          type: string
+        privacyPolicyLastAcceptedVersion:
+          type: string
+        tcPaymentLastAcceptedVersion:
+          type: string
         emailVerified:
           type: boolean
         kycStatus:
@@ -1733,6 +1742,26 @@ components:
           type: string
           minLength: 1
           maxLength: 100
+    GetConsentAcceptancesResonseData:
+      type: object
+      required:
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - consentType
+              - consentVersion
+              - acceptedDate
+            properties:
+              consentType:
+                type: string
+              consentVersion:
+                type: string
+              acceptedDate:
+                type: string
 
 paths:
   /accounts/updateUser:
@@ -2603,3 +2632,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DefaultResponse"
+  /accounts/getConsentAcceptances:
+    post:
+      tags:
+        - user
+      summary: getConsentAcceptances
+      description: getConsentAcceptances
+      operationId: getConsentAcceptances
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetConsentAcceptancesResonseData"
