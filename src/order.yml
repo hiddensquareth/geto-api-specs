@@ -1819,6 +1819,14 @@ paths:
               - ALL
               - SUCCESS
               - ERROR
+        - in: query
+          name: importId
+          description: importId
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
       responses:
         200:
           description: Success
