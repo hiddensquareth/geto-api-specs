@@ -104,6 +104,8 @@ components:
       properties:
         fileUrl:
           type: string
+        gSheetUrl:
+          type: string
         summary:
           type: object
           required:
@@ -142,6 +144,8 @@ components:
       type: object
       properties:
         fileUrl:
+          type: string
+        gSheetUrl:
           type: string
         summary:
           type: object
@@ -216,6 +220,8 @@ components:
       properties:
         fileUrl:
           type: string
+        gSheetUrl:
+          type: string
         summary:
           type: object
           required:
@@ -252,6 +258,8 @@ components:
       properties:
         fileUrl:
           type: string
+        gSheetUrl:
+          type: string
         summary:
           type: object
           required:
@@ -285,6 +293,8 @@ components:
       type: object
       properties:
         fileUrl:
+          type: string
+        gSheetUrl:
           type: string
         summary:
           type: object
@@ -322,6 +332,8 @@ components:
       type: object
       properties:
         fileUrl:
+          type: string
+        gSheetUrl:
           type: string
         summary:
           type: object
@@ -362,6 +374,8 @@ components:
       type: object
       properties:
         fileUrl:
+          type: string
+        gSheetUrl:
           type: string
         summary:
           type: object
