@@ -535,6 +535,10 @@ components:
         - price
         - paymentOption
       properties:
+        orderId:
+          type: string
+          minLength: 1
+          maxLength: 50
         referenceOrderId:
           type: string
           minLength: 1
