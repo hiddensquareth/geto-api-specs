@@ -13,13 +13,6 @@ components:
           example: "ok"
     ListGeneralSettingsResponseData:
       type: object
-      required:
-        - mobileMinimumSupportedVersion
-        - mobileMinimumSupportedVersionAndroid
-        - mobileIdleTimeout
-        - cmsIdleTimeout
-        - callCenterPhoneNo
-        - contactEmail
       properties:
         mobileMinimumSupportedVersion:
           type: string
@@ -41,6 +34,13 @@ components:
           type: string
         instagramUrl:
           type: string
+        contactWebsite:
+          type: string
+        contactAddress:
+          type: string
+        orderImportExampleUrl:
+          type: string
+
     Settings:
       type: object
       properties:
@@ -68,6 +68,10 @@ components:
             idleTimeout:
               type: integer
               minimum: 0
+            orderImportExampleUrl:
+              type: string
+              pattern: "^https://.+"
+              maxLength: 1000
         contactInformation:
           type: object
           required:
@@ -97,14 +101,22 @@ components:
               type: string
               pattern: "^https://.+"
               maxLength: 100
+            contactAddress:
+              type: string
+              minLength: 1
+              maxLength: 1000
+            contactWebsite:
+              type: string
+              pattern: "^https://.+"
+              maxLength: 1000
 
 paths:
   /settings/listGeneralSettings:
     get:
       tags:
         - setting
-      summary: Get list of banks
-      description: Get list of banks
+      summary: listGeneralSettings
+      description: listGeneralSettings
       operationId: listGeneralSettings
       responses:
         200:
