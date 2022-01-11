@@ -333,6 +333,7 @@ components:
         - shopNameEn
         - shopEmail
         - shopMobileNo
+        - shopAddressSameAsCompanyAddress
         - shopAddressLine
         - shopProvinceId
         - shopProvinceNameTh
@@ -401,6 +402,8 @@ components:
           type: string
         shopMobileNo:
           type: string
+        shopAddressSameAsCompanyAddress:
+          type: boolean
         shopAddressLine:
           type: string
         shopProvinceId:
