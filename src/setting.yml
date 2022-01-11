@@ -101,13 +101,17 @@ components:
               type: string
               pattern: "^https://.+"
               maxLength: 100
-            contactAddress:
+            contactAddressTh:
+              type: string
+              minLength: 1
+              maxLength: 1000
+            contactAddressEn:
               type: string
               minLength: 1
               maxLength: 1000
             contactWebsite:
               type: string
-              pattern: "^https://.+"
+              minLength: 1
               maxLength: 1000
 
 paths:
