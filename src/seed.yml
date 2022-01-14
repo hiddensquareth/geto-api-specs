@@ -10,10 +10,10 @@ components:
       properties:
         message:
           type: string
-          example: 'ok'
+          example: "ok"
     CreateSuperAdminUserForCmsRequestData:
       type: object
-      required: 
+      required:
         - email
         - password
         - firstName
@@ -23,8 +23,7 @@ components:
         email:
           type: string
           format: email
-          pattern: '[^\.]+\.[^\.]+$'
-          example: 'superadmin@geto.app'
+          example: "superadmin@geto.app"
         password:
           type: string
           pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,20}$'
@@ -41,27 +40,27 @@ components:
           example: Stg
         mobileNo:
           type: string
-          pattern: '^[0-9]{10}$'
-          example: '0999999999'
+          pattern: "^[0-9]{10}$"
+          example: "0999999999"
 
 paths:
   /seeds/createSuperAdminUserForCms:
     post:
       tags:
         - seed
-      summary: 'Create super admin user for fist-time access after new lauch'
-      description: 'Create super admin user for fist-time access after new lauch'
+      summary: "Create super admin user for fist-time access after new lauch"
+      description: "Create super admin user for fist-time access after new lauch"
       operationId: createSuperAdminUserForCms
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateSuperAdminUserForCmsRequestData'
+              $ref: "#/components/schemas/CreateSuperAdminUserForCmsRequestData"
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultResponse'
+                $ref: "#/components/schemas/DefaultResponse"

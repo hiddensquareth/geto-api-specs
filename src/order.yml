@@ -651,7 +651,6 @@ components:
         customerEmail:
           type: string
           format: email
-          pattern: '[^\.]+\.[^\.]+$'
           example: "maw-dev@littlepawcraft.com"
           maxLength: 100
         customerMobileNo:

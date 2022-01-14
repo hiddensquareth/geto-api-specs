@@ -144,7 +144,6 @@ components:
         email:
           type: string
           format: email
-          pattern: '[^\.]+\.[^\.]+$'
           example: "maw-dev@littlepawcraft.com"
         scope:
           type: string
