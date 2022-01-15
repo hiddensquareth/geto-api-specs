@@ -1713,9 +1713,9 @@ paths:
     get:
       tags:
         - order
-      summary: Get order
-      description: Get order
-      operationId: getOrder
+      summary: getOrderWorkAroundForDriver
+      description: getOrderWorkAroundForDriver
+      operationId: getOrderWorkAroundForDriver
       parameters:
         - in: query
           name: orderId
@@ -1734,9 +1734,9 @@ paths:
     get:
       tags:
         - order
-      summary: Get order
-      description: Get order
-      operationId: getOrder
+      summary: getOrderWorkAroundFroCustomer
+      description: getOrderWorkAroundFroCustomer
+      operationId: getOrderWorkAroundFroCustomer
       parameters:
         - in: query
           name: orderId
