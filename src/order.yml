@@ -1709,7 +1709,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetOrderResponseData"
-
+  /orders/getOrderWorkAroundForDriver:
+    get:
+      tags:
+        - order
+      summary: Get order
+      description: Get order
+      operationId: getOrder
+      parameters:
+        - in: query
+          name: orderId
+          description: id of the order
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOrderResponseData"
+  /orders/getOrderWorkAroundFroCustomer:
+    get:
+      tags:
+        - order
+      summary: Get order
+      description: Get order
+      operationId: getOrder
+      parameters:
+        - in: query
+          name: orderId
+          description: id of the order
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOrderResponseData"
   /orders/createOrder:
     post:
       tags:
