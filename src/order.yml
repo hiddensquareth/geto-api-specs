@@ -322,6 +322,7 @@ components:
       type: object
       required:
         - orderId
+        - customerUuid
         - createdAt
         - createdBy
         - lastUpdatedAt
@@ -379,6 +380,8 @@ components:
         referenceCustomerId:
           type: string
         orderId:
+          type: string
+        customerUuid:
           type: string
         createdAt:
           type: string
