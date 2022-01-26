@@ -437,6 +437,8 @@ components:
           type: string
         shopMapLocationLng:
           type: string
+        custProfileImageUrl:
+          type: string
         custFirstName:
           type: string
         custLastName:
@@ -506,6 +508,8 @@ components:
         paid:
           type: number
         driverUuid:
+          type: string
+        driverProfileImageUrl:
           type: string
         driverFirstName:
           type: string
