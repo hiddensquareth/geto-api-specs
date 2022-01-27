@@ -527,7 +527,6 @@ components:
             type: object
             required:
               - companyType
-              - companyServiceType
               - companyUuid
               - companyLogoUrl
               - companyNameTh
