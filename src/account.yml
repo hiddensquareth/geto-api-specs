@@ -527,6 +527,7 @@ components:
             type: object
             required:
               - companyType
+              - companyServiceType
               - companyUuid
               - companyLogoUrl
               - companyNameTh
@@ -540,6 +541,8 @@ components:
               - permissions
             properties:
               companyType:
+                type: string
+              companyServiceType:
                 type: string
               companyUuid:
                 type: string
