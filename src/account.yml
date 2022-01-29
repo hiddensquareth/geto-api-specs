@@ -1759,6 +1759,20 @@ components:
                 type: string
               acceptedDate:
                 type: string
+    LockAccountRequestData:
+      type: object
+      properties:
+        userUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+    UnlockAccountRequestData:
+      type: object
+      properties:
+        userUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
 
 paths:
   /accounts/updateUser:
@@ -2641,3 +2655,43 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetConsentAcceptancesResonseData"
+  /accounts/lockAccount:
+    post:
+      tags:
+        - user
+      summary: lockAccount
+      description: lockAccount
+      operationId: lockAccount
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LockAccountRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
+  /accounts/unlockAccount:
+    post:
+      tags:
+        - user
+      summary: unlockAccount
+      description: unlockAccount
+      operationId: unlockAccount
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnlockAccountRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
