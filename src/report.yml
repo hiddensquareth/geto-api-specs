@@ -467,6 +467,61 @@ components:
                 type: number
               merchantTotalRevenue:
                 type: number
+    SearchReportFruadDetectionSingleAmountResponseData:
+      type: object
+      properties:
+        fileUrl:
+          type: string
+        gSheetUrl:
+          type: string
+        summary:
+          type: object
+          required:
+            - totalCount
+            - totalAccounts
+            - sumAmount
+          properties:
+            totalCount:
+              type: integer
+            totalAccounts:
+              type: integer
+            sumAmount:
+              type: number
+        list:
+          type: array
+          items:
+            type: object
+            properties:
+              orderId:
+                type: string
+              orderStatus:
+                type: string
+              orderDate:
+                type: string
+              orderPrice:
+                type: number
+              paymentId:
+                type: string
+              paymentDate:
+                type: string
+              paymentAmount:
+                type: number
+              paymentMethod:
+                type: string
+              customerEmail:
+                type: string
+              customerName:
+                type: string
+              customerAccountLock:
+                type: boolean
+              customerAccountLockReason:
+                type: string
+              customerAccountLockActivityDate:
+                type: string
+              merchantName:
+                type: string
+              courierName:
+                type: string
 
 paths:
   /reports/searchReportDailyTransactions:
@@ -672,3 +727,30 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SearchReportCompaniesResponseData"
+  /reports/searchReportFruadDetectionSingleAmount:
+    get:
+      tags:
+        - report
+      summary: searchReportFruadDetectionSingleAmount
+      description: searchReportFruadDetectionSingleAmount
+      operationId: searchReportFruadDetectionSingleAmount
+      parameters:
+        - $ref: "#/components/parameters/searchKeyword"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+        - $ref: "#/components/parameters/export"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchReportFruadDetectionSingleAmountResponseData"
+  # /reports/searchReportFruadDetectionSumAmount:
+  # /reports/searchReportFruadDetectionRateLimit:
+  # /reports/searchReportFruadDetectionDuplicateAmount:
+  # /reports/searchReportFruadDetectionLateShipping:
