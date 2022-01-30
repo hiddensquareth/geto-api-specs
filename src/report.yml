@@ -518,9 +518,9 @@ components:
                 type: string
               customerAccountLockActivityDate:
                 type: string
-              merchantName:
+              merchantNameTh:
                 type: string
-              courierName:
+              merchantNameEn:
                 type: string
 
 paths:
