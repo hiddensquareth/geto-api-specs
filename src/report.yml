@@ -489,6 +489,21 @@ components:
               type: number
         list:
           type: array
+          required:
+            - orderId
+            - orderStatus
+            - orderDate
+            - orderPrice
+            - paymentId
+            - paymentDate
+            - paymentAmount
+            - paymentMethod
+            - customerEmail
+            - customerMobileNo
+            - customerName
+            - customerAccountLock
+            - merchantNameTh
+            - merchantNameEn
           items:
             type: object
             properties:
