@@ -512,6 +512,8 @@ components:
                 type: string
               customerName:
                 type: string
+              customerMobileNo:
+                type: string
               customerAccountLock:
                 type: boolean
               customerAccountLockReason:
