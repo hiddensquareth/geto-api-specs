@@ -489,23 +489,23 @@ components:
               type: number
         list:
           type: array
-          required:
-            - orderId
-            - orderStatus
-            - orderDate
-            - orderPrice
-            - paymentId
-            - paymentDate
-            - paymentAmount
-            - paymentMethod
-            - customerEmail
-            - customerMobileNo
-            - customerName
-            - customerAccountLock
-            - merchantNameTh
-            - merchantNameEn
           items:
             type: object
+            required:
+              - orderId
+              - orderStatus
+              - orderDate
+              - orderPrice
+              - paymentId
+              - paymentDate
+              - paymentAmount
+              - paymentMethod
+              - customerEmail
+              - customerMobileNo
+              - customerName
+              - customerAccountLock
+              - merchantNameTh
+              - merchantNameEn
             properties:
               orderId:
                 type: string
