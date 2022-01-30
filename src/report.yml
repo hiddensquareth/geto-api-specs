@@ -539,6 +539,10 @@ components:
                 type: string
               merchantNameEn:
                 type: string
+              customerUserId:
+                type: string
+              merchantCompanyId:
+                type: string
 
 paths:
   /reports/searchReportDailyTransactions:
