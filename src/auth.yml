@@ -226,12 +226,7 @@ components:
         - password
         - deviceId
         - deviceInfo
-        - fcmToken
       properties:
-        fcmToken:
-          type: string
-          minLength: 1
-          maxLength: 1000
         email:
           type: string
           minLength: 1
@@ -265,12 +260,7 @@ components:
         - providerId
         - deviceId
         - deviceInfo
-        - fcmToken
       properties:
-        fcmToken:
-          type: string
-          minLength: 1
-          maxLength: 1000
         providerUserId:
           type: string
           minLength: 1
@@ -360,12 +350,7 @@ components:
       type: object
       required:
         - loginGrantToken
-        - fcmToken
       properties:
-        fcmToken:
-          type: string
-          minLength: 1
-          maxLength: 1000
         loginGrantToken:
           type: string
           minLength: 1
@@ -378,6 +363,15 @@ components:
         firebaseCustomToken:
           type: string
         loginGrantToken:
+          type: string
+    RegisterFcmRequestData:
+      type: object
+      required:
+        - fcmToken
+      properties:
+        deviceId:
+          type: string
+        fcmToken:
           type: string
 
 paths:
@@ -705,6 +699,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InitiateLoginUserByGrantTokenResponseData"
+  /auth/registerFcm:
+    post:
+      tags:
+        - auth
+      summary: registerFcm
+      description: registerFcm
+      operationId: registerFcm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterFcmRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
   /auth/logout:
     post:
       tags:
@@ -719,3 +733,4 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DefaultResponse"
+# TODO must have deviceId in token, so that we can unregister fcm token per device
