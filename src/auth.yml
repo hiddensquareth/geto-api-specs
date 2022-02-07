@@ -226,7 +226,12 @@ components:
         - password
         - deviceId
         - deviceInfo
+        - fcmToken
       properties:
+        fcmToken:
+          type: string
+          minLength: 1
+          maxLength: 1000
         email:
           type: string
           minLength: 1
@@ -260,7 +265,12 @@ components:
         - providerId
         - deviceId
         - deviceInfo
+        - fcmToken
       properties:
+        fcmToken:
+          type: string
+          minLength: 1
+          maxLength: 1000
         providerUserId:
           type: string
           minLength: 1
@@ -350,7 +360,12 @@ components:
       type: object
       required:
         - loginGrantToken
+        - fcmToken
       properties:
+        fcmToken:
+          type: string
+          minLength: 1
+          maxLength: 1000
         loginGrantToken:
           type: string
           minLength: 1
@@ -690,3 +705,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InitiateLoginUserByGrantTokenResponseData"
+  /auth/logout:
+    post:
+      tags:
+        - auth
+      summary: logout
+      description: logout
+      operationId: logout
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
