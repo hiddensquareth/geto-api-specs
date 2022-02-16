@@ -329,6 +329,7 @@ components:
         - lastUpdatedBy
         - status
         - orderDate
+        - shopCompanyUuid
         - shopLogoUrl
         - shopNameTh
         - shopNameEn
@@ -394,6 +395,8 @@ components:
         status:
           type: string
         orderDate:
+          type: string
+        shopCompanyUuid:
           type: string
         shopLogoUrl:
           type: string
