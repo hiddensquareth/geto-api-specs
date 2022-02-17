@@ -373,6 +373,13 @@ components:
           type: string
         fcmToken:
           type: string
+    LogoutRequestData:
+      type: object
+      required:
+        - deviceId
+      properties:
+        deviceId:
+          type: string
 
 paths:
   /auth/loginUserWithLine:
@@ -726,6 +733,12 @@ paths:
       summary: logout
       description: logout
       operationId: logout
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LogoutRequestData"
       responses:
         200:
           description: Success
