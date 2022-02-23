@@ -214,6 +214,12 @@ components:
                 type: number
               cashAmount:
                 type: number
+              referenceCustomerId:
+                type: string
+              referenceMerchantId:
+                type: string
+              referenceOrderId:
+                type: string
 
     SearchReportDailyBatchTransferResponseData:
       type: object
@@ -408,6 +414,12 @@ components:
               type: number
             sumMerchantTotalRevenue:
               type: number
+            referenceCustomerId:
+              type: string
+            referenceMerchantId:
+              type: string
+            referenceOrderId:
+              type: string
         list:
           type: array
           items:
