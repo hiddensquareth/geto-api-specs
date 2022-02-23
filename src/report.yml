@@ -414,12 +414,6 @@ components:
               type: number
             sumMerchantTotalRevenue:
               type: number
-            referenceCustomerId:
-              type: string
-            referenceMerchantId:
-              type: string
-            referenceOrderId:
-              type: string
         list:
           type: array
           items:
@@ -479,6 +473,12 @@ components:
                 type: number
               merchantTotalRevenue:
                 type: number
+              referenceCustomerId:
+                type: string
+              referenceMerchantId:
+                type: string
+              referenceOrderId:
+                type: string
     SearchReportFruadDetectionSingleAmountResponseData:
       type: object
       properties:
