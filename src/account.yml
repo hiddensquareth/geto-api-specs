@@ -163,6 +163,8 @@ components:
           type: string
         lastName:
           type: string
+        mobileNo:
+          type: string
         citizenId:
           type: string
         laserNumber:
@@ -328,6 +330,32 @@ components:
           maxLength: 50
           minLength: 1
           example: 10000
+    CmsUpdateCustomerRequestData:
+      type: object
+      required:
+        - customerUuid
+        - firstName
+        - lastName
+        - mobileNo
+      properties:
+        customerUuid:
+          type: string
+          maxLength: 50
+          minLength: 1
+        firstName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: John
+        lastName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: Lennon
+        mobileNo:
+          type: string
+          pattern: '^\+[1-9][0-9]{3,14}$'
+          example: "+66999999999"
     DeviceInfo:
       type: object
       properties:
@@ -1833,6 +1861,26 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/UpdateCustomerRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
+  /accounts/cmsUpdateCustomer:
+    post:
+      tags:
+        - customer
+      summary: cmsUpdateCustomer
+      description: cmsUpdateCustomer
+      operationId: cmsUpdateCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CmsUpdateCustomerRequestData"
       responses:
         200:
           description: Success
