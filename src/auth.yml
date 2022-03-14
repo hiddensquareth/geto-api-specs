@@ -67,6 +67,16 @@ components:
           type: string
           minLength: 1
           maxLength: 100
+        companyId:
+          type: string
+          minLength: 1
+          maxLength: 100
+        scope:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 100
     InitiateLoginCmsResponseData:
       type: object
       required:
@@ -245,7 +255,14 @@ components:
           maxLength: 500
         deviceInfo:
           $ref: "#/components/schemas/DeviceInfo"
-
+        as:
+          type: string
+          minLength: 1
+          maxLength: 100
+        companyId:
+          type: string
+          minLength: 1
+          maxLength: 100
     InitiateLogInUserByEmailResponseData:
       type: object
       properties:
