@@ -401,6 +401,44 @@ components:
       properties:
         deviceId:
           type: string
+    SwitchCompanyCmsRequestData:
+      type: object
+      required:
+        - companyId
+      properties:
+        companyId:
+          type: string
+          minLength: 1
+          maxLength: 100
+        scope:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 100
+    SwitchCompanyCmsResponseData:
+      type: object
+      required:
+        - firebaseCustomToken
+      properties:
+        firebaseCustomToken:
+          type: string
+    SwitchCompanyDriverRequestData:
+      type: object
+      required:
+        - companyId
+      properties:
+        companyId:
+          type: string
+          minLength: 1
+          maxLength: 100
+    SwitchCompanyDriverResponseData:
+      type: object
+      required:
+        - firebaseCustomToken
+      properties:
+        firebaseCustomToken:
+          type: string
 
 paths:
   /auth/loginUserWithLine:
@@ -767,4 +805,46 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DefaultResponse"
-# TODO must have deviceId in token, so that we can unregister fcm token per device
+  # TODO must have deviceId in token, so that we can unregister fcm token per device
+
+  /auth/switchCompanyCms:
+    post:
+      tags:
+        - auth
+      summary: swithCompanyCms
+      description: swithCompanyCms
+      operationId: swithCompanyCms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SwitchCompanyCmsRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SwitchCompanyCmsResponseData"
+
+  /auth/switchCompanyDriver:
+    post:
+      tags:
+        - auth
+      summary: switchCompanyDriver
+      description: switchCompanyDriver
+      operationId: switchCompanyDriver
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SwitchCompanyDriverRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SwitchCompanyDriverResponseData"
