@@ -811,9 +811,9 @@ paths:
     post:
       tags:
         - auth
-      summary: swithCompanyCms
-      description: swithCompanyCms
-      operationId: swithCompanyCms
+      summary: switchCompanyCms
+      description: switchCompanyCms
+      operationId: switchCompanyCms
       requestBody:
         required: true
         content:
