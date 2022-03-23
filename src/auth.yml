@@ -439,6 +439,13 @@ components:
       properties:
         firebaseCustomToken:
           type: string
+    SwitchToCustomerResponseData:
+      type: object
+      required:
+        - firebaseCustomToken
+      properties:
+        firebaseCustomToken:
+          type: string
 
 paths:
   /auth/loginUserWithLine:
@@ -848,3 +855,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SwitchCompanyDriverResponseData"
+
+  /auth/switchToCustomer:
+    post:
+      tags:
+        - auth
+      summary: switchToCustomer
+      description: switchToCustomer
+      operationId: switchToCustomer
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SwitchToCustomerResponseData"
