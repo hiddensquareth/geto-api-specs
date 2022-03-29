@@ -1,0 +1,328 @@
+openapi: 3.0.0
+info:
+  title: Invoice
+  description: API to manage Invoice
+  version: 1.0.0
+components:
+  parameters:
+    statusFilter:
+      in: query
+      name: statusFilter
+      description: statusFilter
+      required: false
+      schema:
+        type: string
+        maxLength: 50
+    searchKeyword:
+      in: query
+      name: searchKeyword
+      description: searchKeyword
+      required: false
+      schema:
+        type: string
+        maxLength: 100
+    startDate:
+      in: query
+      name: startDate
+      description: startDate
+      required: false
+      schema:
+        type: string
+        maxLength: 50
+    endDate:
+      in: query
+      name: endDate
+      description: endDate
+      required: false
+      schema:
+        type: string
+        maxLength: 50
+    page:
+      in: query
+      name: page
+      description: page
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+    rowsPerPage:
+      in: query
+      name: rowsPerPage
+      description: rowsPerPage
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+    sortField:
+      in: query
+      name: sortField
+      description: sortField
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 50
+    sortDirection:
+      in: query
+      name: sortDirection
+      description: sortDirection
+      required: false
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+
+  schemas:
+    DefaultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: ok
+    GetInvoiceResponseData:
+      type: object
+      required:
+        - invoiceId
+        - status
+        - version
+        - transactionDate
+        - companyUuid
+        - companyNameTh
+        - companyNameEn
+        - companyType
+        - amount
+        - periodStartDate
+        - periodEndDate
+        - dueDate
+        - invoiceDocument
+      properties:
+        invoiceId:
+          type: string
+        status:
+          type: string
+        version:
+          type: integer
+        transactionDate:
+          type: string
+        companyUuid:
+          type: string
+        companyNameTh:
+          type: string
+        companyNameEn:
+          type: string
+        companyType:
+          type: string
+        amount:
+          type: number
+        periodStartDate:
+          type: string
+        periodEndDate:
+          type: string
+        dueDate:
+          type: string
+        invoiceDocument:
+          type: string
+        receiptDocument:
+          type: string
+        paymentDate:
+          type: string
+    InvoiceList:
+      type: object
+      required:
+        - list
+        - itemCount
+      properties:
+        itemCount:
+          type: integer
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetInvoiceResponseData"
+    CreateInvoiceRequestData:
+      type: object
+      required:
+        - transactionDate
+        - companyUuid
+        - amount
+        - periodStartDate
+        - periodEndDate
+        - dueDate
+        - invoiceDocument
+      properties:
+        transactionDate:
+          type: string
+          minLength: 1
+          maxLength: 100
+        companyUuid:
+          type: string
+          minLength: 1
+          maxLength: 100
+        amount:
+          type: number
+        periodStartDate:
+          type: string
+          minLength: 1
+          maxLength: 100
+        periodEndDate:
+          type: string
+          minLength: 1
+          maxLength: 100
+        dueDate:
+          type: string
+          minLength: 1
+          maxLength: 100
+        invoiceDocument:
+          type: string
+          minLength: 1
+          maxLength: 2000
+    UpdateInvoiceRequestData:
+      type: object
+      required:
+        - invoiceId
+        - version
+        - transactionDate
+        - companyUuid
+        - amount
+        - periodStartDate
+        - periodEndDate
+        - dueDate
+        - invoiceDocument
+      properties:
+        invoiceId:
+          type: string
+          minLength: 1
+          maxLength: 100
+        version:
+          type: integer
+        transactionDate:
+          type: string
+          minLength: 1
+          maxLength: 100
+        companyUuid:
+          type: string
+          minLength: 1
+          maxLength: 100
+        amount:
+          type: number
+        periodStartDate:
+          type: string
+          minLength: 1
+          maxLength: 100
+        periodEndDate:
+          type: string
+          minLength: 1
+          maxLength: 100
+        dueDate:
+          type: string
+          minLength: 1
+          maxLength: 100
+        invoiceDocument:
+          type: string
+          minLength: 1
+          maxLength: 2000
+    UpdateInvoicePaymentRequestData:
+      type: object
+      required:
+        - receiptDocument
+        - paymentDate
+      properties:
+        receiptDocument:
+          type: string
+          minLength: 1
+          maxLength: 2000
+        paymentDate:
+          type: string
+          minLength: 1
+          maxLength: 100
+paths:
+  /invoices/searchInvoices:
+    get:
+      tags:
+        - invoice
+      summary: searchInvoices
+      description: searchInvoices
+      operationId: searchInvoices
+      parameters:
+        - in: query
+          name: companyType
+          description: search by company service type
+          required: false
+          schema:
+            type: boolean
+        - $ref: "#/components/parameters/statusFilter"
+        - $ref: "#/components/parameters/searchKeyword"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceList"
+
+  /invoices/createInvoice:
+    post:
+      tags:
+        - invoice
+      summary: createInvoice
+      description: createInvoice
+      operationId: createInvoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateInvoiceRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
+  /invoices/updateInvoice:
+    post:
+      tags:
+        - invoice
+      summary: updateInvoice
+      description: updateInvoice
+      operationId: updateInvoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateInvoiceRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
+  /invoices/updateInvoicePayment:
+    post:
+      tags:
+        - invoice
+      summary: updateInvoicePayment
+      description: updateInvoicePayment
+      operationId: updateInvoicePayment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateInvoicePaymentRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
