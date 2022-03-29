@@ -224,9 +224,17 @@ components:
     UpdateInvoicePaymentRequestData:
       type: object
       required:
+        - invoiceId
+        - version
         - receiptDocument
         - paymentDate
       properties:
+        invoiceId:
+          type: string
+          minLength: 1
+          maxLength: 100
+        version:
+          type: integer
         receiptDocument:
           type: string
           minLength: 1
