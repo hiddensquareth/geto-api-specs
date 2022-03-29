@@ -249,7 +249,7 @@ paths:
           description: search by company service type
           required: false
           schema:
-            type: boolean
+            type: string
         - $ref: "#/components/parameters/statusFilter"
         - $ref: "#/components/parameters/searchKeyword"
         - $ref: "#/components/parameters/startDate"
