@@ -243,6 +243,31 @@ components:
           type: string
           minLength: 1
           maxLength: 100
+    BulkUpdateInvoiceStatusRequestData:
+      type: object
+      required:
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - version
+              - invoiceId
+              - status
+            properties:
+              version:
+                type: integer
+                minimum: 0
+              invoiceId:
+                type: string
+                minLength: 1
+                maxLength: 50
+              status:
+                type: string
+                minLength: 1
+                maxLength: 50
 paths:
   /invoices/searchInvoices:
     get:
@@ -327,6 +352,26 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/UpdateInvoicePaymentRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
+  /invoices/bulkUpdateInvoiceStatus:
+    post:
+      tags:
+        - invoice
+      summary: bulkUpdateInvoiceStatus
+      description: bulkUpdateInvoiceStatus
+      operationId: bulkUpdateInvoiceStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BulkUpdateInvoiceStatusRequestData"
       responses:
         200:
           description: Success
