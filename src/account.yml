@@ -636,6 +636,8 @@ components:
           type: boolean
         kycStatus:
           type: string
+        kycExpDate:
+          type: string
         kycStatusNote:
           type: string
         status:
