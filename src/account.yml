@@ -140,6 +140,14 @@ components:
                 type: string
               kycStatus:
                 type: string
+              customerAccountLock:
+                type: boolean
+              customerAccountLockReason:
+                type: string
+              customerAccountLockActivityDate:
+                type: string
+              customerUserId:
+                type: string
     GetCustomerResponseData:
       type: object
       properties:
