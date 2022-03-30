@@ -136,6 +136,8 @@ components:
                 type: string
               kycDate:
                 type: string
+              kycExpDate:
+                type: string
               dopaStatus:
                 type: string
               kycStatus:
