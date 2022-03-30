@@ -399,7 +399,6 @@ components:
     RegisterCustomerRequestData:
       type: object
       required:
-        - profileImageUrl
         - email
         - nationality
         - firstName
