@@ -1620,6 +1620,53 @@ components:
                 type: string
               status:
                 type: string
+    SearchStaffsResponseData:
+      type: object
+      required:
+        - itemCount
+        - list
+      properties:
+        itemCount:
+          type: integer
+        list:
+          type: array
+          items:
+            type: object
+            required:
+              - version
+              - staffUuid
+              - email
+              - firstName
+              - lastName
+              - mobileNo
+              - roleId
+              - roleNameTh
+              - roleNameEn
+              - lastEdit
+              - status
+            properties:
+              version:
+                type: integer
+              staffUuid:
+                type: string
+              email:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              mobileNo:
+                type: string
+              roleId:
+                type: string
+              roleNameTh:
+                type: string
+              roleNameEn:
+                type: string
+              lastEdit:
+                type: string
+              status:
+                type: string
     CheckRegistrationStatusByOauthProviderResponseData:
       type: object
       properties:
@@ -2521,6 +2568,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListStaffsResponseData"
+  /accounts/searchStaff:
+    get:
+      tags:
+        - company
+      summary: searchStaff
+      description: searchStaff
+      operationId: searchStaff
+      parameters:
+        - in: query
+          name: companyUuid
+          description: the target company
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/statusFilter"
+        - $ref: "#/components/parameters/searchKeyword"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchStaffsResponseData"
   /accounts/inviteStaff:
     post:
       tags:
