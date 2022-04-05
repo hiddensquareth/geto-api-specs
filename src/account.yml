@@ -1525,6 +1525,14 @@ components:
                 maxLength: 100
                 example: "Lennon"
 
+    InviteStaffResponseData:
+      type: object
+      required:
+        - staffUuid
+      properties:
+        staffUuid:
+          type: string
+
     InviteStaffRequestData:
       type: object
       required:
@@ -1535,6 +1543,10 @@ components:
         - lastName
         - mobileNo
       properties:
+        importId:
+          type: string
+          minLength: 1
+          maxLength: 100
         companyUuid:
           type: string
           minLength: 1
@@ -2433,7 +2445,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DefaultResponse"
+                $ref: "#/components/schemas/InviteStaffResponseData"
 
   /accounts/applyKyc:
     post:
