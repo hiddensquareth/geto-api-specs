@@ -1918,6 +1918,13 @@ components:
           type: string
           pattern: "^https?://.+$"
           example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
+    ExportStaffImportDetailsResponseData:
+      type: object
+      properties:
+        csvUrl:
+          type: string
+        gSheetUrl:
+          type: string
 
 paths:
   /accounts/updateUser:
@@ -2937,3 +2944,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DefaultResponse"
+  /accounts/exportStaffImportDetails:
+    get:
+      tags:
+        - company
+      summary: exportStaffImportDetails
+      description: exportStaffImportDetails
+      operationId: exportStaffImportDetails
+      parameters:
+        - in: query
+          name: status
+          description: status to include
+          required: true
+          schema:
+            type: string
+            enum:
+              - ALL
+              - SUCCESS
+              - ERROR
+        - in: query
+          name: importId
+          description: importId
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExportStaffImportDetailsResponseData"
