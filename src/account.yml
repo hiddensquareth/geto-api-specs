@@ -1868,6 +1868,15 @@ components:
     StaffImportDetailList:
       type: object
       required:
+        - list
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/StaffImportDetai"
+    StaffImportDetai:
+      type: object
+      required:
         - uuid
         - importId
         - status
