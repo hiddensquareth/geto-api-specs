@@ -1828,6 +1828,87 @@ components:
           type: string
           minLength: 1
           maxLength: 50
+    GetStaffImportResponseData:
+      type: object
+      required:
+        - importId
+        - importDate
+        - totalCount
+        - successCount
+        - errorCount
+        - generalErrorReason
+        - status
+      properties:
+        importId:
+          type: string
+        importDate:
+          type: string
+        totalCount:
+          type: integer
+        successCount:
+          type: integer
+        errorCount:
+          type: integer
+        generalErrorReason:
+          type: string
+        status:
+          type: string
+    StaffImportList:
+      type: object
+      required:
+        - itemCount
+        - list
+      properties:
+        itemCount:
+          type: integer
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetStaffImportResponseData"
+    StaffImportDetailList:
+      type: object
+      required:
+        - uuid
+        - importId
+        - status
+      properties:
+        uuid:
+          type: string
+        importId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        mobileNo:
+          type: string
+        roleNameTh:
+          type: string
+        roleNameEn:
+          type: string
+        staffUuid:
+          type: string
+        status:
+          type: string
+        errorReason:
+          type: string
+    CreateStaffImportRequestData:
+      type: object
+      required:
+        - companyUuid
+        - fileUrl
+      properties:
+        companyUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: "abc"
+        fileUrl:
+          type: string
+          pattern: "^https?://.+$"
+          example: "https://www.1stwallsend.org.uk/wp-content/uploads/2019/08/profile-placeholder.png"
 
 paths:
   /accounts/updateUser:
@@ -2763,6 +2844,83 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/UnlockAccountRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
+
+  /accounts/searchStaffImports:
+    get:
+      tags:
+        - company
+      summary: searchStaffImports
+      description: searchStaffImports
+      operationId: searchStaffImports
+      parameters:
+        - in: query
+          name: companyUuid
+          description: uuid of the company
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/statusFilter"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffImportList"
+  /accounts/listStaffImportDetails:
+    get:
+      tags:
+        - company
+      summary: listStaffImportDetails
+      description: listStaffImportDetails
+      operationId: listStaffImportDetails
+      parameters:
+        - in: query
+          name: companyUuid
+          description: uuid of the company
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: importId
+          description: importId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffImportDetailList"
+
+  /accounts/createStaffImport:
+    post:
+      tags:
+        - company
+      summary: createStaffImport
+      description: createStaffImport
+      operationId: createStaffImport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateStaffImportRequestData"
       responses:
         200:
           description: Success
