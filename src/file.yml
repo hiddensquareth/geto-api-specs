@@ -28,8 +28,8 @@ paths:
           description: The original filename
           schema:
             type: string
-            minLength: 3
-            maxLength: 50
+            minLength: 1
+            maxLength: 1000
         - in: query
           name: resourceType
           required: true
@@ -47,4 +47,4 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetPresignedUrlResponseData'
+                $ref: "#/components/schemas/GetPresignedUrlResponseData"
