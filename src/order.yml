@@ -675,7 +675,7 @@ components:
           example: "abc"
         customerAddressPhone:
           type: string
-          pattern: "^[0-9]{9,10}$"
+          # pattern: "^[0-9]{9,10}$"
           example: "021234567"
           maxLength: 100
         customerAddressLine:
