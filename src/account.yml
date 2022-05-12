@@ -1971,6 +1971,13 @@ components:
         gSheetUrl:
           type: string
 
+    SetPreferLanguageRequestData:
+      type: object
+      properties:
+        language:
+          type: string
+          pattern: "^[a-z][a-z]$"
+
 paths:
   /accounts/updateUser:
     post:
@@ -3049,3 +3056,24 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ExportStaffImportDetailsResponseData"
+
+  /accounts/setPreferLanguage:
+    post:
+      tags:
+        - user
+      summary: setPreferLanguage
+      description: setPreferLanguage
+      operationId: setPreferLanguage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetPreferLanguageRequestData"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultResponse"
