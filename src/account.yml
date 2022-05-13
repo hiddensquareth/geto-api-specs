@@ -1306,8 +1306,11 @@ components:
     ListAllCompaniesResponseData:
       type: object
       required:
+        - itemCount
         - list
       properties:
+        itemCount:
+          type: integer
         list:
           type: array
           items:
@@ -3081,3 +3084,25 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DefaultResponse"
+
+  /accounts/searchCompanies:
+    get:
+      tags:
+        - company
+      summary: searchCompanies
+      description: searchCompanies
+      operationId: searchCompanies
+      parameters:
+        - $ref: "#/components/parameters/statusFilter"
+        - $ref: "#/components/parameters/searchKeyword"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/rowsPerPage"
+        - $ref: "#/components/parameters/sortField"
+        - $ref: "#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAllCompaniesResponseData"
