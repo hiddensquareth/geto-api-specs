@@ -555,6 +555,53 @@ components:
                 type: string
               merchantCompanyId:
                 type: string
+    GetDetailReportFruadDetectionSingleAmountResponseData:
+      type: object
+      properties:
+        paymentId:
+          type: integer
+        paymentDate:
+          type: string
+        paymentAmount:
+          type: number
+        customerFirstName:
+          type: string
+        customerLastName:
+          type: string
+        customerNationlity:
+          type: string
+        customerAddressLine:
+          type: string
+        customerCountryCode:
+          type: string
+        customerProvince:
+          type: string
+        customerDistrict:
+          type: string
+        customerSubDistrict:
+          type: string
+        customerZipCode:
+          type: string
+        customerIdCardNo:
+          type: string
+        customerIdCardIssueDate:
+          type: string
+        customerIdCardExpDate:
+          type: string
+        customerPaymentAccountNo:
+          type: string
+        customerPaymentChannel:
+          type: string
+        customerPaymentCountry:
+          type: string
+        companyRegistrationInThai:
+          type: boolean
+        companyBankAccountNo:
+          type: string
+        companyBank:
+          type: string
+        companyCountry:
+          type: string
 
 paths:
   /reports/searchReportDailyTransactions:
@@ -788,3 +835,26 @@ paths:
   # /reports/searchReportFruadDetectionRateLimit:
   # /reports/searchReportFruadDetectionDuplicateAmount:
   # /reports/searchReportFruadDetectionLateShipping:
+
+  /reports/getDetailReportFruadDetectionSingleAmount:
+    get:
+      tags:
+        - report
+      summary: getDetailReportFruadDetectionSingleAmount
+      description: getDetailReportFruadDetectionSingleAmount
+      operationId: getDetailReportFruadDetectionSingleAmount
+      parameters:
+        - in: query
+          name: paymentId
+          description: paymentId
+          required: true
+          schema:
+            type: string
+            maxLength: 100
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDetailReportFruadDetectionSingleAmountResponseData"
