@@ -559,7 +559,7 @@ components:
       type: object
       properties:
         paymentId:
-          type: integer
+          type: string
         paymentDate:
           type: string
         paymentAmount:
